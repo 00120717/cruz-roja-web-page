@@ -154,6 +154,7 @@
                     :options="sectionList"
                     name="section"
                     display-name="name"
+
                     :error="errors[0]"
                   />
                 </ValidationProvider>
@@ -186,7 +187,7 @@ import ToggleSelector from '@/components/ui/ToggleSelector.vue';
 import InputSelect from '@/components/ui/InputSelect.vue';
 import InputGroup from '@/components/ui/InputGroup.vue';
 import InputMask from '@/components/ui/InputMask.vue';
-
+// value="id" prueba id set value in list
 interface Breadcrumb {
   name: string;
   route?: string;
