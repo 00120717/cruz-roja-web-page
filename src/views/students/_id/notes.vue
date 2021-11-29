@@ -139,7 +139,7 @@ const Students = namespace('students');
 export default class ShowStudentPage extends Vue {
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
-    { name: 'Estudiantes', route: '/students' },
+    { name: 'Voluntarios', route: '/students' },
     { name: 'Detalle' },
   ];
 

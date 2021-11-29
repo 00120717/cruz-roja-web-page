@@ -226,7 +226,7 @@ export default class NewStudentPage extends Vue {
 
   breadcrumbs: Breadcrumb[] =[
     { name: 'Administración' },
-    { name: 'Estudiantes', route: '/students' },
+    { name: 'Voluntarios', route: '/students' },
     { name: 'Nuevo' },
   ]
 

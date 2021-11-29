@@ -11,6 +11,7 @@ export default {
    * @param {string} domain
    * */
   setBaseUrl(domain: string) {
+    axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
     axios.defaults.baseURL = `${domain}`;
   },
   /**

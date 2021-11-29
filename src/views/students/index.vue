@@ -1,12 +1,12 @@
 <template>
   <main class="pb-40">
     <page-heading
-      title="Estudiantes"
+      title="Voluntarios"
       :show-return="false"
       :breadcrumbs="breadcrumbs"
     >
       <template slot="actions">
-        <custom-button title="Nuevo estudiante" color="secondary" to="/students/new">
+        <custom-button title="Nuevo Voluntario" color="secondary" to="/students/new">
           <template #icon>
             <svg
               class="w-4 h-4 mr-2"
@@ -50,7 +50,7 @@
             <td
               class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap"
             >
-              {{ student.code }}
+              {{ student.voluntarioCodigo }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
@@ -58,7 +58,7 @@
               <div class="flex items-center">
                 <div class="">
                   <div class="text-sm font-medium leading-5 text-gray-900">
-                    {{ (`${student.person.firstName} ${student.person.lastName}`) }}
+                    {{ (`${student.persona.firstName} ${student.persona.lastName}`) }}
                   </div>
                 </div>
               </div>
@@ -66,27 +66,27 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ student.grade ? student.grade.grade : 'N/A' }}
+              {{ student.sede ? student.sede.nombre : 'N/A' }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ student.section ? student.section.name : 'N/A' }}
+              {{ student.tipoVoluntario ? student.tipoVoluntario.tipo : 'N/A' }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
             >
-              <active-indicator :status="Boolean(student.approved)" />
+              <active-indicator :status="Boolean(student.persona.estado)" />
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ student.year }}
+              {{ student.aniosServicio }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
             >
-              <active-indicator :status="Boolean(student.person.status)" />
+              <active-indicator :status="Boolean(student.persona.estado)" />
             </td>
           </table-item>
         </template>
@@ -142,7 +142,7 @@ export default class StudentsPage extends Vue {
   selectedItems: Array<string | number> = []
   showDeleteModal = false
   showDeleteCompleted = false
-  breadcrumbs: Breadcrumb[] = [{ name: 'Administración' }, { name: 'Estudiantes' }]
+  breadcrumbs: Breadcrumb[] = [{ name: 'Administración' }, { name: 'Voluntarios' }]
 
   headers: Array<object> = [
     {
