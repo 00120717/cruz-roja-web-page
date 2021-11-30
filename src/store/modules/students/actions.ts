@@ -52,10 +52,10 @@ export const actions: ActionTree<StudentState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  show: async ({ commit }: RoleActionContext, { id, vm }: { id: number; vm: any }) => {
+  show: async ({ commit }: RoleActionContext, { id, vm }: { id: string; vm: any }) => {
     try {
       commit('toggleLoading', true);
-      const { data } = await StudentService.show(id);
+      const { data } = await StudentService.showString(id);
       commit('setStudent', data);
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
@@ -63,10 +63,10 @@ export const actions: ActionTree<StudentState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  destroy: async ({ commit }: RoleActionContext, { id, vm }: { id: number; vm: any }) => {
+  destroy: async ({ commit }: RoleActionContext, { id, vm }: { id: string; vm: any }) => {
     try {
       commit('toggleLoading', true);
-      await StudentService.destroy(id);
+      await StudentService.destroyString(id);
       vm.$snotify.success('Estudiante eliminado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);

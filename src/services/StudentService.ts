@@ -20,6 +20,14 @@ class StudentService extends BaseService {
     const url = `/admin/voluntario/${id}/notes`;
     return this.get({ url });
   }
+
+  showString(id: string): Promise<AxiosResponse> {
+    return this.get({ url: `${this.apiResource}/${id}` });
+  }
+
+  destroyString(id: string): Promise<AxiosResponse> {
+    return this.delete({ url: `${this.apiResource}/${id}` });
+  }
 }
 
 export default new StudentService();

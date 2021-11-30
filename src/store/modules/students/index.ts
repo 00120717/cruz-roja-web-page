@@ -8,14 +8,14 @@ import { StudentState } from '@/store/modules/students/types';
 
 export const state: StudentState = {
   student: {
-    id: 0,
-    year: 0,
-    report: '',
-    approved: false,
-    finalAverage: null,
-    institutionalAverage: null,
-    code: '0',
-    firstTime: false,
+    id: '',
+    username: '',
+    voluntarioCodigo: '0',
+    genero: 'M',
+    aniosServicio: 0,
+    estado: true,
+    firstName: '',
+    lastName: '',
     person: {
       id: '0',
       username: '',
@@ -36,16 +36,6 @@ export const state: StudentState = {
     modality: {
       id: 0,
       type: '',
-    },
-    section: {
-      id: 0,
-      name: '',
-    },
-    grade: {
-      id: 0,
-      grade: '',
-      institutionalPercentage: '',
-      externalPercentage: '',
     },
   },
   isLoading: false,

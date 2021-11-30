@@ -1,9 +1,9 @@
 <template>
   <main class="pb-40">
-    <page-heading title="Detalle estudiante" back-route="/students" :breadcrumbs="breadcrumbs">
+    <page-heading title="Detalle voluntario" back-route="/students" :breadcrumbs="breadcrumbs">
       <template slot="actions">
         <custom-button
-          title="Ver notas"
+          title="Ver emergencias"
           color="secondary"
           size="small"
           class="mr-2"
@@ -64,10 +64,10 @@
       <div class="overflow-hidden bg-white border border-gray-100 shadow sm:rounded-lg">
         <div class="px-4 py-5 border-b border-gray-100 sm:px-6">
           <h3 class="text-lg font-medium leading-6 text-gray-900">
-            Estudiante #{{ student.id }}
+            Voluntario #{{ student.id }}
           </h3>
           <p class="max-w-2xl mt-1 text-sm leading-5 text-gray-500">
-            Información general de estudiante.
+            Información general de voluntario.
           </p>
         </div>
         <div>
@@ -77,7 +77,7 @@
                 Nombres
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ student.person.firstName }}
+                {{ student.firstName }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -85,7 +85,7 @@
                 Apellidos
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ student.person.lastName }}
+                {{ student.lastName }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -93,27 +93,7 @@
                 Código
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ student.code }}
-              </dd>
-            </div>
-            <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium leading-5 text-gray-500">
-                Número de teléfono
-              </dt>
-              <dd
-                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ student.person.phoneNumber ? student.person.phoneNumber : 'N/A' }}
-              </dd>
-            </div>
-            <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium leading-5 text-gray-500">
-                Número de teléfono alternativo
-              </dt>
-              <dd
-                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ student.person.altPhoneNumber ? student.person.altPhoneNumber : 'N/A' }}
+                {{ student.voluntarioCodigo }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -123,7 +103,7 @@
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ student.person.email ? student.person.email : 'N/A' }}
+                {{ student.email ? student.email : 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -133,27 +113,27 @@
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ student.modality ? student.modality.type : 'N/A' }}
+                {{ student.modalidad ? student.modalidad.modalidad : 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
-                Grado
+                Cuerpo Filial
               </dt>
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ student.grade ? student.grade.grade : 'N/A' }}
+                {{ student.cuerpoFilial ? student.cuerpoFilial.nombreCuerpoFilial : 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
-                Sección
+                Tipo Voluntario
               </dt>
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ student.section ? student.section.name : 'N/A' }}
+                {{ student.tipoVoluntario ? student.tipoVoluntario.tipo : 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -163,45 +143,45 @@
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ student.person && student.person.sede ? student.person.sede.name : 'N/A' }}
+                {{ student.sede && student.sede.nombre ? student.sede.nombre : 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
-                Año
+                Años Servicio
               </dt>
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ student.year || 'N/A' }}
+                {{ student.aniosServicio || 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
-                Promedio Final
+                Genero
               </dt>
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ student.finalAverage || 'N/A' }}
+                {{ student.genero || 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
-                Promedio Instituional
+                Edad
               </dt>
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ student.institutionalAverage || 'N/A' }}
+                {{ student.edad || 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
-                Aprobado
+                Estado
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                <active-indicator :status="Boolean(student.approved)" />
+                <active-indicator :status="Boolean(student.estado)" />
               </dd>
             </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -209,7 +189,7 @@
                 Activo
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                <active-indicator :status="Boolean(student.person.status)" />
+                <active-indicator :status="Boolean(student.estado)" />
               </dd>
             </div>
           </dl>
@@ -218,7 +198,7 @@
     </section>
     <delete-item
       :show="showDeleteModal"
-      :title="`${student.person.firstName} ${student.person.lastName}`"
+      :title="`${student.firstName} ${student.lastName}`"
       @update:show="showDeleteModal = false"
       @action="deleteItem"
     />
@@ -272,19 +252,19 @@ export default class ShowStudentPage extends Vue {
 
   @Students.State('isLoading') isStudentsLoading!: boolean
   @Students.State('student') student!: Student
-  @Students.Action('show') fetchStudent!: ({ id, vm }: { id: number; vm: any }) => ActionMethod
-  @Students.Action('destroy') deleteStudent!: ({ id, vm }: { id: number; vm: any }) => ActionMethod
+  @Students.Action('show') fetchStudent!: ({ id, vm }: { id: string; vm: any }) => ActionMethod
+  @Students.Action('destroy') deleteStudent!: ({ id, vm }: { id: string; vm: any }) => ActionMethod
 
   async mounted() {
     const { id } = this.$route.params;
-    await this.fetchStudent({ id: +id, vm: this });
+    await this.fetchStudent({ id: String(+id), vm: this });
     if (!this.student.id) {
       this.redirectBack();
     }
   }
 
   async deleteItem() {
-    await this.deleteStudent({ id: this.student?.id, vm: this });
+    await this.deleteStudent({ id: String(this.student?.id), vm: this });
     this.showConfirmationModal = true;
   }
 

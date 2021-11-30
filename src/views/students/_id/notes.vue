@@ -159,7 +159,7 @@ export default class ShowStudentPage extends Vue {
   @Students.Action('show') fetchStudent!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
   @Students.Action('updateNote') updateNote!: ({ payload, vm }: { payload: any; vm: any }) => ActionMethod;
   @Students.Action('fetchNotes') fetchNotes!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
-  @Students.Action('destroy') deleteStudent!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
+  @Students.Action('destroy') deleteStudent!: ({ id, vm }: { id: string; vm: any }) => ActionMethod;
 
   async mounted() {
     const { id } = this.$route.params;
@@ -186,7 +186,7 @@ export default class ShowStudentPage extends Vue {
   }
 
   async deleteItem() {
-    await this.deleteStudent({ id: +this.student?.id, vm: this });
+    await this.deleteStudent({ id: String(+this.student?.id), vm: this });
     this.showConfirmationModal = true;
   }
 

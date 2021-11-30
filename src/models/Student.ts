@@ -1,16 +1,17 @@
 interface Student {
-  id: number;
-  year: number;
-  report: string;
-  approved: boolean;
-  finalAverage: null | number | string;
-  institutionalAverage: null | number | string;
-  code: string;
-  firstTime: boolean;
-  person: Person;
-  modality: Modality;
-  section: Section;
-  grade: Grade;
+  id?: string;
+  username: string;
+  estado: boolean;
+  genero: string;
+  lastName: string;
+  firstName: string;
+  aniosServicio: number | null;
+  email?: string | null;
+  sede?: Sede | null;
+  sedeId?: number;
+  voluntarioCodigo?: string;
+  person?: Person;
+  modality?: Modality;
 }
 
 interface Person {

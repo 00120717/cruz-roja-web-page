@@ -86,7 +86,7 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
             >
-              <active-indicator :status="Boolean(student.persona.estado)" />
+              {{ student.persona.genero }}
             </td>
           </table-item>
         </template>
@@ -154,24 +154,24 @@ export default class StudentsPage extends Vue {
       key: 'name',
     },
     {
-      name: 'Grado',
-      key: 'grade',
+      name: 'Sede',
+      key: 'sede',
     },
     {
-      name: 'Sección',
-      key: 'section',
+      name: 'Tipo Voluntario',
+      key: 'tipoVoluntario',
     },
     {
-      name: 'Aprobado',
-      key: 'approved',
+      name: 'Estado',
+      key: 'estado',
     },
     {
-      name: 'Año',
-      key: 'year',
+      name: 'Años Servicio',
+      key: 'aniosServicio',
     },
     {
-      name: 'Activo',
-      key: 'status',
+      name: 'Genero',
+      key: 'genero',
     },
   ]
 
