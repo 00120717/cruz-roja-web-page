@@ -1,10 +1,10 @@
 import { AxiosResponse } from 'axios';
 import BaseService from '@/services/core/BaseService';
 
-class ModalityService extends BaseService {
+class TipoVoluntarioService extends BaseService {
   apiVersion = '';
 
-  apiResource = '/admin/modalidad';
+  apiResource = '/admin/tipoVoluntario';
 
   list(): Promise<AxiosResponse> {
     const url = `${this.apiResource}/list`;
@@ -12,4 +12,4 @@ class ModalityService extends BaseService {
   }
 }
 
-export default new ModalityService();
+export default new TipoVoluntarioService();

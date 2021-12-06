@@ -67,7 +67,7 @@ export const actions: ActionTree<StudentState, RootState> = {
     try {
       commit('toggleLoading', true);
       await StudentService.destroyString(id);
-      vm.$snotify.success('Estudiante eliminado correctamente');
+      vm.$snotify.success('Voluntario eliminado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
     } finally {
@@ -78,7 +78,7 @@ export const actions: ActionTree<StudentState, RootState> = {
     try {
       commit('toggleLoading', true);
       await StudentService.store(student);
-      vm.$snotify.success('Estudiante creado correctamente');
+      vm.$snotify.success('Voluntario creado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
     } finally {
@@ -89,7 +89,7 @@ export const actions: ActionTree<StudentState, RootState> = {
     try {
       commit('toggleLoading', true);
       await StudentService.update(student);
-      vm.$snotify.success('Estudiante actualizado correctamente');
+      vm.$snotify.success('Voluntario actualizado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
     } finally {

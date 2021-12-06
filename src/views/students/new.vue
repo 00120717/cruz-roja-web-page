@@ -1,17 +1,17 @@
 <template>
   <main class="pb-40">
-    <page-heading title="Nuevo estudiante" back-route="/students" :breadcrumbs="breadcrumbs" />
+    <page-heading title="Nuevo Voluntario" back-route="/students" :breadcrumbs="breadcrumbs" />
     <form-section>
       <ValidationObserver ref="form" tag="form" autocomplete="off" @submit.prevent="onSubmit">
         <div class="md:grid md:grid-cols-3 md:gap-8 ">
           <div class="md:col-span-1">
             <h3 class="text-lg font-medium leading-6 text-gray-900">
-              Estudiante
+              Voluntario
             </h3>
             <p
               class="mt-1 text-sm leading-5 text-gray-500"
             >
-              Información del estudiante
+              Información del Voluntario
             </p>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
@@ -46,7 +46,7 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.code" label="Código del estudiante" name="code" :error="errors[0]" />
+                  <input-group v-model="form.code" label="Código del Voluntario" name="code" :error="errors[0]" />
                 </ValidationProvider>
               </div>
               <div class="col-span-6 sm:col-span-4">
@@ -97,7 +97,7 @@
                     placeholder="Seleccionar"
                     :options="sedeList"
                     name="role"
-                    display-name="name"
+                    display-name="nombre"
                     :error="errors[0]"
                   />
                 </ValidationProvider>
@@ -115,7 +115,7 @@
                     placeholder="Seleccionar"
                     :options="modalityList"
                     name="modality"
-                    display-name="type"
+                    display-name="modalidad"
                     :error="errors[0]"
                   />
                 </ValidationProvider>
@@ -197,7 +197,8 @@ const Students = namespace('students');
 const SedeModel = namespace('sede');
 const ModalityModel = namespace('modality');
 const SectionModel = namespace('section');
-const GradeModel = namespace('grade');
+const GradeModel = namespace('estado');
+const TipoVoluntarioModel = namespace('tipoVoluntario');
 
 @Component({
   components: {
@@ -212,16 +213,20 @@ const GradeModel = namespace('grade');
 })
 export default class NewStudentPage extends Vue {
   form = {
-    year: 0,
-    report: '',
-    code: '',
-    firstName: '',
+    username: '',
+    fechaNacimiento: '',
+    fechaInicio: '',
+    estado: false,
+    genero: '',
     lastName: '',
+    firstName: '',
+    email: '',
     sedeId: 0,
     modalityId: 0,
-    sectionId: 0,
-    gradeId: 0,
-    status: true,
+    cuerpoFilialId: 0,
+    tipoVoluntarioId: 0,
+    voluntarioCodigo: '',
+    estadoId: 0,
   }
 
   breadcrumbs: Breadcrumb[] =[
@@ -232,11 +237,13 @@ export default class NewStudentPage extends Vue {
 
   @SedeModel.State('sedeList') sedeList!: Sede[];
   @SedeModel.Action('list') fetchSedeList!: (vm: any) => ActionMethod;
+  @TipoVoluntarioModel.State('tipoVoluntarioList') tipoVoluntarioList!: TipoVoluntario[];
+  @TipoVoluntarioModel.Action('list') fetchTipoVoluntarioList!: (vm: any) => ActionMethod;
   @ModalityModel.State('modalityList') modalityList!: Modality[];
   @ModalityModel.Action('list') fetchModalityList!: (vm: any) => ActionMethod;
   @SectionModel.State('sectionList') sectionList!: Section[];
   @SectionModel.Action('list') fetchSectionList!: (vm: any) => ActionMethod;
-  @GradeModel.State('gradeList') gradeList!: Grade[];
+  @GradeModel.State('estadoList') estadoList!: Estado[];
   @GradeModel.Action('list') fetchGradeList!: (vm: any) => ActionMethod;
   @Students.State('isLoading') isStudentsLoading!: boolean;
   @Students.Action('store') createStudent!: ({ student, vm }: { student: any; vm: any }) => ActionMethod;
@@ -256,7 +263,7 @@ export default class NewStudentPage extends Vue {
     const isValid = await (this.$refs.form as any).validate();
     if (isValid) {
       try {
-        this.form.year = +this.form.year;
+        // this.form.year = +this.form.year;
         await this.createStudent({ student: this.form, vm: this });
         this.$router.push('/students');
         // eslint-disable-next-line no-empty

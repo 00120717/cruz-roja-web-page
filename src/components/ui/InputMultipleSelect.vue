@@ -57,7 +57,7 @@
             <span
               class="font-normal block truncate"
               :class="{'font-semibold': inputValue.findIndex(i=>i===item.id) >= 0 }"
-            >{{ item.name }}</span>
+            >{{ item[displayName] }}</span>
 
             <span
               v-show="inputValue.findIndex(i=>i===item.id) >= 0"
@@ -101,6 +101,7 @@ export default class InputMultipleSelect extends Vue {
   @Prop(String) readonly placeholder!: string
   @Prop(Array) readonly options!: Array<object>
   @Prop({ type: Boolean, default: false }) readonly disable!: boolean
+  @Prop({ type: String, default: 'name' }) readonly displayName!: string
   @Prop({ type: [String, Boolean], default: false }) readonly error!:
     | string
     | boolean

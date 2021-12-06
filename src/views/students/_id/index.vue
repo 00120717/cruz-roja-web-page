@@ -168,28 +168,20 @@
             </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
-                Edad
+                Estado Voluntario
               </dt>
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ student.edad || 'N/A' }}
+                {{ student.estado.estadoVoluntario || 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
-                Estado
+                Edad
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                <active-indicator :status="Boolean(student.estado)" />
-              </dd>
-            </div>
-            <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium leading-5 text-gray-500">
-                Activo
-              </dt>
-              <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                <active-indicator :status="Boolean(student.estado)" />
+                {{ student.edad }}
               </dd>
             </div>
           </dl>
@@ -204,7 +196,7 @@
     />
     <confirmation-modal
       :show="showConfirmationModal"
-      title="Estudiante Eliminado"
+      title="Voluntario Eliminado"
       @update:show="showConfirmationModal = false"
       @action="redirectBack"
     />
