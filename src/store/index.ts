@@ -11,6 +11,9 @@ import { students } from '@/store/modules/students';
 import { modality } from '@/store/modules/modality';
 import { section } from '@/store/modules/section';
 import { grade } from '@/store/modules/grade';
+import { cuerpoFilial } from '@/store/modules/cuerpoFilial';
+import { estado } from '@/store/modules/estado';
+import { tipoVoluntario } from '@/store/modules/tipoVoluntario';
 
 Vue.use(Vuex);
 
@@ -18,6 +21,9 @@ export default new Vuex.Store({
   modules: {
     auth,
     users,
+    cuerpoFilial,
+    estado,
+    tipoVoluntario,
     roles,
     subject,
     sede,

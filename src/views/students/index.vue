@@ -64,6 +64,11 @@
               </div>
             </td>
             <td
+              class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
+            >
+              {{ student.persona.genero }}
+            </td>
+            <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
               {{ student.sede ? student.sede.nombre : 'N/A' }}
@@ -74,19 +79,25 @@
               {{ student.tipoVoluntario ? student.tipoVoluntario.tipo : 'N/A' }}
             </td>
             <td
+              class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
+            >
+              {{ student.cuerpoFilial ? student.cuerpoFilial.nombreCuerpoFilial : 'N/A' }}
+            </td>
+            <td
               class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
             >
-              <active-indicator :status="Boolean(student.persona.estado)" />
+              {{ student.estado ? student.estado.estadoVoluntario : 'N/A' }}
+              <!--<active-indicator :status="Boolean(student.estado.estadoVoluntario)" />-->
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ student.aniosServicio }}
+              {{ student.modalidad ? student.modalidad.modalidad : 'N/A' }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
             >
-              {{ student.persona.genero }}
+              <active-indicator :status="Boolean(student.persona.estadoPersona)" />
             </td>
           </table-item>
         </template>
@@ -154,6 +165,10 @@ export default class StudentsPage extends Vue {
       key: 'name',
     },
     {
+      name: 'Genero',
+      key: 'genero',
+    },
+    {
       name: 'Sede',
       key: 'sede',
     },
@@ -162,16 +177,20 @@ export default class StudentsPage extends Vue {
       key: 'tipoVoluntario',
     },
     {
+      name: 'Cuerpo Filial',
+      key: 'cuerpoFilial',
+    },
+    {
+      name: 'Estado Voluntario',
+      key: 'estadoVoluntario',
+    },
+    {
+      name: 'Modalidad',
+      key: 'modalidad',
+    },
+    {
       name: 'Estado',
       key: 'estado',
-    },
-    {
-      name: 'Años Servicio',
-      key: 'aniosServicio',
-    },
-    {
-      name: 'Genero',
-      key: 'genero',
     },
   ]
 

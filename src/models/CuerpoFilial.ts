@@ -1,5 +1,5 @@
 interface CuerpoFilial {
   id: number;
-  name: string;
-  manager: string;
+  nombreCuerpoFilial: string;
+  encargado: string;
 }

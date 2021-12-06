@@ -30,19 +30,36 @@
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  vid="name"
-                  name="nombre"
+                  vid="voluntarioCodigo"
+                  name="voluntarioCodigo"
+                  tag="div"
+                  rules="min:8"
+                >
+                  <input-group
+                    id="voluntarioCodigo"
+                    v-model="form.voluntarioCodigo"
+                    label="Codigo de Voluntario"
+                    name="voluntarioCodigo"
+                    :error="errors[0]"
+                  />
+                </ValidationProvider>
+              </div>
+              <div class="col-span-6 sm:col-span-4">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  vid="firstName"
+                  name="firstName"
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.firstName" label="Nombres" name="name" :error="errors[0]" />
+                  <input-group v-model="form.firstName" label="Nombres" name="firstName" :error="errors[0]" />
                 </ValidationProvider>
               </div>
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
                   vid="lastname"
-                  name="apellidos"
+                  name="lastname"
                   tag="div"
                   rules="required"
                 >
@@ -53,17 +70,34 @@
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  vid="password"
-                  name="contraseña"
+                  vid="fechaNacimiento"
+                  name="fechaNacimiento"
                   tag="div"
-                  rules="min:8"
+                  rules="min:10"
                 >
                   <input-group
-                    id="password"
-                    v-model="form.password"
-                    label="Contraseña"
-                    type="password"
-                    name="password"
+                    id="fechaNacimiento"
+                    v-model="form.fechaNacimiento"
+                    label="Fecha Nacimiento"
+                    name="fechaNacimiento"
+                    :error="errors[0]"
+                  />
+                </ValidationProvider>
+              </div>
+
+              <div class="col-span-6 sm:col-span-4">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  vid="fechaInicio"
+                  name="fechaInicio"
+                  tag="div"
+                  rules="min:10"
+                >
+                  <input-group
+                    id="fechaInicio"
+                    v-model="form.fechaInicio"
+                    label="Fecha Incorporacion Cruz Roja"
+                    name="fechaInicio"
                     :error="errors[0]"
                   />
                 </ValidationProvider>
@@ -73,12 +107,12 @@
                 <ValidationProvider
                   v-slot="{ errors }"
                   vid="email"
-                  name="correo electrónico"
+                  name="email"
                   tag="div"
                   rules="email"
                 >
                   <input-group
-                    id="signin-email"
+                    id="email"
                     v-model="form.email"
                     label="Correo electrónico"
                     name="email"
@@ -86,65 +120,100 @@
                   />
                 </ValidationProvider>
               </div>
-
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  vid="phonenumber"
-                  name="teléfono"
+                  vid="genero"
+                  name="genero"
                   tag="div"
-                  rules="min:8"
+                  rules="min:1"
                 >
-                  <input-mask
-                    id="phonenumber"
-                    v-model="form.phoneNumber"
-                    mask="####-####"
-                    label="Número de teléfono"
-                    name="phonenumber"
+                  <input-group
+                    id="genero"
+                    v-model="form.genero"
+                    label="Genero"
+                    name="genero"
                     :error="errors[0]"
                   />
                 </ValidationProvider>
               </div>
-
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  vid="altPhoneNumber"
-                  name="correo electrónico"
-                  tag="div"
-                  rules="min:8"
-                >
-                  <input-mask
-                    id="altphonenumber"
-                    v-model="form.altPhoneNumber"
-                    mask="####-####"
-                    label="Número de teléfono alterno"
-                    name="altPhoneNumber"
-                    :error="errors[0]"
-                  />
-                </ValidationProvider>
-              </div>
-
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="role"
-                  name="rol"
+                  vid="tipoVoluntario"
+                  name="tipoVoluntario"
                   tag="div"
                   rules="required"
                 >
                   <input-select
-                    v-model="form.roleId"
-                    label="Rol"
+                    v-model="form.tipoVoluntarioId"
+                    label="Tipo Voluntario"
                     placeholder="Seleccionar"
-                    :options="rolesList"
-                    name="role"
-                    display-name="nombre"
+                    :options="tipoVoluntarioList"
+                    name="tipoVoluntario"
+                    display-name="tipo"
                     :error="errors[0]"
                   />
                 </ValidationProvider>
               </div>
 
+              <div class="col-span-6 sm:col-span-4">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  vid="estado"
+                  name="estado"
+                  tag="div"
+                  rules="required"
+                >
+                  <input-select
+                    v-model="form.estadoId"
+                    label="Estado Voluntario"
+                    placeholder="Seleccionar"
+                    :options="estadoList"
+                    name="estado"
+                    display-name="estadoVoluntario"
+                    :error="errors[0]"
+                  />
+                </ValidationProvider>
+              </div>
+              <div class="col-span-6 sm:col-span-4">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  vid="modalidad"
+                  name="modalidad"
+                  tag="div"
+                  rules="required"
+                >
+                  <input-select
+                    v-model="form.modalityId"
+                    label="Modalidad Voluntario"
+                    placeholder="Seleccionar"
+                    :options="modalityList"
+                    name="modalidad"
+                    display-name="modalidad"
+                    :error="errors[0]"
+                  />
+                </ValidationProvider>
+              </div>
+              <div class="col-span-6 sm:col-span-4">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  vid="cuerpoFilial"
+                  name="cuerpoFilial"
+                  tag="div"
+                  rules="required"
+                >
+                  <input-select
+                    v-model="form.cuerpoFilialId"
+                    label="Cuerpo Filial"
+                    placeholder="Seleccionar"
+                    :options="cuerpoFilialList"
+                    name="cuerpoFilial"
+                    display-name="nombreCuerpoFilial"
+                    :error="errors[0]"
+                  />
+                </ValidationProvider>
+              </div>
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
@@ -164,28 +233,8 @@
                   />
                 </ValidationProvider>
               </div>
-
-              <!--<div v-if="currentRole() && (currentRole().type !== 'superadmin' && currentRole().type !== 'admin')" class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="subject"
-                  name="materia"
-                  tag="div"
-                >
-                  <input-select
-                    v-model="form.subjectId"
-                    label="Materia"
-                    placeholder="Seleccionar"
-                    :options="subjectList"
-                    name="subject"
-                    display-name="name"
-                    :error="errors[0]"
-                  />
-                </ValidationProvider>
-              </div>-->
-
               <div class="col-span-6 sm:col-span-4">
-                <toggle-selector v-model="form.status" label="Activo" />
+                <toggle-selector v-model="form.estadoPersona" label="Activo" />
               </div>
             </div>
           </div>
@@ -194,7 +243,7 @@
     </form-section>
     <div class="w-full">
       <div class="flex items-center justify-end">
-        <custom-button type="submit" class="ml-2" title="Guardar" :loading="isUserLoading" @click.prevent="onSubmit" />
+        <custom-button type="submit" class="ml-2" title="Guardar" :loading="isStudentsLoading" @click.prevent="onSubmit" />
       </div>
     </div>
   </main>
@@ -210,7 +259,6 @@ import CustomButton from '@/components/ui/CustomButton.vue';
 import ToggleSelector from '@/components/ui/ToggleSelector.vue';
 import InputSelect from '@/components/ui/InputSelect.vue';
 import InputGroup from '@/components/ui/InputGroup.vue';
-import InputMask from '@/components/ui/InputMask.vue';
 
 interface Breadcrumb {
   name: string;
@@ -218,9 +266,11 @@ interface Breadcrumb {
 }
 
 const Users = namespace('students');
-const RoleModel = namespace('roles');
+const CuerpoFilialModel = namespace('cuerpoFilial');
+const ModalityModel = namespace('modality');
+const EstadoModel = namespace('estado');
 const SedeModel = namespace('sede');
-const SubjectModel = namespace('subject');
+const TipoVoluntarioModel = namespace('tipoVoluntario');
 
 @Component({
   components: {
@@ -230,18 +280,24 @@ const SubjectModel = namespace('subject');
     ToggleSelector,
     InputSelect,
     InputGroup,
-    InputMask,
   },
 })
 export default class NewUserPage extends Vue {
   form: Student = {
     username: '',
-    phoneNumber: '',
-    altPhoneNumber: '',
-    firstName: '',
+    fechaNacimiento: '',
+    fechaInicio: '',
+    estadoPersona: false,
+    genero: '',
     lastName: '',
+    firstName: '',
+    email: '',
+    voluntarioCodigo: '',
     sedeId: 0,
-    code: '',
+    modalityId: 0,
+    cuerpoFilialId: 0,
+    tipoVoluntarioId: 0,
+    estadoId: 0,
   }
 
   breadcrumbs: Breadcrumb[] =[
@@ -250,24 +306,31 @@ export default class NewUserPage extends Vue {
     { name: 'Nuevo' },
   ]
 
-  @RoleModel.State('rolesList') rolesList!: Role[];
-  @RoleModel.Action('list') fetchRolesList!: (vm: any) => ActionMethod;
-  @SubjectModel.State('subjectList') subjectList!: Subject[];
-  @SubjectModel.Action('list') fetchSubjectsList!: (vm: any) => ActionMethod;
+  @EstadoModel.State('estadoList') estadoList!: Estado[];
+  @EstadoModel.Action('list') fetchEstadoList!: (vm: any) => ActionMethod;
+  @CuerpoFilialModel.State('cuerpoFilialList') cuerpoFilialList!: CuerpoFilial[];
+  @CuerpoFilialModel.Action('list') fetchCuerpoFilialList!: (vm: any) => ActionMethod;
+  @ModalityModel.State('modalityList') modalityList!: Modality[];
+  @ModalityModel.Action('list') fetchModalityList!: (vm: any) => ActionMethod;
+  @TipoVoluntarioModel.State('tipoVoluntarioList') tipoVoluntarioList!: TipoVoluntario[];
+  @TipoVoluntarioModel.Action('list') fetchTipoVoluntarioList!: (vm: any) => ActionMethod;
   @SedeModel.State('sedeList') sedeList!: Sede[];
   @SedeModel.Action('list') fetchSedeList!: (vm: any) => ActionMethod;
-  @Users.State('isLoading') isUserLoading!: boolean;
-  @Users.State('students') currentUser!: Student;
+  @Users.State('isLoading') isStudentsLoading!: boolean;
+  @Users.State('student') student!: Student;
   @Users.Action('show') showUser!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
-  @Users.Action('update') updateUser!: ({ user, vm }: { user: any; vm: any }) => ActionMethod;
+  @Users.Action('update') updateStudent!: ({ student, vm }: { student: any; vm: any }) => ActionMethod;
 
   async mounted() {
     try {
       await this.showUser({ id: +this.$route.params.id, vm: this });
       this.setCurrentUser();
-      await this.fetchRolesList(this);
+      await this.fetchEstadoList(this);
       await this.fetchSedeList(this);
-      await this.fetchSubjectsList(this);
+      await this.fetchModalityList(this);
+      await this.fetchCuerpoFilialList(this);
+      await this.fetchTipoVoluntarioList(this);
+      console.log(this.isStudentsLoading);
     } catch (e) {
       (this as any).$snotify.error('Ha ocurrido un error');
     }
@@ -275,9 +338,13 @@ export default class NewUserPage extends Vue {
 
   setCurrentUser() {
     this.form = {
-      ...this.currentUser,
+      ...this.student,
     };
-    this.form.sedeId = this.currentUser?.sede?.id ?? 0;
+    this.form.modalityId = this.student?.modalidad?.id ?? 0;
+    this.form.cuerpoFilialId = this.student?.cuerpoFilial?.id ?? 0;
+    this.form.sedeId = this.student?.sede?.id ?? 0;
+    this.form.tipoVoluntarioId = this.student?.tipoVoluntario?.id ?? 0;
+    this.form.estadoId = this.student?.estado?.id ?? 0;
   }
 
   /* currentRole() {
@@ -285,15 +352,17 @@ export default class NewUserPage extends Vue {
   } */
 
   async onSubmit() {
-    const isValid = await (this.$refs.form as any).validate();
-    if (isValid) {
-      try {
-        await this.updateUser({ user: this.form, vm: this });
-        this.$router.push('/students');
-        // eslint-disable-next-line no-empty
-      } catch (e) {
-      }
+  // const isValid = await (this.$refs.form as any).validate();
+  // console.log(isValid);
+  // if (isValid) {
+    try {
+      console.log(this.$refs.form);
+      await this.updateStudent({ student: this.form, vm: this });
+      this.$router.push('/students');
+      // eslint-disable-next-line no-empty
+    } catch (e) {
     }
+  // }
   }
 }
 </script>

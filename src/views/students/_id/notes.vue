@@ -1,15 +1,15 @@
 <template>
   <main class="pb-40">
-    <page-heading title="Notas estudiante" :back-route="`/students/${$route.params.id}`" :breadcrumbs="breadcrumbs">
+    <page-heading title="Notas Voluntario" :back-route="`/students/${$route.params.id}`" :breadcrumbs="breadcrumbs">
     </page-heading>
     <section v-if="student">
       <div class="overflow-hidden bg-white border border-gray-100 shadow sm:rounded-lg">
         <div class="px-4 py-5 border-b border-gray-100 sm:px-6">
           <h3 class="text-lg font-medium leading-6 text-gray-900">
-            Estudiante -  {{ `${student.person.firstName} ${student.person.lastName}` }}
+            Voluntario -  {{ `${student.person.firstName} ${student.person.lastName}` }}
           </h3>
           <p class="max-w-2xl mt-1 text-sm leading-5 text-gray-500">
-            Notas del estudiante.
+            Notas del Voluntario.
           </p>
         </div>
         <div>
@@ -96,7 +96,7 @@
     />
     <confirmation-modal
       :show="showConfirmationModal"
-      title="Estudiante Eliminado"
+      title="Voluntario Eliminado"
       @update:show="showConfirmationModal = false"
       @action="redirectBack"
     />
