@@ -122,6 +122,26 @@ export default [
       component: () => import(/* webpackChunkName: "modality-id-edit" */ '@/views/modality/_id/edit.vue'),
     },
     {
+      path: '/cuerpoFilial',
+      name: 'cuerpoFilial',
+      component: () => import(/* webpackChunkName: "cuerpoFilial" */ '@/views/CuerpoFilial/index.vue'),
+    },
+    {
+      path: '/cuerpoFilial/new',
+      name: 'cuerpoFilial-new',
+      component: () => import(/* webpackChunkName: "cuerpoFilial-new" */ '@/views/CuerpoFilial/new.vue'),
+    },
+    {
+      path: '/cuerpoFilial/:id',
+      name: 'cuerpoFilial-id',
+      component: () => import(/* webpackChunkName: "cuerpoFilial-id" */ '@/views/CuerpoFilial/_id/index.vue'),
+    },
+    {
+      path: '/cuerpoFilial/:id/edit',
+      name: 'cuerpoFilial-id-edit',
+      component: () => import(/* webpackChunkName: "cuerpoFilial-id-edit" */ '@/views/CuerpoFilial/_id/edit.vue'),
+    },
+    {
       path: '/section',
       name: 'section',
       component: () => import(/* webpackChunkName: "section" */ '@/views/section/index.vue'),
