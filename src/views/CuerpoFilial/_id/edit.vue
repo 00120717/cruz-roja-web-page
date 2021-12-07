@@ -1,17 +1,17 @@
 <template>
   <main class="pb-40">
-    <page-heading title="Nuevo Cuerpo Filial" :back-route="`/modality/${$route.params.id}`" :breadcrumbs="breadcrumbs" />
+    <page-heading title="Nuevo Cuerpo Filial" :back-route="`/cuerpoFilial/${$route.params.id}`" :breadcrumbs="breadcrumbs" />
     <form-section>
       <ValidationObserver ref="form" tag="form" autocomplete="off" @submit.prevent="onSubmit">
         <div class="md:grid md:grid-cols-3 md:gap-8 ">
           <div class="md:col-span-1">
             <h3 class="text-lg font-medium leading-6 text-gray-900">
-              Modalidad
+              Cuerpo Filial
             </h3>
             <p
               class="mt-1 text-sm leading-5 text-gray-500"
             >
-              Información de la modalidad
+              Información del Cuerpo Filial
             </p>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
@@ -19,12 +19,12 @@
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  vid="type"
-                  name="tipo"
+                  vid="nombreCuerpoFilial"
+                  name="nombreCuerpoFilial"
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.type" label="Tipo de modalidad" name="type" :error="errors[0]" />
+                  <input-group v-model="form.type" label="Cuerpo Filial" name="type" :error="errors[0]" />
                 </ValidationProvider>
               </div>
             </div>
@@ -34,7 +34,7 @@
     </form-section>
     <div class="w-full">
       <div class="flex items-center justify-end">
-        <custom-button type="submit" class="ml-2" title="Guardar" :loading="isModalityLoading" @click.prevent="onSubmit" />
+        <custom-button type="submit" class="ml-2" title="Guardar" :loading="isCuerpoFilialLoading" @click.prevent="onSubmit" />
       </div>
     </div>
   </main>
@@ -49,7 +49,7 @@ import CustomButton from '@/components/ui/CustomButton.vue';
 import ToggleSelector from '@/components/ui/ToggleSelector.vue';
 import InputGroup from '@/components/ui/InputGroup.vue';
 
-const ModalityModel = namespace('modality');
+const CuerpoFilialModel = namespace('cuerpoFilial');
 
 @Component({
   components: {
@@ -60,35 +60,36 @@ const ModalityModel = namespace('modality');
     InputGroup,
   },
 })
-export default class EditModalityPage extends Vue {
+export default class EditCuerpoFilialPage extends Vue {
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
-    { name: 'Modalidad', route: '/modality' },
+    { name: 'CuerpoFilial', route: '/cuerpoFilial' },
     { name: 'Nuevo' },
   ]
 
-  form: Modality = {
+  form: CuerpoFilial = {
     id: 0,
-    type: '',
+    nombreCuerpoFilial: '',
+    encargado: '',
   };
 
-  @ModalityModel.State('isLoading') isModalityLoading!: boolean;
-  @ModalityModel.State('modality') modality!: Modality;
-  @ModalityModel.Action('update') updateModality!: ({ modality, vm }: { modality: any; vm: any }) => ActionMethod;
-  @ModalityModel.Action('show') fetchModality!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
+  @CuerpoFilialModel.State('isLoading') isCuerpoFilialLoading!: boolean;
+  @CuerpoFilialModel.State('cuerpoFilial') cuerpoFilial!: CuerpoFilial;
+  @CuerpoFilialModel.Action('update') updateCuerpoFilial!: ({ cuerpoFilial, vm }: { cuerpoFilial: any; vm: any }) => ActionMethod;
+  @CuerpoFilialModel.Action('show') fetchCuerpoFilial!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
 
   async mounted() {
     try {
-      await this.fetchModality({ id: +this.$route.params.id, vm: this });
-      this.setCurrentModality();
+      await this.fetchCuerpoFilial({ id: +this.$route.params.id, vm: this });
+      this.setCurrentCuerpoiFilial();
     } catch (e) {
       (this as any).$snotify.error('Ha ocurrido un error');
     }
   }
 
-  setCurrentModality() {
+  setCurrentCuerpoiFilial() {
     this.form = {
-      ...this.modality,
+      ...this.cuerpoFilial,
     };
   }
 
@@ -96,8 +97,8 @@ export default class EditModalityPage extends Vue {
     const isValid = await (this.$refs.form as any).validate();
     if (isValid) {
       try {
-        await this.updateModality({ modality: this.form, vm: this });
-        this.$router.push('/modality');
+        await this.updateCuerpoFilial({ cuerpoFilial: this.form, vm: this });
+        this.$router.push('/cuerpoFilial');
       } catch (e) {
         console.error(e);
       }
