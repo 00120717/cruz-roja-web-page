@@ -66,7 +66,7 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
             >
-              {{ student.persona.genero }}
+              {{ student.persona.genero == 'M'? 'Masculino' : 'Femenino' }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"

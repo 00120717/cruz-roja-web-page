@@ -16,7 +16,7 @@
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
             <div class="grid grid-cols-6 row-gap-2 col-gap-6">
-              <div class="col-span-6 sm:col-span-4">
+              <!--<div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
                   vid="username"
@@ -26,7 +26,7 @@
                 >
                   <input-group v-model="form.username" label="Username" name="username" :error="errors[0]" />
                 </ValidationProvider>
-              </div>
+              </div>-->
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
@@ -103,7 +103,7 @@
                 </ValidationProvider>
               </div>
 
-              <div class="col-span-6 sm:col-span-4">
+              <!--<div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
                   vid="email"
@@ -119,23 +119,44 @@
                     :error="errors[0]"
                   />
                 </ValidationProvider>
-              </div>
+              </div>-->
               <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="genero"
-                  name="genero"
-                  tag="div"
-                  rules="min:1"
-                >
-                  <input-group
-                    id="genero"
+              <div class="flex w-full justify-between">
+                <label
+                  :for="id"
+                  class="block text-sm font-medium leading-5 text-gray-700"
+                  >Genero</label>
+              </div>
+              <div class="relative mt-1 rounded-md shadow-sm">
+              <div class="flex items-center mb-2">
+                  <input
+                    id="masculino"
                     v-model="form.genero"
-                    label="Genero"
+                    label="Masculino"
                     name="genero"
-                    :error="errors[0]"
+                    value="M"
+                    class="w-4 h-4 text-blue-600 transition duration-150 ease-in-out form-radio"
+                    type="radio"
                   />
-                </ValidationProvider>
+                  <label for="masculino" class="w-full ml-3">
+                      <span class="block text-sm font-medium leading-5 text-gray-700 truncate ...">{{ "Masculino" | truncate(75)}}</span>
+                  </label>
+                  </div>
+                  <div class="flex items-center mb-2">
+                  <input
+                    id="femenino"
+                    v-model="form.genero"
+                    label="Femenino"
+                    name="genero"
+                    value="F"
+                    class="w-4 h-4 text-blue-600 transition duration-150 ease-in-out form-radio"
+                    type="radio"
+                  />
+                  <label for="femenino" class="w-full ml-3">
+                      <span class="block text-sm font-medium leading-5 text-gray-700 truncate ...">{{ "Femenino" | truncate(75)}}</span>
+                  </label>
+                  </div>
+              </div>
               </div>
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
@@ -259,6 +280,7 @@ import CustomButton from '@/components/ui/CustomButton.vue';
 import ToggleSelector from '@/components/ui/ToggleSelector.vue';
 import InputSelect from '@/components/ui/InputSelect.vue';
 import InputGroup from '@/components/ui/InputGroup.vue';
+import InputRadio from '@/components/ui/InputRadio.vue';
 
 interface Breadcrumb {
   name: string;
@@ -280,6 +302,7 @@ const TipoVoluntarioModel = namespace('tipoVoluntario');
     ToggleSelector,
     InputSelect,
     InputGroup,
+    InputRadio,
   },
 })
 export default class NewUserPage extends Vue {
@@ -330,7 +353,6 @@ export default class NewUserPage extends Vue {
       await this.fetchModalityList(this);
       await this.fetchCuerpoFilialList(this);
       await this.fetchTipoVoluntarioList(this);
-      console.log(this.isStudentsLoading);
     } catch (e) {
       (this as any).$snotify.error('Ha ocurrido un error');
     }
@@ -352,17 +374,15 @@ export default class NewUserPage extends Vue {
   } */
 
   async onSubmit() {
-  // const isValid = await (this.$refs.form as any).validate();
-  // console.log(isValid);
-  // if (isValid) {
-    try {
-      console.log(this.$refs.form);
-      await this.updateStudent({ student: this.form, vm: this });
-      this.$router.push('/students');
+    const isValid = await (this.$refs.form as any).validate();
+    if (isValid) {
+      try {
+        await this.updateStudent({ student: this.form, vm: this });
+        this.$router.push('/students');
       // eslint-disable-next-line no-empty
-    } catch (e) {
+      } catch (e) {
+      }
     }
-  // }
   }
 }
 </script>
