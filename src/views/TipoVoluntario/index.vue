@@ -1,12 +1,12 @@
 <template>
   <main class="pb-40">
     <page-heading
-      title="Sede"
+      title="Tipo Voluntario"
       :show-return="false"
       :breadcrumbs="breadcrumbs"
     >
       <template slot="actions">
-        <custom-button title="Nueva sede" color="secondary" to="/sede/new">
+        <custom-button title="Nuevo Tipo de Voluntario" color="secondary" to="/tipoVoluntario/new">
           <template #icon>
             <svg
               class="w-4 h-4 mr-2"
@@ -30,7 +30,7 @@
         :current-page="filters.page"
         :last-page="lastPage"
         :per-page="filters.per_page"
-        :is-loading="isSedeLoading"
+        :is-loading="isTipoVoluntarioLoading"
         :filters="filters"
         :total-items="meta.total"
         @filter-change="onFiltersChange"
@@ -39,12 +39,12 @@
       >
         <template slot="items">
           <table-item
-            v-for="(sede, index) in sedes"
+            v-for="(tipoVoluntario, index) in tiposVoluntarios"
             :key="index"
-            :item="sede.id"
+            :item="tipoVoluntario.id"
             :selected="selectedItems"
             :remove="false"
-            page="sede"
+            page="tipoVoluntario"
             @update:selected="setItems"
           >
             <td
@@ -53,7 +53,7 @@
               <div class="flex items-center">
                 <div class="">
                   <div class="text-sm font-medium leading-5 text-gray-900">
-                    {{ sede.id }}
+                    {{ tipoVoluntario.id }}
                   </div>
                 </div>
               </div>
@@ -61,17 +61,7 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ sede.name }}
-            </td>
-            <td
-              class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
-            >
-              {{ sede.code }}
-            </td>
-            <td
-              class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
-            >
-              <active-indicator :status="Boolean(sede.active)" />
+              {{ tipoVoluntario.tipo }}
             </td>
           </table-item>
         </template>
@@ -96,7 +86,7 @@ interface Breadcrumb {
   route?: string;
 }
 
-const Sedes = namespace('sede');
+const TiposVoluntarios = namespace('tipoVoluntario');
 
 @Component({
   components: {
@@ -108,11 +98,11 @@ const Sedes = namespace('sede');
     ActiveIndicator,
   },
 })
-export default class SedePage extends Vue {
+export default class TipoVoluntarioPage extends Vue {
   selectedItems: Array<string | number> = []
   showDeleteModal = false
   showDeleteCompleted = false
-  breadcrumbs: Breadcrumb[] = [{ name: 'Administración' }, { name: 'Sede' }]
+  breadcrumbs: Breadcrumb[] = [{ name: 'Administración' }, { name: 'TipoVoluntario' }]
 
   headers: Array<object> = [
     {
@@ -120,35 +110,27 @@ export default class SedePage extends Vue {
       key: 'id',
     },
     {
-      name: 'Nombre',
-      key: 'name',
-    },
-    {
-      name: 'Código',
-      key: 'code',
-    },
-    {
-      name: 'Activa',
-      key: 'active',
+      name: 'Tipo',
+      key: 'tipo',
     },
   ]
 
   // eslint-disable-next-line @typescript-eslint/camelcase
   filters: Filters = { search: '', per_page: '10', page: 1 }
   selectedItem = 0
-  @Sedes.State('sedes') sedes!: Sede[];
-  @Sedes.State('meta') meta!: Meta;
-  @Sedes.State('isLoading') isSedeLoading!: boolean;
-  @Sedes.Action('fetch') fetchSedes!: ({ filters, vm }: { filters: Filters; vm: any }) => AxiosResponse;
+  @TiposVoluntarios.State('tiposVoluntarios') tiposVoluntarios!: TipoVoluntario[];
+  @TiposVoluntarios.State('meta') meta!: Meta;
+  @TiposVoluntarios.State('isLoading') isTipoVoluntarioLoading!: boolean;
+  @TiposVoluntarios.Action('fetch') fetchTiposVoluntarios!: ({ filters, vm }: { filters: Filters; vm: any }) => AxiosResponse;
 
   async mounted() {
-    await this.fetchSedes({ filters: this.filters, vm: this });
+    await this.fetchTiposVoluntarios({ filters: this.filters, vm: this });
   }
 
   @Watch('filters', { deep: true })
   async handleFilterChange(value: Filters) {
     if (value) {
-      await this.fetchSedes({ filters: this.filters, vm: this });
+      await this.fetchTiposVoluntarios({ filters: this.filters, vm: this });
     }
   }
 
@@ -166,7 +148,7 @@ export default class SedePage extends Vue {
 
   selectAllCurrent(value: boolean) {
     if (value) {
-      this.sedes.forEach((item: any) => {
+      this.tiposVoluntarios.forEach((item: any) => {
         this.selectedItems.push(item.id);
       });
     } else {
