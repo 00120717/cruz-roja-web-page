@@ -1,17 +1,17 @@
 <template>
   <main class="pb-40">
-    <page-heading title="Nueva sede" back-route="/sede" :breadcrumbs="breadcrumbs" />
+    <page-heading title="Nuevo Tipo de Voluntario" back-route="/tipoVoluntario" :breadcrumbs="breadcrumbs" />
     <form-section>
       <ValidationObserver ref="form" tag="form" autocomplete="off" @submit.prevent="onSubmit">
         <div class="md:grid md:grid-cols-3 md:gap-8 ">
           <div class="md:col-span-1">
             <h3 class="text-lg font-medium leading-6 text-gray-900">
-              Sede
+              Tipo de Voluntario
             </h3>
             <p
               class="mt-1 text-sm leading-5 text-gray-500"
             >
-              Información de la sede
+              Información del Tipo de Voluntario
             </p>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
@@ -19,49 +19,13 @@
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  vid="name"
-                  name="nombre"
+                  vid="type"
+                  name="tipo"
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.name" label="Nombre" name="name" :error="errors[0]" />
+                  <input-group v-model="form.type" label="Tipo de Voluntario" name="tipo" :error="errors[0]" />
                 </ValidationProvider>
-              </div>
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="logo"
-                  name="logo"
-                  tag="div"
-                  rules="required"
-                >
-                  <input-group v-model="form.logo" label="Link del logo" name="logo" :error="errors[0]" />
-                </ValidationProvider>
-              </div>
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="code"
-                  name="código"
-                  tag="div"
-                  rules="required"
-                >
-                  <input-group v-model="form.code" label="Código" name="code" :error="errors[0]" />
-                </ValidationProvider>
-              </div>
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="address"
-                  name="dirección"
-                  tag="div"
-                  rules="required"
-                >
-                  <input-group v-model="form.address" label="Dirección" name="address" :error="errors[0]" />
-                </ValidationProvider>
-              </div>
-              <div class="col-span-6 sm:col-span-4">
-                <toggle-selector v-model="form.active" label="Activo" />
               </div>
             </div>
           </div>
@@ -70,7 +34,7 @@
     </form-section>
     <div class="w-full">
       <div class="flex items-center justify-end">
-        <custom-button type="submit" class="ml-2" title="Guardar" :loading="isSedeLoading" @click.prevent="onSubmit" />
+        <custom-button type="submit" class="ml-2" title="Guardar" :loading="isTipoVoluntarioLoading" @click.prevent="onSubmit" />
       </div>
     </div>
   </main>
@@ -85,7 +49,7 @@ import CustomButton from '@/components/ui/CustomButton.vue';
 import ToggleSelector from '@/components/ui/ToggleSelector.vue';
 import InputGroup from '@/components/ui/InputGroup.vue';
 
-const Sedes = namespace('sede');
+const TiposVoluntarios = namespace('tipoVoluntario');
 
 @Component({
   components: {
@@ -96,30 +60,26 @@ const Sedes = namespace('sede');
     InputGroup,
   },
 })
-export default class NewSedePage extends Vue {
+export default class NewTipoVoluntarioPage extends Vue {
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
-    { name: 'Sede', route: '/sede' },
+    { name: 'TipoVoluntario', route: '/tipoVoluntario' },
     { name: 'Nuevo' },
   ]
 
   form = {
-    name: '',
-    logo: '',
-    code: '',
-    address: '',
-    active: false,
+    type: '',
   };
 
-  @Sedes.State('isLoading') isSedeLoading!: boolean;
-  @Sedes.Action('store') createSede!: ({ sede, vm }: { sede: any; vm: any }) => ActionMethod;
+  @TiposVoluntarios.State('isLoading') isTipoVoluntarioLoading!: boolean;
+  @TiposVoluntarios.Action('store') createTipoVoluntario!: ({ tipoVoluntario, vm }: { tipoVoluntario: any; vm: any }) => ActionMethod;
 
   async onSubmit() {
     const isValid = await (this.$refs.form as any).validate();
     if (isValid) {
       try {
-        await this.createSede({ sede: this.form, vm: this });
-        this.$router.push('/sede');
+        await this.createTipoVoluntario({ tipoVoluntario: this.form, vm: this });
+        this.$router.push('/tipoVoluntario');
       } catch (e) {
         console.error(e);
       }
