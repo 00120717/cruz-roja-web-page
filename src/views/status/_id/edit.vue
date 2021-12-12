@@ -1,17 +1,17 @@
 <template>
   <main class="pb-40">
-    <page-heading title="Nueva modalidad" :back-route="`/modality/${$route.params.id}`" :breadcrumbs="breadcrumbs" />
+    <page-heading title="Nuevo estado" :back-route="`/estado/${$route.params.id}`" :breadcrumbs="breadcrumbs" />
     <form-section>
       <ValidationObserver ref="form" tag="form" autocomplete="off" @submit.prevent="onSubmit">
         <div class="md:grid md:grid-cols-3 md:gap-8 ">
           <div class="md:col-span-1">
             <h3 class="text-lg font-medium leading-6 text-gray-900">
-              Modalidad
+              Estado
             </h3>
             <p
               class="mt-1 text-sm leading-5 text-gray-500"
             >
-              Información de la modalidad
+              Información del estado
             </p>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
@@ -24,7 +24,7 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.type" label="Tipo de modalidad" name="type" :error="errors[0]" />
+                  <input-group v-model="form.type" label="Tipo de estado" name="type" :error="errors[0]" />
                 </ValidationProvider>
               </div>
             </div>
@@ -34,7 +34,7 @@
     </form-section>
     <div class="w-full">
       <div class="flex items-center justify-end">
-        <custom-button type="submit" class="ml-2" title="Guardar" :loading="isModalityLoading" @click.prevent="onSubmit" />
+        <custom-button type="submit" class="ml-2" title="Guardar" :loading="isEstadoLoading" @click.prevent="onSubmit" />
       </div>
     </div>
   </main>
@@ -49,7 +49,7 @@ import CustomButton from '@/components/ui/CustomButton.vue';
 import ToggleSelector from '@/components/ui/ToggleSelector.vue';
 import InputGroup from '@/components/ui/InputGroup.vue';
 
-const ModalityModel = namespace('modality');
+const EstadoModel = namespace('estado');
 
 @Component({
   components: {
@@ -60,35 +60,35 @@ const ModalityModel = namespace('modality');
     InputGroup,
   },
 })
-export default class EditModalityPage extends Vue {
+export default class EditEstadoPage extends Vue {
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
-    { name: 'Modalidad', route: '/modality' },
+    { name: 'Estado', route: '/estado' },
     { name: 'Nuevo' },
   ]
 
-  form: Modality = {
+  form: Estado = {
     id: 0,
-    type: '',
+    estadoVoluntario: '',
   };
 
-  @ModalityModel.State('isLoading') isModalityLoading!: boolean;
-  @ModalityModel.State('modality') modality!: Modality;
-  @ModalityModel.Action('update') updateModality!: ({ modality, vm }: { modality: any; vm: any }) => ActionMethod;
-  @ModalityModel.Action('show') fetchModality!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
+  @EstadoModel.State('isLoading') isEstadoLoading!: boolean;
+  @EstadoModel.State('estado') estado!: Estado;
+  @EstadoModel.Action('update') updateEstado!: ({ estado, vm }: { estado: any; vm: any }) => ActionMethod;
+  @EstadoModel.Action('show') fetchEstado!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
 
   async mounted() {
     try {
-      await this.fetchModality({ id: +this.$route.params.id, vm: this });
-      this.setCurrentModality();
+      await this.fetchEstado({ id: +this.$route.params.id, vm: this });
+      this.setCurrentEstado();
     } catch (e) {
       (this as any).$snotify.error('Ha ocurrido un error');
     }
   }
 
-  setCurrentModality() {
+  setCurrentEstado() {
     this.form = {
-      ...this.modality,
+      ...this.estado,
     };
   }
 
@@ -96,8 +96,8 @@ export default class EditModalityPage extends Vue {
     const isValid = await (this.$refs.form as any).validate();
     if (isValid) {
       try {
-        await this.updateModality({ modality: this.form, vm: this });
-        this.$router.push('/modality');
+        await this.updateEstado({ estado: this.form, vm: this });
+        this.$router.push('/estado');
       } catch (e) {
         console.error(e);
       }
