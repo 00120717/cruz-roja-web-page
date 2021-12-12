@@ -24,7 +24,7 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.type" label="Cuerpo Filial" name="type" :error="errors[0]" />
+                  <input-group v-model="form.type" label="Cuerpo Filial" name="nombreCuerpoFilial" :error="errors[0]" />
                 </ValidationProvider>
               </div>
             </div>
