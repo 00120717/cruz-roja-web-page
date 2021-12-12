@@ -1,13 +1,13 @@
 <template>
   <main class="pb-40">
-    <page-heading title="Detalle Cuerpo filial" back-route="/modality" :breadcrumbs="breadcrumbs">
+    <page-heading title="Detalle Cuerpo filial" back-route="/cuerpoFilial" :breadcrumbs="breadcrumbs">
       <template slot="actions">
         <custom-button
           title="Editar"
           color="white"
           size="small"
           class="mr-2"
-          :to="`/modality/${modality.id}/edit`"
+          :to="`/cuerpoFilial/${cuerpoFilial.id}/edit`"
         >
           <template #icon>
             <svg
@@ -49,14 +49,14 @@
         </custom-button>
       </template>
     </page-heading>
-    <section v-if="modality">
+    <section v-if="cuerpoFilial">
       <div class="overflow-hidden bg-white border border-gray-100 shadow sm:rounded-lg">
         <div class="px-4 py-5 border-b border-gray-100 sm:px-6">
           <h3 class="text-lg font-medium leading-6 text-gray-900">
-            Modalidad #{{ modality.id }}
+            Cuerpo Filial #{{ cuerpoFilial.id }}
           </h3>
           <p class="max-w-2xl mt-1 text-sm leading-5 text-gray-500">
-            Información general de la modalidad {{ modality.type }}.
+            Información general del Cuerpo Filial {{ cuerpoFilial.nombreCuerpoFilial }}.
           </p>
         </div>
         <div>
@@ -66,7 +66,7 @@
                 Tipo
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ modality.type }}
+                {{ cuerpoFilial.nombreCuerpoFilial }}
               </dd>
             </div>
           </dl>
@@ -75,17 +75,17 @@
     </section>
     <delete-item
       :show="showDeleteModal"
-      :title="`modalidad ${modality.type}`"
+      :title="`cuerpoFilial ${cuerpoFilial.nombreCuerpoFilial}`"
       @update:show="showDeleteModal = false"
       @action="deleteItem"
     />
     <confirmation-modal
       :show="showConfirmationModal"
-      title="Modalidad Eliminada"
+      title="Cuerpo Filial Eliminado"
       @update:show="showConfirmationModal = false"
       @action="redirectBack"
     />
-    <loading :active="isModalityLoading" :is-full-page="false" />
+    <loading :active="isCuerpoFilialLoading" :is-full-page="false" />
   </main>
 </template>
 
@@ -105,7 +105,7 @@ interface Breadcrumb {
   route?: string;
 }
 
-const ModalityModel = namespace('modality');
+const CuerpoFilialModel = namespace('cuerpoFilial');
 
 @Component({
   components: {
@@ -117,36 +117,36 @@ const ModalityModel = namespace('modality');
     ConfirmationModal,
   },
 })
-export default class ShowModalityPage extends Vue {
+export default class ShowCuerpoFilialPage extends Vue {
   showConfirmationModal = false
   showDeleteModal = false
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
-    { name: 'Modalidad', route: '/modality' },
+    { name: 'CuerpoFilial', route: '/cuerpoFilial' },
     { name: 'Detalle' },
   ]
 
-  @ModalityModel.State('isLoading') isModalityLoading!: boolean;
-  @ModalityModel.State('modality') modality!: Modality;
-  @ModalityModel.Action('show') fetchModality!: ({ id, vm }: { id: number; vm: any }) => ActionMethod
-  @ModalityModel.Action('destroy') deleteModality!: ({ id, vm }: { id: number; vm: any }) => ActionMethod
+  @CuerpoFilialModel.State('isLoading') isCuerpoFilialLoading!: boolean;
+  @CuerpoFilialModel.State('cuerpoFilial') cuerpoFilial!: CuerpoFilial;
+  @CuerpoFilialModel.Action('update') updateCuerpoFilial!: ({ cuerpoFilial, vm }: { cuerpoFilial: any; vm: any }) => ActionMethod;
+  @CuerpoFilialModel.Action('show') fetchCuerpoFilial!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
 
   async mounted() {
     const { id } = this.$route.params;
-    await this.fetchModality({ id: +id, vm: this });
-    if (!this.modality.id) {
+    await this.fetchCuerpoFilial({ id: +id, vm: this });
+    if (!this.cuerpoFilial.id) {
       this.redirectBack();
     }
   }
 
   async deleteItem() {
-    const id = Number(this.modality?.id);
-    await this.deleteModality({ id, vm: this });
+    const id = Number(this.cuerpoFilial?.id);
+    await this.deleteCuerpoFilial({ id, vm: this });
     this.showConfirmationModal = true;
   }
 
   redirectBack() {
-    this.$router.push('/modality');
+    this.$router.push('/cuerpoFilial');
   }
 }
 </script>
