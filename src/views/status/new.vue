@@ -1,17 +1,17 @@
 <template>
   <main class="pb-40">
-    <page-heading title="Nuevo rol" back-route="/modality" :breadcrumbs="breadcrumbs" />
+    <page-heading title="Nuevo Estado" back-route="/estado" :breadcrumbs="breadcrumbs" />
     <form-section>
       <ValidationObserver ref="form" tag="form" autocomplete="off" @submit.prevent="onSubmit">
         <div class="md:grid md:grid-cols-3 md:gap-8 ">
           <div class="md:col-span-1">
             <h3 class="text-lg font-medium leading-6 text-gray-900">
-              Modalidad
+              Estado
             </h3>
             <p
               class="mt-1 text-sm leading-5 text-gray-500"
             >
-              Información de la modalidad
+              Información del Estado
             </p>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
@@ -24,7 +24,7 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.type" label="Tipo de modalidad" name="type" :error="errors[0]" />
+                  <input-group v-model="form.type" label="Tipo de Estado" name="estadoVoluntario" :error="errors[0]" />
                 </ValidationProvider>
               </div>
             </div>
@@ -34,7 +34,7 @@
     </form-section>
     <div class="w-full">
       <div class="flex items-center justify-end">
-        <custom-button type="submit" class="ml-2" title="Guardar" :loading="isModalityLoading" @click.prevent="onSubmit" />
+        <custom-button type="submit" class="ml-2" title="Guardar" :loading="isEstadoLoading" @click.prevent="onSubmit" />
       </div>
     </div>
   </main>
@@ -49,7 +49,7 @@ import CustomButton from '@/components/ui/CustomButton.vue';
 import ToggleSelector from '@/components/ui/ToggleSelector.vue';
 import InputGroup from '@/components/ui/InputGroup.vue';
 
-const ModalityModel = namespace('modality');
+const EstadoModel = namespace('estado');
 
 @Component({
   components: {
@@ -60,26 +60,26 @@ const ModalityModel = namespace('modality');
     InputGroup,
   },
 })
-export default class NewModalityPage extends Vue {
+export default class NewEstadoPage extends Vue {
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
-    { name: 'Modalidad', route: '/modality' },
+    { name: 'Estado', route: '/estado' },
     { name: 'Nuevo' },
   ]
 
   form = {
-    type: '',
+    estadoVoluntario: '',
   };
 
-  @ModalityModel.State('isLoading') isModalityLoading!: boolean;
-  @ModalityModel.Action('store') createModality!: ({ modality, vm }: { modality: any; vm: any }) => ActionMethod;
+  @EstadoModel.State('isLoading') isEstadoLoading!: boolean;
+  @EstadoModel.Action('store') createEstado!: ({ estado, vm }: { estado: any; vm: any }) => ActionMethod;
 
   async onSubmit() {
     const isValid = await (this.$refs.form as any).validate();
     if (isValid) {
       try {
-        await this.createModality({ modality: this.form, vm: this });
-        this.$router.push('/modality');
+        await this.createEstado({ estado: this.form, vm: this });
+        this.$router.push('/estado');
       } catch (e) {
         console.error(e);
       }
