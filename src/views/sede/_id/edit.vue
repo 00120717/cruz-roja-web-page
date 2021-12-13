@@ -24,18 +24,7 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.name" label="Nombre" name="name" :error="errors[0]" />
-                </ValidationProvider>
-              </div>
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="logo"
-                  name="logo"
-                  tag="div"
-                  rules="required"
-                >
-                  <input-group v-model="form.logo" label="Link del logo" name="logo" :error="errors[0]" />
+                  <input-group v-model="form.nombre" label="Nombre" name="name" :error="errors[0]" />
                 </ValidationProvider>
               </div>
               <div class="col-span-6 sm:col-span-4">
@@ -46,7 +35,7 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.code" label="Código" name="code" :error="errors[0]" />
+                  <input-group v-model="form.codigo" label="Código" name="code" :error="errors[0]" />
                 </ValidationProvider>
               </div>
               <div class="col-span-6 sm:col-span-4">
@@ -57,7 +46,7 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.address" label="Dirección" name="address" :error="errors[0]" />
+                  <input-group v-model="form.direccion" label="Dirección" name="address" :error="errors[0]" />
                 </ValidationProvider>
               </div>
               <div class="col-span-6 sm:col-span-4">
@@ -140,6 +129,7 @@ export default class EditSedePage extends Vue {
   async mounted() {
     try {
       await this.fetchSede({ id: +this.$route.params.id, vm: this });
+      await this.fetchTipoSedeList(this);
       this.setCurrentSede();
     } catch (e) {
       (this as any).$snotify.error('Ha ocurrido un error');

@@ -124,22 +124,22 @@ export default [
     {
       path: '/cuerpoFilial',
       name: 'cuerpoFilial',
-      component: () => import(/* webpackChunkName: "cuerpoFilial" */ '@/views/CuerpoFilial/index.vue'),
+      component: () => import(/* webpackChunkName: "cuerpoFilial" */ '@/views/cuerpoFilial/index.vue'),
     },
     {
       path: '/cuerpoFilial/new',
       name: 'cuerpoFilial-new',
-      component: () => import(/* webpackChunkName: "cuerpoFilial-new" */ '@/views/CuerpoFilial/new.vue'),
+      component: () => import(/* webpackChunkName: "cuerpoFilial-new" */ '@/views/cuerpoFilial/new.vue'),
     },
     {
       path: '/cuerpoFilial/:id',
       name: 'cuerpoFilial-id',
-      component: () => import(/* webpackChunkName: "cuerpoFilial-id" */ '@/views/CuerpoFilial/_id/index.vue'),
+      component: () => import(/* webpackChunkName: "cuerpoFilial-id" */ '@/views/cuerpoFilial/_id/index.vue'),
     },
     {
       path: '/cuerpoFilial/:id/edit',
       name: 'cuerpoFilial-id-edit',
-      component: () => import(/* webpackChunkName: "cuerpoFilial-id-edit" */ '@/views/CuerpoFilial/_id/edit.vue'),
+      component: () => import(/* webpackChunkName: "cuerpoFilial-id-edit" */ '@/views/cuerpoFilial/_id/edit.vue'),
     },
     {
       path: '/section',
