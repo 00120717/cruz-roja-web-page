@@ -24,44 +24,8 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.name" label="Nombre" name="name" :error="errors[0]" />
+                  <input-group v-model="form.nombreTipoVoluntario" label="Nombre Tipo Voluntario" name="name" :error="errors[0]" />
                 </ValidationProvider>
-              </div>
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="logo"
-                  name="logo"
-                  tag="div"
-                  rules="required"
-                >
-                  <input-group v-model="form.logo" label="Link del logo" name="logo" :error="errors[0]" />
-                </ValidationProvider>
-              </div>
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="code"
-                  name="código"
-                  tag="div"
-                  rules="required"
-                >
-                  <input-group v-model="form.code" label="Código" name="code" :error="errors[0]" />
-                </ValidationProvider>
-              </div>
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="address"
-                  name="dirección"
-                  tag="div"
-                  rules="required"
-                >
-                  <input-group v-model="form.address" label="Dirección" name="address" :error="errors[0]" />
-                </ValidationProvider>
-              </div>
-              <div class="col-span-6 sm:col-span-4">
-                <toggle-selector v-model="form.active" label="Activo" />
               </div>
             </div>
           </div>
@@ -105,15 +69,11 @@ export default class EditTipoVoluntarioPage extends Vue {
 
   form: TipoVoluntario = {
     id: 0,
-    name: '',
-    logo: '',
-    code: '',
-    address: '',
-    active: false,
+    nombreTipoVoluntario: '',
   };
 
   @TiposVoluntarios.State('isLoading') isTipoVoluntarioLoading!: boolean;
-  @TiposVoluntarios.State('tipoVoluntario') tipoVoluntario!: tipoVoluntario;
+  @TiposVoluntarios.State('tipoVoluntario') tipoVoluntario!: TipoVoluntario;
   @TiposVoluntarios.Action('update') updateTipoVoluntario!: ({ tipoVoluntario, vm }: { tipoVoluntario: any; vm: any }) => ActionMethod;
   @TiposVoluntarios.Action('show') fetchTipoVoluntario!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
 

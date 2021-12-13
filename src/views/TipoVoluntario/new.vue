@@ -68,7 +68,7 @@ export default class NewTipoVoluntarioPage extends Vue {
   ]
 
   form = {
-    type: '',
+    nombreTipoVoluntario: '',
   };
 
   @TiposVoluntarios.State('isLoading') isTipoVoluntarioLoading!: boolean;

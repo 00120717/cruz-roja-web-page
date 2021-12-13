@@ -6,7 +6,7 @@
       :breadcrumbs="breadcrumbs"
     >
       <template slot="actions">
-        <custom-button title="Nuevo Voluntario" color="secondary" to="/students/new">
+        <custom-button title="Nuevo Voluntario" color="secondary" to="/voluntarios/new">
           <template #icon>
             <svg
               class="w-4 h-4 mr-2"
@@ -43,7 +43,7 @@
             :key="index"
             :item="student.id"
             :selected="selectedItems"
-            page="students"
+            page="voluntarios"
             @update:selected="setItems"
             @delete="deleteItem"
           >
@@ -76,7 +76,7 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ student.tipoVoluntario ? student.tipoVoluntario.tipo : 'N/A' }}
+              {{ student.tipoVoluntario ? student.tipoVoluntario.nombreTipo : 'N/A' }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
@@ -92,7 +92,7 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ student.modalidad ? student.modalidad.modalidad : 'N/A' }}
+              {{ student.modalidad ? student.modalidad.nombreModalidad : 'N/A' }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"

@@ -1,8 +1,8 @@
 interface Sede {
   id: number;
-  name: string;
-  logo: string;
-  code: string;
-  address: string;
-  active?: boolean;
+  nombre: string;
+  codigo: string;
+  direccion: string;
+  tipoSedeId?: number;
+  tipoSede?: TipoSede;
 }

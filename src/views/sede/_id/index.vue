@@ -44,7 +44,7 @@
                 Nombre
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ sede.name }}
+                {{ sede.nombre }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -52,15 +52,7 @@
                 Código
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ sede.code }}
-              </dd>
-            </div>
-            <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium leading-5 text-gray-500">
-                Logo
-              </dt>
-              <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                <img v-if="sede.logo" :src="sede.logo" alt="">
+                {{ sede.codigo }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -70,15 +62,17 @@
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ sede.address }}
+                {{ sede.direccion }}
               </dd>
             </div>
-            <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
-                Activo
+                Tipo Sede
               </dt>
-              <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                <active-indicator :status="Boolean(sede.active)" />
+              <dd
+                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+              >
+                {{ sede.tipoSede.nombreTipoSede }}
               </dd>
             </div>
           </dl>

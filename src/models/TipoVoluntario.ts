@@ -1,4 +1,4 @@
 interface TipoVoluntario {
   id: number;
-  tipo: string;
+  nombreTipoVoluntario: string;
 }

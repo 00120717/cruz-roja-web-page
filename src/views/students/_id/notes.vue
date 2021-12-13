@@ -1,6 +1,6 @@
 <template>
   <main class="pb-40">
-    <page-heading title="Notas Voluntario" :back-route="`/students/${$route.params.id}`" :breadcrumbs="breadcrumbs">
+    <page-heading title="Notas Voluntario" :back-route="`/voluntarios/${$route.params.id}`" :breadcrumbs="breadcrumbs">
     </page-heading>
     <section v-if="student">
       <div class="overflow-hidden bg-white border border-gray-100 shadow sm:rounded-lg">
@@ -139,7 +139,7 @@ const Students = namespace('students');
 export default class ShowStudentPage extends Vue {
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
-    { name: 'Voluntarios', route: '/students' },
+    { name: 'Voluntarios', route: '/voluntarios' },
     { name: 'Detalle' },
   ];
 
@@ -227,7 +227,7 @@ export default class ShowStudentPage extends Vue {
   }
 
   redirectBack() {
-    this.$router.push('/students');
+    this.$router.push('/voluntarios');
   }
 }
 </script>

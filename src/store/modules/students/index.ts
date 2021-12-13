@@ -20,14 +20,13 @@ export const state: StudentState = {
     email: null,
     sede: {
       id: 0,
-      name: '',
-      logo: '',
-      code: '',
-      address: '',
+      nombre: '',
+      codigo: '',
+      direccion: '',
     },
     modalidad: {
       id: 0,
-      type: '',
+      nombreModalidad: '',
     },
     estado: {
       id: 0,
@@ -35,7 +34,12 @@ export const state: StudentState = {
     },
     tipoVoluntario: {
       id: 0,
-      tipo: '',
+      nombreTipoVoluntario: '',
+    },
+    cuerpoFilial: {
+      id: 0,
+      nombreCuerpoFilial: '',
+      encargado: '',
     },
   },
   isLoading: false,

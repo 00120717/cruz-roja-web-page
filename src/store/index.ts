@@ -9,6 +9,7 @@ import { sede } from '@/store/modules/sede';
 import { permissions } from '@/store/modules/permissions';
 import { students } from '@/store/modules/students';
 import { modality } from '@/store/modules/modality';
+import { tipoSede } from '@/store/modules/tipoSede';
 import { section } from '@/store/modules/section';
 import { grade } from '@/store/modules/grade';
 import { cuerpoFilial } from '@/store/modules/cuerpoFilial';
@@ -30,6 +31,7 @@ export default new Vuex.Store({
     permissions,
     students,
     modality,
+    tipoSede,
     section,
     grade,
   },

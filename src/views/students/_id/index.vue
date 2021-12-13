@@ -1,13 +1,13 @@
 <template>
   <main class="pb-40">
-    <page-heading title="Detalle voluntario" back-route="/students" :breadcrumbs="breadcrumbs">
+    <page-heading title="Detalle voluntario" back-route="/voluntarios" :breadcrumbs="breadcrumbs">
       <template slot="actions">
         <custom-button
           title="Ver emergencias"
           color="secondary"
           size="small"
           class="mr-2"
-          :to="`/students/${student.id}`"
+          :to="`/voluntarios/${student.id}`"
         >
           <template #icon>
             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
@@ -18,7 +18,7 @@
           color="white"
           size="small"
           class="mr-2"
-          :to="`/students/${student.id}/edit`"
+          :to="`/voluntarios/${student.id}/edit`"
         >
           <template #icon>
             <svg
@@ -113,7 +113,7 @@
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ student.modalidad ? student.modalidad.modalidad : 'N/A' }}
+                {{ student.modalidad ? student.modalidad.nombreModalidad : 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -133,7 +133,7 @@
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ student.tipoVoluntario ? student.tipoVoluntario.tipo : 'N/A' }}
+                {{ student.tipoVoluntario ? student.tipoVoluntario.nombreTipo : 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -235,7 +235,7 @@ const Students = namespace('students');
 export default class ShowStudentPage extends Vue {
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
-    { name: 'Voluntarios', route: '/students' },
+    { name: 'Voluntarios', route: '/voluntarios' },
     { name: 'Detalle' },
   ]
 
@@ -269,7 +269,7 @@ export default class ShowStudentPage extends Vue {
   }
 
   redirectBack() {
-    this.$router.push('/students');
+    this.$router.push('/voluntarios');
   }
 }
 

@@ -1,6 +1,6 @@
 <template>
    <main class="pb-40">
-      <page-heading title="Edición voluntario" :back-route="`/students/${$route.params.id}`" :breadcrumbs="breadcrumbs" />
+      <page-heading title="Edición voluntario" :back-route="`/voluntarios/${$route.params.id}`" :breadcrumbs="breadcrumbs" />
       <form-section>
          <ValidationObserver ref="form" tag="form" autocomplete="off" @submit.prevent="onSubmit">
             <div class="md:grid md:grid-cols-3 md:gap-8 ">
@@ -169,7 +169,7 @@
                               placeholder="Seleccionar"
                               :options="tipoVoluntarioList"
                               name="tipoVoluntario"
-                              display-name="tipo"
+                              display-name="nombreTipo"
                               :error="errors[0]"
                               />
                         </ValidationProvider>
@@ -207,7 +207,7 @@
                               placeholder="Seleccionar"
                               :options="modalityList"
                               name="modalidad"
-                              display-name="modalidad"
+                              display-name="nombreModalidad"
                               :error="errors[0]"
                               />
                         </ValidationProvider>
@@ -321,7 +321,7 @@ export default class NewUserPage extends Vue {
 
   breadcrumbs: Breadcrumb[] =[
     { name: 'Administración' },
-    { name: 'Voluntarios', route: '/students' },
+    { name: 'Voluntarios', route: '/voluntarios' },
     { name: 'Nuevo' },
   ]
 
@@ -374,7 +374,7 @@ export default class NewUserPage extends Vue {
     if (isValid) {
       try {
         await this.updateStudent({ student: this.form, vm: this });
-        this.$router.push('/students');
+        this.$router.push('/voluntarios');
       // eslint-disable-next-line no-empty
       } catch (e) {
       }

@@ -61,17 +61,17 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ sede.name }}
+              {{ sede.nombre }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ sede.code }}
+              {{ sede.codigo }}
             </td>
             <td
-              class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
+              class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              <active-indicator :status="Boolean(sede.active)" />
+              {{ sede.tipoSede.nombreTipoSede }}
             </td>
           </table-item>
         </template>
@@ -128,8 +128,8 @@ export default class SedePage extends Vue {
       key: 'code',
     },
     {
-      name: 'Activa',
-      key: 'active',
+      name: 'Tipo',
+      key: 'tipo',
     },
   ]
 

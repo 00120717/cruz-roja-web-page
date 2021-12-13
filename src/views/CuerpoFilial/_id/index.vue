@@ -130,6 +130,7 @@ export default class ShowCuerpoFilialPage extends Vue {
   @CuerpoFilialModel.State('cuerpoFilial') cuerpoFilial!: CuerpoFilial;
   @CuerpoFilialModel.Action('update') updateCuerpoFilial!: ({ cuerpoFilial, vm }: { cuerpoFilial: any; vm: any }) => ActionMethod;
   @CuerpoFilialModel.Action('show') fetchCuerpoFilial!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
+  @CuerpoFilialModel.Action('destroy') deleteCuerpoFilial!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
 
   async mounted() {
     const { id } = this.$route.params;

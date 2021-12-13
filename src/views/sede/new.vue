@@ -24,18 +24,7 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.name" label="Nombre" name="name" :error="errors[0]" />
-                </ValidationProvider>
-              </div>
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="logo"
-                  name="logo"
-                  tag="div"
-                  rules="required"
-                >
-                  <input-group v-model="form.logo" label="Link del logo" name="logo" :error="errors[0]" />
+                  <input-group v-model="form.nombre" label="Nombre" name="name" :error="errors[0]" />
                 </ValidationProvider>
               </div>
               <div class="col-span-6 sm:col-span-4">
@@ -46,7 +35,7 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.code" label="Código" name="code" :error="errors[0]" />
+                  <input-group v-model="form.codigo" label="Código" name="code" :error="errors[0]" />
                 </ValidationProvider>
               </div>
               <div class="col-span-6 sm:col-span-4">
@@ -57,12 +46,28 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.address" label="Dirección" name="address" :error="errors[0]" />
+                  <input-group v-model="form.direccion" label="Dirección" name="address" :error="errors[0]" />
                 </ValidationProvider>
               </div>
               <div class="col-span-6 sm:col-span-4">
-                <toggle-selector v-model="form.active" label="Activo" />
-              </div>
+                  <ValidationProvider
+                      v-slot="{ errors }"
+                      vid="tipoSede"
+                      name="tipoSede"
+                      tag="div"
+                      rules="required"
+                      >
+                      <input-select
+                        v-model="form.tipoSedeId"
+                        label="Tipo Sede"
+                        placeholder="Seleccionar"
+                        :options="tipoSedeList"
+                        name="tipoSede"
+                        display-name="nombreTipoSede"
+                        :error="errors[0]"
+                        />
+                  </ValidationProvider>
+                </div>
             </div>
           </div>
         </div>
@@ -82,10 +87,12 @@ import { ActionMethod } from 'vuex';
 import PageHeading from '@/components/layout/PageHeading.vue';
 import FormSection from '@/components/ui/FormSection.vue';
 import CustomButton from '@/components/ui/CustomButton.vue';
+import InputSelect from '@/components/ui/InputSelect.vue';
 import ToggleSelector from '@/components/ui/ToggleSelector.vue';
 import InputGroup from '@/components/ui/InputGroup.vue';
 
 const Sedes = namespace('sede');
+const TipoSedeModel = namespace('tipoSede');
 
 @Component({
   components: {
@@ -93,6 +100,7 @@ const Sedes = namespace('sede');
     FormSection,
     CustomButton,
     ToggleSelector,
+    InputSelect,
     InputGroup,
   },
 })
@@ -104,15 +112,24 @@ export default class NewSedePage extends Vue {
   ]
 
   form = {
-    name: '',
-    logo: '',
-    code: '',
-    address: '',
-    active: false,
+    nombre: '',
+    codigo: '',
+    direccion: '',
+    tipoSedeId: 0,
   };
 
   @Sedes.State('isLoading') isSedeLoading!: boolean;
   @Sedes.Action('store') createSede!: ({ sede, vm }: { sede: any; vm: any }) => ActionMethod;
+  @TipoSedeModel.State('tipoSedeList') tipoSedeList!: TipoSede[];
+  @TipoSedeModel.Action('list') fetchTipoSedeList!: (vm: any) => ActionMethod;
+
+  async mounted() {
+    try {
+      await this.fetchTipoSedeList(this);
+    } catch (e) {
+      (this as any).$snotify.error('Ha ocurrido un error');
+    }
+  }
 
   async onSubmit() {
     const isValid = await (this.$refs.form as any).validate();

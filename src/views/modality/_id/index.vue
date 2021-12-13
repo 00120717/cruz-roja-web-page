@@ -56,7 +56,7 @@
             Modalidad #{{ modality.id }}
           </h3>
           <p class="max-w-2xl mt-1 text-sm leading-5 text-gray-500">
-            Información general de la modalidad {{ modality.type }}.
+            Información general de la modalidad {{ modality.nombreModalidad }}.
           </p>
         </div>
         <div>
@@ -66,7 +66,7 @@
                 Tipo
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ modality.type }}
+                {{ modality.nombreModalidad }}
               </dd>
             </div>
           </dl>
@@ -75,7 +75,7 @@
     </section>
     <delete-item
       :show="showDeleteModal"
-      :title="`modalidad ${modality.type}`"
+      :title="`modalidad ${modality.nombreModalidad}`"
       @update:show="showDeleteModal = false"
       @action="deleteItem"
     />

@@ -61,7 +61,7 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ modality.type }}
+              {{ modality.nombreModalidad }}
             </td>
           </table-item>
         </template>

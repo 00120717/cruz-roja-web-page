@@ -8,11 +8,14 @@ import { SedeState } from '@/store/modules/sede/types';
 
 export const state: SedeState = {
   sede: {
-    address: '',
-    code: '',
+    direccion: '',
+    codigo: '',
     id: 0,
-    logo: '',
-    name: '',
+    nombre: '',
+    tipoSede: {
+      id: 0,
+      nombreTipoSede: '',
+    },
   },
   isLoading: false,
   meta: {

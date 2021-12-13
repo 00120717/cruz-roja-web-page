@@ -9,7 +9,7 @@ import { TipoVoluntarioState } from '@/store/modules/tipoVoluntario/types';
 export const state: TipoVoluntarioState = {
   tipoVoluntario: {
     id: 0,
-    tipo: '',
+    nombreTipoVoluntario: '',
   },
   isLoading: false,
   meta: {

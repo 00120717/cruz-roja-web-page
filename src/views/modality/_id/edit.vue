@@ -24,7 +24,7 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.type" label="Tipo de modalidad" name="type" :error="errors[0]" />
+                  <input-group v-model="form.nombreModalidad" label="Tipo de modalidad" name="type" :error="errors[0]" />
                 </ValidationProvider>
               </div>
             </div>
@@ -69,7 +69,7 @@ export default class EditModalityPage extends Vue {
 
   form: Modality = {
     id: 0,
-    type: '',
+    nombreModalidad: '',
   };
 
   @ModalityModel.State('isLoading') isModalityLoading!: boolean;

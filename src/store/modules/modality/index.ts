@@ -9,7 +9,7 @@ import { ModalityState } from '@/store/modules/modality/types';
 export const state: ModalityState = {
   modality: {
     id: 0,
-    type: '',
+    nombreModalidad: '',
   },
   isLoading: false,
   meta: {

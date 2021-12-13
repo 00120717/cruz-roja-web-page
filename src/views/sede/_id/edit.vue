@@ -61,8 +61,24 @@
                 </ValidationProvider>
               </div>
               <div class="col-span-6 sm:col-span-4">
-                <toggle-selector v-model="form.active" label="Activo" />
-              </div>
+                  <ValidationProvider
+                      v-slot="{ errors }"
+                      vid="tipoSede"
+                      name="tipoSede"
+                      tag="div"
+                      rules="required"
+                      >
+                      <input-select
+                        v-model="form.tipoSedeId"
+                        label="Tipo Sede"
+                        placeholder="Seleccionar"
+                        :options="tipoSedeList"
+                        name="tipoSede"
+                        display-name="nombreTipoSede"
+                        :error="errors[0]"
+                        />
+                  </ValidationProvider>
+                </div>
             </div>
           </div>
         </div>
@@ -82,16 +98,19 @@ import { ActionMethod } from 'vuex';
 import PageHeading from '@/components/layout/PageHeading.vue';
 import FormSection from '@/components/ui/FormSection.vue';
 import CustomButton from '@/components/ui/CustomButton.vue';
+import InputSelect from '@/components/ui/InputSelect.vue';
 import ToggleSelector from '@/components/ui/ToggleSelector.vue';
 import InputGroup from '@/components/ui/InputGroup.vue';
 
 const Sedes = namespace('sede');
+const TipoSedeModel = namespace('tipoSede');
 
 @Component({
   components: {
     PageHeading,
     FormSection,
     CustomButton,
+    InputSelect,
     ToggleSelector,
     InputGroup,
   },
@@ -105,15 +124,16 @@ export default class EditSedePage extends Vue {
 
   form: Sede = {
     id: 0,
-    name: '',
-    logo: '',
-    code: '',
-    address: '',
-    active: false,
+    nombre: '',
+    codigo: '',
+    direccion: '',
+    tipoSedeId: 0,
   };
 
   @Sedes.State('isLoading') isSedeLoading!: boolean;
   @Sedes.State('sede') sede!: Sede;
+  @TipoSedeModel.State('tipoSedeList') tipoSedeList!: TipoSede[];
+  @TipoSedeModel.Action('list') fetchTipoSedeList!: (vm: any) => ActionMethod;
   @Sedes.Action('update') updateSede!: ({ sede, vm }: { sede: any; vm: any }) => ActionMethod;
   @Sedes.Action('show') fetchSede!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
 
@@ -130,6 +150,7 @@ export default class EditSedePage extends Vue {
     this.form = {
       ...this.sede,
     };
+    this.form.tipoSedeId = this.sede?.tipoSede?.id ?? 0;
   }
 
   async onSubmit() {

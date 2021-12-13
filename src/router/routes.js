@@ -37,28 +37,28 @@ export default [
       component: () => import(/* webpackChunkName: "users-id-edit" */'@/views/users/_id/edit.vue'),
     },
     {
-      path: '/students',
-      name: 'students',
+      path: '/voluntarios',
+      name: 'voluntarios',
       component: () => import(/* webpackChunkName: "students" */ '@/views/students/index.vue'),
     },
     {
-      path: '/students/new',
-      name: 'students-new',
+      path: '/voluntarios/new',
+      name: 'voluntarios-new',
       component: () => import(/* webpackChunkName: "students-new" */ '@/views/students/new.vue'),
     },
     {
-      path: '/students/:id',
-      name: 'students-id',
+      path: '/voluntarios/:id',
+      name: 'voluntarios-id',
       component: () => import(/* webpackChunkName: "students-id" */ '@/views/students/_id/index.vue'),
     },
     {
-      path: '/students/:id/edit',
-      name: 'students-id-edit',
+      path: '/voluntarios/:id/edit',
+      name: 'voluntarios-id-edit',
       component: () => import(/* webpackChunkName: "students-id-edit" */ '@/views/students/_id/edit.vue'),
     },
     {
-      path: '/students/:id/notes',
-      name: 'students-id-notes',
+      path: '/voluntarios/:id/notes',
+      name: 'voluntarios-id-notes',
       component: () => import(/* webpackChunkName: "students-id-edit" */ '@/views/students/_id/notes.vue'),
     },
     {

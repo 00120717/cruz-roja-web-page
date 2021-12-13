@@ -1,4 +1,4 @@
 interface Modality {
   id: number;
-  type: string;
+  nombreModalidad: string;
 }
