@@ -186,7 +186,8 @@ export default class ShowStudentPage extends Vue {
   }
 
   async deleteItem() {
-    await this.deleteStudent({ id: String(+this.student?.id), vm: this });
+    const id = String(this.student?.id);
+    await this.deleteStudent({ id, vm: this });
     this.showConfirmationModal = true;
   }
 

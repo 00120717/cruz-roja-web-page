@@ -12,8 +12,8 @@ export const actions: ActionTree<EstadoState, RootState> = {
       commit('toggleLoading', true);
       const params = { ...filters };
       const { data } = await EstadoService.fetch({ params });
-      const { data: sedes, ...rest } = data;
-      commit('setEstados', { sedes, meta: rest });
+      const { data: estados, ...rest } = data;
+      commit('setEstados', { estados, meta: rest });
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
     } finally {

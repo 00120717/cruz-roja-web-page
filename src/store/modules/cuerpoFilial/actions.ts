@@ -12,8 +12,8 @@ export const actions: ActionTree<CuerpoFilialState, RootState> = {
       commit('toggleLoading', true);
       const params = { ...filters };
       const { data } = await CuerpoFilialService.fetch({ params });
-      const { data: sedes, ...rest } = data;
-      commit('setCuerpoFiliales', { sedes, meta: rest });
+      const { data: cuerpoFiliales, ...rest } = data;
+      commit('setCuerpoFiliales', { cuerpoFiliales, meta: rest });
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
     } finally {

@@ -82,6 +82,21 @@ export default [
       component: () => import(/* webpackChunkName: "roles-id-edit" */ '@/views/roles/_id/edit.vue'),
     },
     {
+      path: '/estado',
+      name: 'estado',
+      component: () => import(/* webpackChunkName: "sede" */ '@/views/estado/index.vue'),
+    },
+    {
+      path: '/estado/new',
+      name: 'estado-new',
+      component: () => import(/* webpackChunkName: "sede-new" */ '@/views/estado/new.vue'),
+    },
+    {
+      path: '/estado/:id',
+      name: 'estado-id',
+      component: () => import(/* webpackChunkName: "sede-id" */ '@/views/estado/_id/index.vue'),
+    },
+    {
       path: '/sede',
       name: 'sede',
       component: () => import(/* webpackChunkName: "sede" */ '@/views/sede/index.vue'),

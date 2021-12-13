@@ -1,12 +1,12 @@
 <template>
   <main class="pb-40">
     <page-heading
-      title="Cuerpo Filial"
+      title="Modalidad"
       :show-return="false"
       :breadcrumbs="breadcrumbs"
     >
       <template slot="actions">
-        <custom-button title="Nuevo Cuerpo Filial" color="secondary" to="/cuerpoFilial/new">
+        <custom-button title="Nueva modalidad" color="secondary" to="/modality/new">
           <template #icon>
             <svg
               class="w-4 h-4 mr-2"
@@ -30,7 +30,7 @@
         :current-page="filters.page"
         :last-page="lastPage"
         :per-page="filters.per_page"
-        :is-loading="isCuerpoFilialLoading"
+        :is-loading="isModalityLoading"
         :filters="filters"
         :total-items="meta.total"
         @filter-change="onFiltersChange"
@@ -39,12 +39,12 @@
       >
         <template slot="items">
           <table-item
-            v-for="(cuerpoFilial, index) in cuerpoFiliales"
+            v-for="(modality, index) in estados"
             :key="index"
-            :item="cuerpoFilial.id"
+            :item="modality.id"
             :selected="selectedItems"
             :remove="false"
-            page="cuerpoFilial"
+            page="estado"
             @update:selected="setItems"
           >
             <td
@@ -53,7 +53,7 @@
               <div class="flex items-center">
                 <div class="">
                   <div class="text-sm font-medium leading-5 text-gray-900">
-                    {{ cuerpoFilial.id }}
+                    {{ modality.id }}
                   </div>
                 </div>
               </div>
@@ -61,7 +61,7 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ cuerpoFilial.nombreCuerpoFilial }}
+              {{ modality.id }}
             </td>
           </table-item>
         </template>
@@ -86,7 +86,7 @@ interface Breadcrumb {
   route?: string;
 }
 
-const CuerpoFilialModel = namespace('cuerpoFilial');
+const ModalityModel = namespace('estado');
 
 @Component({
   components: {
@@ -98,7 +98,7 @@ const CuerpoFilialModel = namespace('cuerpoFilial');
     ActiveIndicator,
   },
 })
-export default class CuerpoFilialPage extends Vue {
+export default class ModalityPage extends Vue {
   selectedItems: Array<string | number> = []
   showDeleteModal = false
   showDeleteCompleted = false
@@ -118,19 +118,19 @@ export default class CuerpoFilialPage extends Vue {
   // eslint-disable-next-line @typescript-eslint/camelcase
   filters: Filters = { search: '', per_page: '10', page: 1 }
   selectedItem = 0
-  @CuerpoFilialModel.State('cuerpoFiliales') cuerpoFiliales!: CuerpoFilial[];
-  @CuerpoFilialModel.State('meta') meta!: Meta;
-  @CuerpoFilialModel.State('isLoading') isCuerpoFilialLoading!: boolean;
-  @CuerpoFilialModel.Action('fetch') fetchCuerposFiliales!: ({ filters, vm }: { filters: Filters; vm: any }) => AxiosResponse;
+  @ModalityModel.State('estados') estados!: Estado[];
+  @ModalityModel.State('meta') meta!: Meta;
+  @ModalityModel.State('isLoading') isModalityLoading!: boolean;
+  @ModalityModel.Action('fetch') fetchModalities!: ({ filters, vm }: { filters: Filters; vm: any }) => AxiosResponse;
 
   async mounted() {
-    await this.fetchCuerposFiliales({ filters: this.filters, vm: this });
+    await this.fetchModalities({ filters: this.filters, vm: this });
   }
 
   @Watch('filters', { deep: true })
   async handleFilterChange(value: Filters) {
     if (value) {
-      await this.fetchCuerposFiliales({ filters: this.filters, vm: this });
+      await this.fetchModalities({ filters: this.filters, vm: this });
     }
   }
 
@@ -148,7 +148,7 @@ export default class CuerpoFilialPage extends Vue {
 
   selectAllCurrent(value: boolean) {
     if (value) {
-      this.cuerpoFiliales.forEach((item: any) => {
+      this.estados.forEach((item: any) => {
         this.selectedItems.push(item.id);
       });
     } else {
