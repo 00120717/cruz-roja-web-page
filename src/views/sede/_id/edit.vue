@@ -68,6 +68,25 @@
                         />
                   </ValidationProvider>
                 </div>
+                <div class="col-span-6 sm:col-span-4">
+                  <ValidationProvider
+                      v-slot="{ errors }"
+                      vid="departamentoXMunicipio"
+                      name="departamentoXMunicipio"
+                      tag="div"
+                      rules="required"
+                      >
+                      <input-select
+                        v-model="form.departamentoXmunicipioId"
+                        label="Ubicacion Departamento y Municipio"
+                        placeholder="Seleccionar"
+                        :options="departamentoXMunicipioList"
+                        name="departamentoXMunicipio"
+                        display-name="nombreCompuesto"
+                        :error="errors[0]"
+                        />
+                  </ValidationProvider>
+                </div>
             </div>
           </div>
         </div>
@@ -93,6 +112,7 @@ import InputGroup from '@/components/ui/InputGroup.vue';
 
 const Sedes = namespace('sede');
 const TipoSedeModel = namespace('tipoSede');
+const DepartamentoXMunicipioModel = namespace('departamentoXMunicipio');
 
 @Component({
   components: {
@@ -117,6 +137,7 @@ export default class EditSedePage extends Vue {
     codigo: '',
     direccion: '',
     tipoSedeId: 0,
+    departamentoXmunicipioId: 0,
   };
 
   @Sedes.State('isLoading') isSedeLoading!: boolean;
@@ -125,11 +146,14 @@ export default class EditSedePage extends Vue {
   @TipoSedeModel.Action('list') fetchTipoSedeList!: (vm: any) => ActionMethod;
   @Sedes.Action('update') updateSede!: ({ sede, vm }: { sede: any; vm: any }) => ActionMethod;
   @Sedes.Action('show') fetchSede!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
+  @DepartamentoXMunicipioModel.State('departamentoXMunicipioList') departamentoXMunicipioList!: DepartamentoXMunicipio[];
+  @DepartamentoXMunicipioModel.Action('list') fetchDepartamentoXMunicipioList!: (vm: any) => ActionMethod;
 
   async mounted() {
     try {
       await this.fetchSede({ id: +this.$route.params.id, vm: this });
       await this.fetchTipoSedeList(this);
+      await this.fetchDepartamentoXMunicipioList(this);
       this.setCurrentSede();
     } catch (e) {
       (this as any).$snotify.error('Ha ocurrido un error');
@@ -141,6 +165,7 @@ export default class EditSedePage extends Vue {
       ...this.sede,
     };
     this.form.tipoSedeId = this.sede?.tipoSede?.id ?? 0;
+    this.form.departamentoXmunicipioId = this.sede?.departamentoXmunicipio?.id ?? 0;
   }
 
   async onSubmit() {

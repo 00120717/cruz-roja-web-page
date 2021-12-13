@@ -15,6 +15,7 @@ import { grade } from '@/store/modules/grade';
 import { cuerpoFilial } from '@/store/modules/cuerpoFilial';
 import { estado } from '@/store/modules/estado';
 import { tipoVoluntario } from '@/store/modules/tipoVoluntario';
+import { departamentoXMunicipio } from '@/store/modules/departamentoXMunicipio';
 
 Vue.use(Vuex);
 
@@ -34,5 +35,6 @@ export default new Vuex.Store({
     tipoSede,
     section,
     grade,
+    departamentoXMunicipio,
   },
 });
