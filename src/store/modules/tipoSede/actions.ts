@@ -12,8 +12,8 @@ export const actions: ActionTree<TipoSedeState, RootState> = {
       commit('toggleLoading', true);
       const params = { ...filters };
       const { data } = await TipoSedeService.fetch({ params });
-      const { data: modalities, ...rest } = data;
-      commit('setTiposSedes', { modalities, meta: rest });
+      const { data: tipoSedes, ...rest } = data;
+      commit('setTiposSedes', { tipoSedes, meta: rest });
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
     } finally {
