@@ -16,6 +16,20 @@ export const state: SedeState = {
       id: 0,
       nombreTipoSede: '',
     },
+    departamentoXmunicipio: {
+      id: 0,
+      nombreCompuesto: '',
+      departamento: {
+        id: 0,
+        departamentoNombre: '',
+      },
+      municipio: {
+        id: 0,
+        municipioNombre: '',
+      },
+    },
+    tipoSedeId: 0,
+    departamentoXmunicipioId: 0,
   },
   isLoading: false,
   meta: {

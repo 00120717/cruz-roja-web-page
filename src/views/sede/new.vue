@@ -68,6 +68,25 @@
                         />
                   </ValidationProvider>
                 </div>
+                <div class="col-span-6 sm:col-span-4">
+                  <ValidationProvider
+                      v-slot="{ errors }"
+                      vid="departamentoXMunicipio"
+                      name="departamentoXMunicipio"
+                      tag="div"
+                      rules="required"
+                      >
+                      <input-select
+                        v-model="form.departamentoXmunicipioId"
+                        label="Ubicacion Departamento y Municipio"
+                        placeholder="Seleccionar"
+                        :options="departamentoXMunicipioList"
+                        name="departamentoXMunicipio"
+                        display-name="nombreCompuesto"
+                        :error="errors[0]"
+                        />
+                  </ValidationProvider>
+                </div>
             </div>
           </div>
         </div>
@@ -93,6 +112,7 @@ import InputGroup from '@/components/ui/InputGroup.vue';
 
 const Sedes = namespace('sede');
 const TipoSedeModel = namespace('tipoSede');
+const DepartamentoXMunicipioModel = namespace('departamentoXMunicipio');
 
 @Component({
   components: {
@@ -116,16 +136,20 @@ export default class NewSedePage extends Vue {
     codigo: '',
     direccion: '',
     tipoSedeId: 0,
+    departamentoXmunicipioId: 0,
   };
 
   @Sedes.State('isLoading') isSedeLoading!: boolean;
   @Sedes.Action('store') createSede!: ({ sede, vm }: { sede: any; vm: any }) => ActionMethod;
   @TipoSedeModel.State('tipoSedeList') tipoSedeList!: TipoSede[];
   @TipoSedeModel.Action('list') fetchTipoSedeList!: (vm: any) => ActionMethod;
+  @DepartamentoXMunicipioModel.State('departamentoXMunicipioList') departamentoXMunicipioList!: DepartamentoXMunicipio[];
+  @DepartamentoXMunicipioModel.Action('list') fetchDepartamentoXMunicipioList!: (vm: any) => ActionMethod;
 
   async mounted() {
     try {
       await this.fetchTipoSedeList(this);
+      await this.fetchDepartamentoXMunicipioList(this);
     } catch (e) {
       (this as any).$snotify.error('Ha ocurrido un error');
     }

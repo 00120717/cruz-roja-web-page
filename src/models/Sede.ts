@@ -5,4 +5,6 @@ interface Sede {
   direccion: string;
   tipoSedeId?: number;
   tipoSede?: TipoSede;
+  departamentoXmunicipioId?: number;
+  departamentoXmunicipio?: DepartamentoXMunicipio;
 }
