@@ -63,6 +63,11 @@
             >
               {{ cuerpoFilial.nombreCuerpoFilial }}
             </td>
+            <td
+              class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
+            >
+              {{ cuerpoFilial.encargado }}
+            </td>
           </table-item>
         </template>
       </table-list>
@@ -102,7 +107,7 @@ export default class CuerpoFilialPage extends Vue {
   selectedItems: Array<string | number> = []
   showDeleteModal = false
   showDeleteCompleted = false
-  breadcrumbs: Breadcrumb[] = [{ name: 'Administración' }, { name: 'Modalidad' }]
+  breadcrumbs: Breadcrumb[] = [{ name: 'Administración' }, { name: 'Cuerpo Filial' }]
 
   headers: Array<object> = [
     {
@@ -110,7 +115,11 @@ export default class CuerpoFilialPage extends Vue {
       key: 'id',
     },
     {
-      name: 'Tipo',
+      name: 'Nombre Cuerpo Filial',
+      key: 'type',
+    },
+    {
+      name: 'Nombre Encargado',
       key: 'type',
     },
   ]

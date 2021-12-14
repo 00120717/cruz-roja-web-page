@@ -95,6 +95,30 @@
                     >
                       Voluntarios
                     </router-link>
+                    <router-link
+                      to="/cuerpoFilial"
+                      exact-active-class="font-bold text-blue-600"
+                      active-class="font-bold text-blue-600"
+                      class="flex items-center w-full pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
+                    >
+                      CuerpoFilial
+                    </router-link>
+                    <router-link
+                      to="/estado"
+                      exact-active-class="font-bold text-blue-600"
+                      active-class="font-bold text-blue-600"
+                      class="flex items-center w-full pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
+                    >
+                      Estado
+                    </router-link>
+                    <router-link
+                      to="/tipoVoluntario"
+                      exact-active-class="font-bold text-blue-600"
+                      active-class="font-bold text-blue-600"
+                      class="flex items-center w-full pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
+                    >
+                      TipoVoluntario
+                    </router-link>
                     <!--
                     <router-link
                       to="/sede"

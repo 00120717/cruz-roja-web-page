@@ -63,7 +63,7 @@ const CuerpoFilialModel = namespace('cuerpoFilial');
 export default class EditCuerpoFilialPage extends Vue {
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
-    { name: 'CuerpoFilial', route: '/cuerpoFilial' },
+    { name: 'Cuerpo Filial', route: '/cuerpoFilial' },
     { name: 'Nuevo' },
   ]
 
