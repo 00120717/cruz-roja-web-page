@@ -1,12 +1,12 @@
 <template>
   <main class="pb-40">
     <page-heading
-      title="Modalidad"
+      title="Estado"
       :show-return="false"
       :breadcrumbs="breadcrumbs"
     >
       <template slot="actions">
-        <custom-button title="Nueva modalidad" color="secondary" to="/modality/new">
+        <custom-button title="Nuevo Estado" color="secondary" to="/modality/new">
           <template #icon>
             <svg
               class="w-4 h-4 mr-2"
@@ -102,7 +102,7 @@ export default class ModalityPage extends Vue {
   selectedItems: Array<string | number> = []
   showDeleteModal = false
   showDeleteCompleted = false
-  breadcrumbs: Breadcrumb[] = [{ name: 'Administración' }, { name: 'Modalidad' }]
+  breadcrumbs: Breadcrumb[] = [{ name: 'Administración' }, { name: 'Estado' }]
 
   headers: Array<object> = [
     {

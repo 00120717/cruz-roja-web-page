@@ -24,7 +24,7 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.type" label="Tipo de cuerpo filial" name="nombreCuerpoFilial" :error="errors[0]" />
+                  <input-group v-model="form.nombreCuerpoFilial" label="Tipo de cuerpo filial" name="type" :error="errors[0]" />
                 </ValidationProvider>
               </div>
             </div>
@@ -60,6 +60,7 @@ const CuerpoFilialModel = namespace('cuerpoFilial');
     InputGroup,
   },
 })
+
 export default class NewCuerpoFilialPage extends Vue {
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
@@ -69,7 +70,6 @@ export default class NewCuerpoFilialPage extends Vue {
 
   form = {
     nombreCuerpoFilial: '',
-    encargado: '',
   };
 
   @CuerpoFilialModel.State('isLoading') isCuerpoFilialLoading!: boolean;

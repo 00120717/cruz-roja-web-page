@@ -24,7 +24,7 @@
                   tag="div"
                   rules="required"
                 >
-                  <input-group v-model="form.type" label="Tipo de Voluntario" name="tipo" :error="errors[0]" />
+                  <input-group v-model="form.nombreTipoVoluntario" label="Tipo de Voluntario" name="type" :error="errors[0]" />
                 </ValidationProvider>
               </div>
             </div>
@@ -49,7 +49,7 @@ import CustomButton from '@/components/ui/CustomButton.vue';
 import ToggleSelector from '@/components/ui/ToggleSelector.vue';
 import InputGroup from '@/components/ui/InputGroup.vue';
 
-const TiposVoluntarios = namespace('tipoVoluntario');
+const TipoVoluntarioModel = namespace('tipoVoluntario');
 
 @Component({
   components: {
@@ -71,8 +71,8 @@ export default class NewTipoVoluntarioPage extends Vue {
     nombreTipoVoluntario: '',
   };
 
-  @TiposVoluntarios.State('isLoading') isTipoVoluntarioLoading!: boolean;
-  @TiposVoluntarios.Action('store') createTipoVoluntario!: ({ tipoVoluntario, vm }: { tipoVoluntario: any; vm: any }) => ActionMethod;
+  @TipoVoluntarioModel.State('isLoading') isTipoVoluntarioLoading!: boolean;
+  @TipoVoluntarioModel.Action('store') createTipoVoluntario!: ({ tipoVoluntario, vm }: { tipoVoluntario: any; vm: any }) => ActionMethod;
 
   async onSubmit() {
     const isValid = await (this.$refs.form as any).validate();
