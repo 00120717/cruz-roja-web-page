@@ -157,6 +157,26 @@ export default [
       component: () => import(/* webpackChunkName: "cuerpoFilial-id-edit" */ '@/views/cuerpoFilial/_id/edit.vue'),
     },
     {
+      path: '/tipoVoluntario',
+      name: 'tipoVoluntario',
+      component: () => import(/* webpackChunkName: "cuerpoFilial" */ '@/views/tipoVoluntario/index.vue'),
+    },
+    {
+      path: '/tipoVoluntario/new',
+      name: 'tipoVoluntario-new',
+      component: () => import(/* webpackChunkName: "cuerpoFilial-new" */ '@/views/tipoVoluntario/new.vue'),
+    },
+    {
+      path: '/tipoVoluntario/:id',
+      name: 'tipoVoluntario-id',
+      component: () => import(/* webpackChunkName: "cuerpoFilial-id" */ '@/views/tipoVoluntario/_id/index.vue'),
+    },
+    {
+      path: '/tipoVoluntario/:id/edit',
+      name: 'tipoVoluntario-id-edit',
+      component: () => import(/* webpackChunkName: "cuerpoFilial-id-edit" */ '@/views/tipoVoluntario/_id/edit.vue'),
+    },
+    {
       path: '/section',
       name: 'section',
       component: () => import(/* webpackChunkName: "section" */ '@/views/section/index.vue'),

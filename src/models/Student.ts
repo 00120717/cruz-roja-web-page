@@ -1,14 +1,15 @@
 interface Student {
   id?: string;
   fechaInicio: string;
-  voluntarioCodigo?: string;
-  username: string;
+  voluntarioCodigoCarnet?: string;
   firstName: string;
   lastName: string;
   genero: string;
   fechaNacimiento: string;
   email: string | null;
   estadoPersona: boolean;
+  documentoIdentificacion: string;
+  tipoDocumentoPersona: string;
   sede?: Sede | null;
   sedeId?: number;
   modalityId?: number;
@@ -17,7 +18,6 @@ interface Student {
   cuerpoFilial?: CuerpoFilial;
   tipoVoluntarioId?: number;
   tipoVoluntario?: TipoVoluntario;
-  modality?: Modality;
   estadoId?: number;
   estado?: Estado;
 }

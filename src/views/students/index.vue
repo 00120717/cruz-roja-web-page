@@ -50,7 +50,7 @@
             <td
               class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 whitespace-no-wrap"
             >
-              {{ student.voluntarioCodigo }}
+              {{ student.voluntarioCodigoCarnet }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
@@ -64,7 +64,22 @@
               </div>
             </td>
             <td
-              class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
+              class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
+            >
+              {{ student.persona.username }}
+            </td>
+            <td
+              class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
+            >
+              {{ student.persona.documentoIdentificacion }}
+            </td>
+            <td
+              class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
+            >
+              {{ student.persona.tipoDocumentoPersona == 'D' ? 'DUI' : (student.persona.tipoDocumentoPersona == 'NIT' ? 'NIT' : 'Pasaporte' ) }}
+            </td>
+            <td
+              class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
               {{ student.persona.genero == 'M'? 'Masculino' : 'Femenino' }}
             </td>
@@ -76,7 +91,7 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ student.tipoVoluntario ? student.tipoVoluntario.nombreTipo : 'N/A' }}
+              {{ student.tipoVoluntario ? student.tipoVoluntario.nombreTipoVoluntario : 'N/A' }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
@@ -84,7 +99,7 @@
               {{ student.cuerpoFilial ? student.cuerpoFilial.nombreCuerpoFilial : 'N/A' }}
             </td>
             <td
-              class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
+              class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
               {{ student.estado ? student.estado.estadoVoluntario : 'N/A' }}
               <!--<active-indicator :status="Boolean(student.estado.estadoVoluntario)" />-->
@@ -157,12 +172,24 @@ export default class StudentsPage extends Vue {
 
   headers: Array<object> = [
     {
-      name: 'Código',
-      key: 'code',
+      name: 'Carnet',
+      key: 'voluntarioCodigoCarnet',
     },
     {
-      name: 'Nombre',
+      name: 'Nombre Completo',
       key: 'name',
+    },
+    {
+      name: 'Username',
+      key: 'username',
+    },
+    {
+      name: 'Documento de Identificacion',
+      key: 'documentoIdentificacion',
+    },
+    {
+      name: 'Tipo de Documento de Identificacion',
+      key: 'tipoDocumentoPersona',
     },
     {
       name: 'Genero',
@@ -174,11 +201,11 @@ export default class StudentsPage extends Vue {
     },
     {
       name: 'Tipo Voluntario',
-      key: 'tipoVoluntario',
+      key: 'nombreTipoVoluntario',
     },
     {
       name: 'Cuerpo Filial',
-      key: 'cuerpoFilial',
+      key: 'nombreCuerpoFilial',
     },
     {
       name: 'Estado Voluntario',
@@ -186,11 +213,11 @@ export default class StudentsPage extends Vue {
     },
     {
       name: 'Modalidad',
-      key: 'modalidad',
+      key: 'nombreModalidad',
     },
     {
       name: 'Estado',
-      key: 'estado',
+      key: 'estadoPersona',
     },
   ]
 

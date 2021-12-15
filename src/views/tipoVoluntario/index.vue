@@ -39,7 +39,7 @@
       >
         <template slot="items">
           <table-item
-            v-for="(tipoVoluntario, index) in tiposVoluntarios"
+            v-for="(tipoVoluntario, index) in tipoVoluntarios"
             :key="index"
             :item="tipoVoluntario.id"
             :selected="selectedItems"
@@ -61,7 +61,7 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ tipoVoluntario.tipo }}
+              {{ tipoVoluntario.nombreTipoVoluntario }}
             </td>
           </table-item>
         </template>
@@ -118,7 +118,7 @@ export default class TipoVoluntarioPage extends Vue {
   // eslint-disable-next-line @typescript-eslint/camelcase
   filters: Filters = { search: '', per_page: '10', page: 1 }
   selectedItem = 0
-  @TiposVoluntarios.State('tiposVoluntarios') tiposVoluntarios!: TipoVoluntario[];
+  @TiposVoluntarios.State('tipoVoluntarios') tipoVoluntarios!: TipoVoluntario[];
   @TiposVoluntarios.State('meta') meta!: Meta;
   @TiposVoluntarios.State('isLoading') isTipoVoluntarioLoading!: boolean;
   @TiposVoluntarios.Action('fetch') fetchTiposVoluntarios!: ({ filters, vm }: { filters: Filters; vm: any }) => AxiosResponse;
@@ -148,7 +148,7 @@ export default class TipoVoluntarioPage extends Vue {
 
   selectAllCurrent(value: boolean) {
     if (value) {
-      this.tiposVoluntarios.forEach((item: any) => {
+      this.tipoVoluntarios.forEach((item: any) => {
         this.selectedItems.push(item.id);
       });
     } else {

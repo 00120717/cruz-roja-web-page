@@ -119,7 +119,6 @@
                     >
                       TipoVoluntario
                     </router-link>
-                    <!--
                     <router-link
                       to="/sede"
                       exact-active-class="font-bold text-blue-600"
@@ -136,6 +135,7 @@
                     >
                       Modalidad
                     </router-link>
+                    <!--
                     <router-link
                       to="/subject"
                       exact-active-class="font-bold text-blue-600"

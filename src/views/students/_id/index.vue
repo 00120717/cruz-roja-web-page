@@ -72,6 +72,14 @@
         </div>
         <div>
           <dl>
+            <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium leading-5 text-gray-500">
+                Username
+              </dt>
+              <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
+                {{ student.username }}
+              </dd>
+            </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
                 Nombres
@@ -90,10 +98,30 @@
             </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
-                Código
+                Carnet
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ student.voluntarioCodigo }}
+                {{ student.voluntarioCodigoCarnet }}
+              </dd>
+            </div>
+            <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium leading-5 text-gray-500">
+                Documento de Identificacion
+              </dt>
+              <dd
+                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+              >
+                {{ student.documentoIdentificacion }}
+              </dd>
+            </div>
+            <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium leading-5 text-gray-500">
+                Tipo de Documento de Identificacion
+              </dt>
+              <dd
+                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+              >
+                {{ student.tipoDocumentoPersona == 'D' ? 'DUI' : (student.tipoDocumentoPersona == 'NIT' ? 'NIT' : 'Pasaporte' ) }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -108,52 +136,12 @@
             </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
-                Modalidad
+                Edad
               </dt>
               <dd
                 class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
               >
-                {{ student.modalidad ? student.modalidad.nombreModalidad : 'N/A' }}
-              </dd>
-            </div>
-            <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium leading-5 text-gray-500">
-                Cuerpo Filial
-              </dt>
-              <dd
-                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ student.cuerpoFilial ? student.cuerpoFilial.nombreCuerpoFilial : 'N/A' }}
-              </dd>
-            </div>
-            <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium leading-5 text-gray-500">
-                Tipo Voluntario
-              </dt>
-              <dd
-                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ student.tipoVoluntario ? student.tipoVoluntario.nombreTipo : 'N/A' }}
-              </dd>
-            </div>
-            <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium leading-5 text-gray-500">
-                Sede
-              </dt>
-              <dd
-                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ student.sede && student.sede.nombre ? student.sede.nombre : 'N/A' }}
-              </dd>
-            </div>
-            <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt class="text-sm font-medium leading-5 text-gray-500">
-                Años Servicio
-              </dt>
-              <dd
-                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
-              >
-                {{ student.aniosServicio || 'N/A' }}
+                {{ student.edad }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -168,6 +156,76 @@
             </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
+                Años de Servicio
+              </dt>
+              <dd
+                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+              >
+                {{ student.aniosServicio || 'N/A' }}
+              </dd>
+            </div>
+            <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium leading-5 text-gray-500">
+                Fecha Incorporacion Cruz Roja
+              </dt>
+              <dd
+                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+              >
+                {{ student.fechaInicio }}
+              </dd>
+            </div>
+            <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium leading-5 text-gray-500">
+                Fecha Nacimiento
+              </dt>
+              <dd
+                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+              >
+                {{ student.fechaNacimiento }}
+              </dd>
+            </div>
+            <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium leading-5 text-gray-500">
+                Estado Voluntario
+              </dt>
+              <dd
+                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+              >
+                <active-indicator :status="Boolean(student.estadoPersona)" />
+              </dd>
+            </div>
+            <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium leading-5 text-gray-500">
+                Sede
+              </dt>
+              <dd
+                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+              >
+                {{ student.sede && student.sede.nombre ? student.sede.nombre : 'N/A' }}
+              </dd>
+            </div>
+            <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium leading-5 text-gray-500">
+                Tipo de Voluntario
+              </dt>
+              <dd
+                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+              >
+                {{ student.tipoVoluntario ? student.tipoVoluntario.nombreTipoVoluntario : 'N/A' }}
+              </dd>
+            </div>
+            <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium leading-5 text-gray-500">
+                Cuerpo Filial
+              </dt>
+              <dd
+                class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2"
+              >
+                {{ student.cuerpoFilial ? student.cuerpoFilial.nombreCuerpoFilial : 'N/A' }}
+              </dd>
+            </div>
+            <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium leading-5 text-gray-500">
                 Estado Voluntario
               </dt>
               <dd
@@ -176,12 +234,12 @@
                 {{ student.estado.estadoVoluntario || 'N/A' }}
               </dd>
             </div>
-            <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium leading-5 text-gray-500">
-                Edad
+                Modalidad
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ student.edad }}
+                {{ student.modalidad ? student.modalidad.nombreModalidad : 'N/A' }}
               </dd>
             </div>
           </dl>

@@ -9,12 +9,13 @@ import { StudentState } from '@/store/modules/students/types';
 export const state: StudentState = {
   student: {
     id: '',
-    voluntarioCodigo: '0',
+    voluntarioCodigoCarnet: '0',
     fechaInicio: '',
     genero: '',
     fechaNacimiento: '',
     estadoPersona: true,
-    username: '',
+    documentoIdentificacion: '',
+    tipoDocumentoPersona: '',
     firstName: '',
     lastName: '',
     email: null,

@@ -16,30 +16,82 @@
                </div>
                <div class="mt-5 md:mt-0 md:col-span-2">
                   <div class="grid grid-cols-6 row-gap-2 col-gap-6">
-                     <!--<div class="col-span-6 sm:col-span-4">
-                        <ValidationProvider
-                          v-slot="{ errors }"
-                          vid="username"
-                          name="username"
-                          tag="div"
-                          rules="required"
-                        >
-                          <input-group v-model="form.username" label="Username" name="username" :error="errors[0]" />
-                        </ValidationProvider>
-                        </div>-->
                      <div class="col-span-6 sm:col-span-4">
                         <ValidationProvider
                            v-slot="{ errors }"
-                           vid="voluntarioCodigo"
-                           name="voluntarioCodigo"
+                           vid="documentoIdentificacion"
+                           name="documentoIdentificacion"
+                           tag="div"
+                           rules="required"
+                           >
+                           <input-group v-model="form.documentoIdentificacion" label="Documento Identificacion Personal" name="documentoIdentificacion" :error="errors[0]" />
+                        </ValidationProvider>
+                     </div>
+                     <div class="col-span-6 sm:col-span-4">
+                        <div class="flex w-full justify-between">
+                           <label
+                              for="dui"
+                              class="block text-sm font-medium leading-5 text-gray-700"
+                              >Tipo Documento Identificacion</label>
+                        </div>
+                        <div class="relative mt-1 rounded-md shadow-sm">
+                           <div class="flex items-center mb-2">
+                              <input
+                                 id="dui"
+                                 v-model="form.tipoDocumentoPersona"
+                                 label="DUI"
+                                 name="dui"
+                                 value="D"
+                                 class="w-4 h-4 text-blue-600 transition duration-150 ease-in-out form-radio"
+                                 type="radio"
+                                 />
+                              <label for="dui" class="w-full ml-3">
+                              <span class="block text-sm font-medium leading-5 text-gray-700 truncate ...">{{ "Documento unico de identidad" | truncate(75)}}</span>
+                              </label>
+                           </div>
+                           <div class="flex items-center mb-2">
+                              <input
+                                 id="pasaporte"
+                                 v-model="form.tipoDocumentoPersona"
+                                 label="Pasaporte"
+                                 name="pasaporte"
+                                 value="P"
+                                 class="w-4 h-4 text-blue-600 transition duration-150 ease-in-out form-radio"
+                                 type="radio"
+                                 />
+                              <label for="pasaporte" class="w-full ml-3">
+                              <span class="block text-sm font-medium leading-5 text-gray-700 truncate ...">{{ "Pasaporte" | truncate(75)}}</span>
+                              </label>
+                           </div>
+                           <div class="flex items-center mb-2">
+                              <input
+                                 id="nit"
+                                 v-model="form.tipoDocumentoPersona"
+                                 label="NIT"
+                                 name="nit"
+                                 value="N"
+                                 class="w-4 h-4 text-blue-600 transition duration-150 ease-in-out form-radio"
+                                 type="radio"
+                                 />
+                              <label for="nit" class="w-full ml-3">
+                              <span class="block text-sm font-medium leading-5 text-gray-700 truncate ...">{{ "NIT" | truncate(75)}}</span>
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-span-6 sm:col-span-4">
+                        <ValidationProvider
+                           v-slot="{ errors }"
+                           vid="voluntarioCodigoCarnet"
+                           name="voluntarioCodigoCarnet"
                            tag="div"
                            rules="min:8"
                            >
                            <input-group
-                              id="voluntarioCodigo"
-                              v-model="form.voluntarioCodigo"
-                              label="Codigo de Voluntario"
-                              name="voluntarioCodigo"
+                              id="voluntarioCodigoCarnet"
+                              v-model="form.voluntarioCodigoCarnet"
+                              label="Carnet de Voluntario"
+                              name="voluntarioCodigoCarnet"
                               :error="errors[0]"
                               />
                         </ValidationProvider>
@@ -100,23 +152,23 @@
                               />
                         </ValidationProvider>
                      </div>
-                     <!--<div class="col-span-6 sm:col-span-4">
+                     <div class="col-span-6 sm:col-span-4">
                         <ValidationProvider
-                          v-slot="{ errors }"
-                          vid="email"
-                          name="email"
-                          tag="div"
-                          rules="email"
-                        >
-                          <input-group
-                            id="email"
-                            v-model="form.email"
-                            label="Correo electrónico"
-                            name="email"
-                            :error="errors[0]"
-                          />
+                           v-slot="{ errors }"
+                           vid="email"
+                           name="email"
+                           tag="div"
+                           rules="email"
+                           >
+                           <input-group
+                              id="email"
+                              v-model="form.email"
+                              label="Correo electrónico"
+                              name="email"
+                              :error="errors[0]"
+                              />
                         </ValidationProvider>
-                        </div>-->
+                     </div>
                      <div class="col-span-6 sm:col-span-4">
                         <div class="flex w-full justify-between">
                            <label
@@ -169,7 +221,7 @@
                               placeholder="Seleccionar"
                               :options="tipoVoluntarioList"
                               name="tipoVoluntario"
-                              display-name="nombreTipo"
+                              display-name="nombreTipoVoluntario"
                               :error="errors[0]"
                               />
                         </ValidationProvider>
@@ -303,7 +355,8 @@ const TipoVoluntarioModel = namespace('tipoVoluntario');
 })
 export default class NewUserPage extends Vue {
   form: Student = {
-    username: '',
+    documentoIdentificacion: '',
+    tipoDocumentoPersona: '',
     fechaNacimiento: '',
     fechaInicio: '',
     estadoPersona: false,
@@ -311,7 +364,7 @@ export default class NewUserPage extends Vue {
     lastName: '',
     firstName: '',
     email: '',
-    voluntarioCodigo: '',
+    voluntarioCodigoCarnet: '',
     sedeId: 0,
     modalityId: 0,
     cuerpoFilialId: 0,
