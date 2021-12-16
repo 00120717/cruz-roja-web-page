@@ -5,7 +5,7 @@
         <div class="flex items-center px-2 lg:px-0 xl:w-64">
           <div class="flex-shrink-0">
             <router-link to="/">
-              Logo
+              INICIO
             </router-link>
           </div>
         </div>

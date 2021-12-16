@@ -37,7 +37,7 @@
       <div class="w-full max-w-lg mx-auto">
         <div>
           <h2 class="mt-6 text-3xl font-extrabold leading-9 text-gray-900">
-            Iniciar sesión
+            INICIAR SESIÓN
           </h2>
         </div>
 
