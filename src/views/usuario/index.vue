@@ -187,7 +187,7 @@ export default class UsuarioPage extends Vue {
 
   selectAllCurrent(value: boolean) {
     if (value) {
-      this.usuario.forEach((item: any) => {
+      this.usuarios.forEach((item: any) => {
         this.selectedItems.push(item.id);
       });
     } else {

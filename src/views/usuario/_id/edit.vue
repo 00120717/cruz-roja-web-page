@@ -269,7 +269,7 @@ export default class NewUsuarioPage extends Vue {
     const isValid = await (this.$refs.form as any).validate();
     if (isValid) {
       try {
-        await this.updateUser({ user: this.form, vm: this });
+        await this.updateUser({ usuario: this.form, vm: this });
         this.$router.push('/usuario');
         // eslint-disable-next-line no-empty
       } catch (e) {

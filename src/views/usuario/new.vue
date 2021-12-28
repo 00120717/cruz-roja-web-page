@@ -134,7 +134,7 @@
                   rules="required"
                 >
                   <input-select
-                    v-model="form.roleId"
+                    v-model="form.rolId"
                     label="Rol"
                     placeholder="Seleccionar"
                     :options="rolList"
@@ -222,7 +222,7 @@ export default class NewUsuarioPage extends Vue {
     lastName: '',
     sedeId: 0,
     password: '',
-    roleId: 0,
+    rolId: 0,
     status: true,
   }
 
@@ -249,7 +249,7 @@ export default class NewUsuarioPage extends Vue {
   }
 
   currentRole() {
-    return this.rolList.find((rol) => rol.id === this.form.roleId);
+    return this.rolList.find((rol) => rol.id === this.form.rolId);
   }
 
   async onSubmit() {

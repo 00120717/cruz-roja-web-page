@@ -92,12 +92,12 @@ interface Permission {
 export default class PermissionsModal extends Vue {
   @Prop({ type: Boolean, default: false }) readonly show!: boolean;
   @Prop(String) readonly title!: string;
-  @Prop({ type: Array, default: [] }) list!: Permission[];
+  @Prop({ type: Array, default: [] }) list!: Permiso[];
   @Prop({ type: Array, default: [] }) readonly newPermissions!: Array<number>;
   @PropSync('show', Boolean) showModal!: boolean;
   searchField = '';
   tempPermissions: Array<number> = [];
-  filteredList: Permission[] = [];
+  filteredList: Permiso[] = [];
   isPermissionSelected: {[key: number]: boolean} = {};
 
   mounted() {
@@ -106,7 +106,7 @@ export default class PermissionsModal extends Vue {
   }
 
   @Watch('list', { immediate: true, deep: true })
-  handleListChange(value: Permission[]) {
+  handleListChange(value: Permiso[]) {
     if (value) { this.filteredList = JSON.parse(JSON.stringify(value)); }
   }
 
@@ -115,7 +115,7 @@ export default class PermissionsModal extends Vue {
     if (value) {
       this.$set(this, 'tempPermissions', JSON.parse(JSON.stringify(this.newPermissions)));
       this.$set(this, 'tempPermissions', [...new Set(this.tempPermissions)]);
-      this.filteredList.forEach((permission: Permission) => {
+      this.filteredList.forEach((permission: Permiso) => {
         this.$set(this.isPermissionSelected, `${permission.id}`, this.tempPermissions.includes(permission.id));
       });
     }
@@ -124,7 +124,7 @@ export default class PermissionsModal extends Vue {
   @Watch('tempPermissions', { immediate: true, deep: true })
   handleTempPermissions(value: Array<number>) {
     if (value) {
-      this.filteredList.forEach((permission: Permission) => {
+      this.filteredList.forEach((permission: Permiso) => {
         this.$set(this.isPermissionSelected, `${permission.id}`, value.includes(permission.id));
       });
     }
@@ -138,7 +138,7 @@ export default class PermissionsModal extends Vue {
 
   @Watch('searchField')
   filterPermissions(value: string) {
-    this.filteredList = this.list.filter((permission) => permission.name.toLowerCase().includes(value.toLowerCase()));
+    this.filteredList = this.list.filter((permission) => permission.nombre.toLowerCase().includes(value.toLowerCase()));
   }
 
   obtainValues(value: number | string) {

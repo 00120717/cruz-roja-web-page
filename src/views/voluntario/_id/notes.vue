@@ -1,12 +1,12 @@
 <template>
   <main class="pb-40">
-    <page-heading title="Notas Voluntario" :back-route="`/voluntarios/${$route.params.id}`" :breadcrumbs="breadcrumbs">
+    <page-heading title="Notas Voluntario" :back-route="`/voluntario/${$route.params.id}`" :breadcrumbs="breadcrumbs">
     </page-heading>
-    <section v-if="student">
+    <section v-if="voluntario">
       <div class="overflow-hidden bg-white border border-gray-100 shadow sm:rounded-lg">
         <div class="px-4 py-5 border-b border-gray-100 sm:px-6">
           <h3 class="text-lg font-medium leading-6 text-gray-900">
-            Voluntario -  {{ `${student.person.firstName} ${student.person.lastName}` }}
+            Voluntario -  {{ `${voluntario.persona.firstName} ${voluntario.persona.lastName}` }}
           </h3>
           <p class="max-w-2xl mt-1 text-sm leading-5 text-gray-500">
             Notas del Voluntario.
@@ -90,7 +90,7 @@
     </section>
     <delete-item
       :show="showDeleteModal"
-      :title="`${student.person.firstName} ${student.person.lastName}`"
+      :title="`${voluntario.person.firstName} ${voluntario.person.lastName}`"
       @update:show="showDeleteModal = false"
       @action="deleteItem"
     />
@@ -100,7 +100,7 @@
       @update:show="showConfirmationModal = false"
       @action="redirectBack"
     />
-    <loading :active="isStudentsLoading" :is-full-page="false"/>
+    <loading :active="isVoluntarioLoading" :is-full-page="false"/>
   </main>
 </template>
 
@@ -122,7 +122,7 @@ interface Breadcrumb {
   route?: string;
 }
 
-const Students = namespace('students');
+const VoluntarioModel = namespace('voluntario');
 
 @Component({
   components: {
@@ -136,10 +136,10 @@ const Students = namespace('students');
     Loading,
   },
 })
-export default class ShowStudentPage extends Vue {
+export default class ShowVoluntarioPage extends Vue {
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
-    { name: 'Voluntarios', route: '/voluntarios' },
+    { name: 'Voluntarios', route: '/voluntario' },
     { name: 'Detalle' },
   ];
 
@@ -153,17 +153,17 @@ export default class ShowStudentPage extends Vue {
     [key: string]: number | string | any;
   } = {};
 
-  @Students.State('isLoading') isStudentsLoading!: boolean;
-  @Students.State('student') student!: Student;
-  @Students.State('notes') notes!: any;
-  @Students.Action('show') fetchStudent!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
-  @Students.Action('updateNote') updateNote!: ({ payload, vm }: { payload: any; vm: any }) => ActionMethod;
-  @Students.Action('fetchNotes') fetchNotes!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
-  @Students.Action('destroy') deleteStudent!: ({ id, vm }: { id: string; vm: any }) => ActionMethod;
+  @VoluntarioModel.State('isLoading') isVoluntarioLoading!: boolean;
+  @VoluntarioModel.State('voluntario') voluntario!: Voluntario;
+  @VoluntarioModel.State('notes') notes!: any;
+  @VoluntarioModel.Action('show') fetchVoluntario!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
+  @VoluntarioModel.Action('updateNote') updateNote!: ({ payload, vm }: { payload: any; vm: any }) => ActionMethod;
+  @VoluntarioModel.Action('fetchNotes') fetchNotes!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
+  @VoluntarioModel.Action('destroy') deleteVoluntario!: ({ id, vm }: { id: string; vm: any }) => ActionMethod;
 
   async mounted() {
     const { id } = this.$route.params;
-    await this.fetchStudent({ id: +id, vm: this });
+    await this.fetchVoluntario({ id: +id, vm: this });
     await this.fetchNotes({ id: +id, vm: this });
     Object.keys(this.notes).forEach((key: any) => {
       this.$set(this.modifyingNotes, key, {});
@@ -180,14 +180,14 @@ export default class ShowStudentPage extends Vue {
         });
       });
     });
-    if (!this.student.id) {
+    if (!this.voluntario.id) {
       this.redirectBack();
     }
   }
 
   async deleteItem() {
-    const id = String(this.student?.id);
-    await this.deleteStudent({ id, vm: this });
+    const id = String(this.voluntario?.id);
+    await this.deleteVoluntario({ id, vm: this });
     this.showConfirmationModal = true;
   }
 
@@ -228,7 +228,7 @@ export default class ShowStudentPage extends Vue {
   }
 
   redirectBack() {
-    this.$router.push('/voluntarios');
+    this.$router.push('/voluntario');
   }
 }
 </script>

@@ -65,7 +65,7 @@
                   v-for="(permission, index) in newRolPermiso"
                   :key="index"
                   class="inline-flex px-3 py-2 mb-2 mr-2 text-xs font-semibold leading-5 text-green-700 bg-green-100 rounded-full"
-                >{{ permission.name }}</span>
+                >{{ permission.nombre }}</span>
               </div>
             </div>
           </div>
@@ -107,7 +107,7 @@
     <permissions-modal
       :show="showPermissionsModal"
       :new-permissions="newPermissions"
-      :list="permissionsList"
+      :list="permisoList"
       @update:show="showPermissionsModal = false"
       @update-permissions="updateNewPermissions"
     />
@@ -133,7 +133,7 @@ interface Breadcrumb {
 }
 
 const RolModel = namespace('rol');
-const PermissionModel = namespace('permissions');
+const PermisoModel = namespace('permiso');
 
 @Component({
   components: {
@@ -160,7 +160,7 @@ export default class NewRolPage extends Vue {
   typesList = [
     { id: 'superadmin', name: 'Superadmin' },
     { id: 'admin', name: 'Administrador' },
-    { id: 'tutor', name: 'Tutor' },
+    { id: 'voluntario', name: 'Voluntario' },
   ]
 
   breadcrumbs: Breadcrumb[] = [
@@ -171,13 +171,13 @@ export default class NewRolPage extends Vue {
 
   @RolModel.State('isLoading') isRolLoading!: boolean;
   @RolModel.Action('store') createRol!: ({ rol, vm }: { rol: any; vm: any }) => ActionMethod;
-  @PermissionModel.Action('list') fetchPermissionsList!: (vm: any) => ActionMethod;
-  @PermissionModel.State('isLoading') isPermissionsLoading!: boolean;
-  @PermissionModel.State('permissionsList') permissionsList!: Permission[];
+  @PermisoModel.Action('list') fetchPermisoList!: (vm: any) => ActionMethod;
+  @PermisoModel.State('isLoading') isPermissionsLoading!: boolean;
+  @PermisoModel.State('permisoList') permisoList!: Permiso[];
 
   async mounted() {
     try {
-      await this.fetchPermissionsList(this);
+      await this.fetchPermisoList(this);
     } catch (e) {
       (this as any).$snotify.error('Ha ocurrido un error');
     }
@@ -185,8 +185,8 @@ export default class NewRolPage extends Vue {
 
   @Watch('newPermissions', { immediate: true, deep: true })
   handleNewPermissionChange(value: Array<number>) {
-    if (value && this.permissionsList) {
-      this.newRolPermiso = this.permissionsList.filter((permission: Permission) => value.includes(permission.id));
+    if (value && this.permisoList) {
+      this.newRolPermiso = this.permisoList.filter((permission: Permiso) => value.includes(permission.id));
     }
   }
 

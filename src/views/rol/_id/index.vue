@@ -155,7 +155,7 @@ export default class ShowRolPage extends Vue {
   typesList = [
     { id: 'superadmin', name: 'Superadmin' },
     { id: 'admin', name: 'Administrador' },
-    { id: 'tutor', name: 'Tutor' },
+    { id: 'voluntario', name: 'Voluntario' },
   ]
 
   showConfirmationModal = false

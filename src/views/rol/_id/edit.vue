@@ -163,7 +163,7 @@ export default class EditRolPage extends Vue {
   typesList = [
     { id: 'superadmin', name: 'Superadmin' },
     { id: 'admin', name: 'Administrador' },
-    { id: 'tutor', name: 'Tutor' },
+    { id: 'voluntario', name: 'Voluntario' },
   ]
 
   breadcrumbs: Breadcrumb[] = [
@@ -193,16 +193,16 @@ export default class EditRolPage extends Vue {
   @Watch('newPermiso', { immediate: true, deep: true })
   handleNewPermissionChange(value: Array<number>) {
     if (value && this.permisoList) {
-      this.newRolPermiso = this.permisoList.filter((permission: Permission) => value.includes(permission.id));
+      this.newRolPermiso = this.permisoList.filter((permission: Permiso) => value.includes(permission.id));
     }
   }
 
   setCurrentRol() {
     const { permissions } = this.currentRol;
     this.$set(this.form, 'id', this.currentRol.id);
-    this.$set(this.form, 'name', this.currentRol.nombre);
-    this.$set(this.form, 'type', this.currentRol.tipo);
-    this.newPermiso = permissions.map((permission: Permission) => permission.id);
+    this.$set(this.form, 'nombre', this.currentRol.nombre);
+    this.$set(this.form, 'tipo', this.currentRol.tipo);
+    this.newPermiso = permissions.map((permission: Permiso) => permission.id);
   }
 
   updatenewPermiso(value: Array<number>) {
