@@ -54,10 +54,10 @@ export const actions: ActionTree<TipoVoluntarioState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  store: async ({ commit }: TipoVoluntarioActionContext, { sede, vm }: { sede: any; vm: any }) => {
+  store: async ({ commit }: TipoVoluntarioActionContext, { tipoVoluntario, vm }: { tipoVoluntario: any; vm: any }) => {
     try {
       commit('toggleLoading', true);
-      await TipoVoluntarioService.store(sede);
+      await TipoVoluntarioService.store(tipoVoluntario);
       vm.$snotify.success('Tipo Voluntario creado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
@@ -65,10 +65,10 @@ export const actions: ActionTree<TipoVoluntarioState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  update: async ({ commit }: TipoVoluntarioActionContext, { sede, vm }: { sede: any; vm: any }) => {
+  update: async ({ commit }: TipoVoluntarioActionContext, { tipoVoluntario, vm }: { tipoVoluntario: any; vm: any }) => {
     try {
       commit('toggleLoading', true);
-      await TipoVoluntarioService.update(sede);
+      await TipoVoluntarioService.update(tipoVoluntario);
       vm.$snotify.success('Tipo Voluntario actualizado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);

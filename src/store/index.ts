@@ -2,39 +2,43 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { auth } from '@/store/modules/auth';
-import { users } from '@/store/modules/users';
-import { roles } from '@/store/modules/roles';
-import { subject } from '@/store/modules/subject';
+import { usuario } from '@/store/modules/usuario';
+import { rol } from '@/store/modules/rol';
 import { sede } from '@/store/modules/sede';
-import { permissions } from '@/store/modules/permissions';
-import { students } from '@/store/modules/students';
-import { modality } from '@/store/modules/modality';
+import { permiso } from '@/store/modules/permiso';
+import { voluntario } from '@/store/modules/voluntario';
+import { modalidad } from '@/store/modules/modalidad';
 import { tipoSede } from '@/store/modules/tipoSede';
-import { section } from '@/store/modules/section';
-import { grade } from '@/store/modules/grade';
 import { cuerpoFilial } from '@/store/modules/cuerpoFilial';
 import { estado } from '@/store/modules/estado';
 import { tipoVoluntario } from '@/store/modules/tipoVoluntario';
+import { tipoEmergencia } from '@/store/modules/tipoEmergencia';
 import { departamentoXMunicipio } from '@/store/modules/departamentoXMunicipio';
+import { vehiculo } from '@/store/modules/vehiculo';
+import { hospital } from '@/store/modules/hospital';
+import { emergencia } from './modules/emergencia';
+import { seccional } from './modules/seccional';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     auth,
-    users,
+    usuario,
     cuerpoFilial,
     estado,
     tipoVoluntario,
-    roles,
-    subject,
+    rol,
     sede,
-    permissions,
-    students,
-    modality,
+    permiso,
+    voluntario,
+    modalidad,
     tipoSede,
-    section,
-    grade,
     departamentoXMunicipio,
+    tipoEmergencia,
+    vehiculo,
+    hospital,
+    emergencia,
+    seccional,
   },
 });

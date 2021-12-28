@@ -34,7 +34,7 @@
             Sede #{{ sede.id }}
           </h3>
           <p class="max-w-2xl mt-1 text-sm leading-5 text-gray-500">
-            Información general de la sede {{ sede.code }}.
+            Información general de la sede {{ sede.codigo }}.
           </p>
         </div>
         <div>

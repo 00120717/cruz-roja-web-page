@@ -53,10 +53,10 @@ export const actions: ActionTree<DepartamentoXMunicipioState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  store: async ({ commit }: DepartamentoXMunicipioActionContext, { modality, vm }: { modality: any; vm: any }) => {
+  store: async ({ commit }: DepartamentoXMunicipioActionContext, { departamentXmunicipio, vm }: { departamentXmunicipio: any; vm: any }) => {
     try {
       commit('toggleLoading', true);
-      await DepartamentoXMunicipioService.store(modality);
+      await DepartamentoXMunicipioService.store(departamentXmunicipio);
       vm.$snotify.success('Departamento y Municipio creado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
@@ -64,10 +64,10 @@ export const actions: ActionTree<DepartamentoXMunicipioState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  update: async ({ commit }: DepartamentoXMunicipioActionContext, { modality, vm }: { modality: any; vm: any }) => {
+  update: async ({ commit }: DepartamentoXMunicipioActionContext, { departamentXmunicipio, vm }: { departamentXmunicipio: any; vm: any }) => {
     try {
       commit('toggleLoading', true);
-      await DepartamentoXMunicipioService.update(modality);
+      await DepartamentoXMunicipioService.update(departamentXmunicipio);
       vm.$snotify.success('Departamento y Municipio actualizado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);

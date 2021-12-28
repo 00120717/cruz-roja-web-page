@@ -53,10 +53,10 @@ export const actions: ActionTree<EstadoState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  store: async ({ commit }: EstadoActionContext, { sede, vm }: { sede: any; vm: any }) => {
+  store: async ({ commit }: EstadoActionContext, { estado, vm }: { estado: any; vm: any }) => {
     try {
       commit('toggleLoading', true);
-      await EstadoService.store(sede);
+      await EstadoService.store(estado);
       vm.$snotify.success('Cuerpo Filial creado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
@@ -64,10 +64,10 @@ export const actions: ActionTree<EstadoState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  update: async ({ commit }: EstadoActionContext, { sede, vm }: { sede: any; vm: any }) => {
+  update: async ({ commit }: EstadoActionContext, { estado, vm }: { estado: any; vm: any }) => {
     try {
       commit('toggleLoading', true);
-      await EstadoService.update(sede);
+      await EstadoService.update(estado);
       vm.$snotify.success('Cuerpo Filial actualizado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);

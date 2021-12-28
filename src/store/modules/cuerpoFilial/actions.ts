@@ -54,10 +54,10 @@ export const actions: ActionTree<CuerpoFilialState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  store: async ({ commit }: CuerpoFilialActionContext, { sede, vm }: { sede: any; vm: any }) => {
+  store: async ({ commit }: CuerpoFilialActionContext, { cuerpoFilial, vm }: { cuerpoFilial: any; vm: any }) => {
     try {
       commit('toggleLoading', true);
-      await CuerpoFilialService.store(sede);
+      await CuerpoFilialService.store(cuerpoFilial);
       vm.$snotify.success('Cuerpo Filial creado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
@@ -65,10 +65,10 @@ export const actions: ActionTree<CuerpoFilialState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  update: async ({ commit }: CuerpoFilialActionContext, { sede, vm }: { sede: any; vm: any }) => {
+  update: async ({ commit }: CuerpoFilialActionContext, { cuerpoFilial, vm }: { cuerpoFilial: any; vm: any }) => {
     try {
       commit('toggleLoading', true);
-      await CuerpoFilialService.update(sede);
+      await CuerpoFilialService.update(cuerpoFilial);
       vm.$snotify.success('Cuerpo Filial actualizado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);

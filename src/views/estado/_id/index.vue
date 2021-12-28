@@ -1,13 +1,13 @@
 <template>
   <main class="pb-40">
-    <page-heading title="Detalle modalidad" back-route="/modality" :breadcrumbs="breadcrumbs">
+    <page-heading title="Detalle de Estado" back-route="/estado" :breadcrumbs="breadcrumbs">
       <template slot="actions">
         <custom-button
           title="Editar"
           color="white"
           size="small"
           class="mr-2"
-          :to="`/modality/${modality.id}/edit`"
+          :to="`/estado/${estado.id}/edit`"
         >
           <template #icon>
             <svg
@@ -49,14 +49,14 @@
         </custom-button>
       </template>
     </page-heading>
-    <section v-if="modality">
+    <section v-if="estado">
       <div class="overflow-hidden bg-white border border-gray-100 shadow sm:rounded-lg">
         <div class="px-4 py-5 border-b border-gray-100 sm:px-6">
           <h3 class="text-lg font-medium leading-6 text-gray-900">
-            Modalidad #{{ modality.id }}
+            Estado #{{ estado.id }}
           </h3>
           <p class="max-w-2xl mt-1 text-sm leading-5 text-gray-500">
-            Información general de la modalidad {{ modality.nombreModalidad }}.
+            Información general del estado {{ estado.estadoVoluntario }}.
           </p>
         </div>
         <div>
@@ -66,7 +66,7 @@
                 Tipo
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ modality.nombreModalidad }}
+                {{ estado.estadoVoluntario }}
               </dd>
             </div>
           </dl>
@@ -75,17 +75,17 @@
     </section>
     <delete-item
       :show="showDeleteModal"
-      :title="`modalidad ${modality.nombreModalidad}`"
+      :title="`estado ${estado.estadoVoluntario}`"
       @update:show="showDeleteModal = false"
       @action="deleteItem"
     />
     <confirmation-modal
       :show="showConfirmationModal"
-      title="Modalidad Eliminada"
+      title="Estado Eliminado"
       @update:show="showConfirmationModal = false"
       @action="redirectBack"
     />
-    <loading :active="isModalityLoading" :is-full-page="false" />
+    <loading :active="isEstadoLoading" :is-full-page="false" />
   </main>
 </template>
 
@@ -105,7 +105,7 @@ interface Breadcrumb {
   route?: string;
 }
 
-const ModalityModel = namespace('modality');
+const EstadoModel = namespace('estado');
 
 @Component({
   components: {
@@ -117,36 +117,36 @@ const ModalityModel = namespace('modality');
     ConfirmationModal,
   },
 })
-export default class ShowModalityPage extends Vue {
+export default class ShowEstadoPage extends Vue {
   showConfirmationModal = false
   showDeleteModal = false
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
-    { name: 'Modalidad', route: '/modality' },
+    { name: 'Estado', route: '/estado' },
     { name: 'Detalle' },
   ]
 
-  @ModalityModel.State('isLoading') isModalityLoading!: boolean;
-  @ModalityModel.State('modality') modality!: Modality;
-  @ModalityModel.Action('show') fetchModality!: ({ id, vm }: { id: number; vm: any }) => ActionMethod
-  @ModalityModel.Action('destroy') deleteModality!: ({ id, vm }: { id: number; vm: any }) => ActionMethod
+  @EstadoModel.State('isLoading') isEstadoLoading!: boolean;
+  @EstadoModel.State('estado') estado!: Estado;
+  @EstadoModel.Action('show') fetchEstado!: ({ id, vm }: { id: number; vm: any }) => ActionMethod
+  @EstadoModel.Action('destroy') deleteEstado!: ({ id, vm }: { id: number; vm: any }) => ActionMethod
 
   async mounted() {
     const { id } = this.$route.params;
-    await this.fetchModality({ id: +id, vm: this });
-    if (!this.modality.id) {
+    await this.fetchEstado({ id: +id, vm: this });
+    if (!this.estado.id) {
       this.redirectBack();
     }
   }
 
   async deleteItem() {
-    const id = Number(this.modality?.id);
-    await this.deleteModality({ id, vm: this });
+    const id = Number(this.estado?.id);
+    await this.deleteEstado({ id, vm: this });
     this.showConfirmationModal = true;
   }
 
   redirectBack() {
-    this.$router.push('/modality');
+    this.$router.push('/estado');
   }
 }
 </script>

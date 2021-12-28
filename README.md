@@ -1,4 +1,4 @@
-# educame-sede-admin
+# cruz-roja-admin
 
 ## Project setup
 ```

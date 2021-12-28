@@ -11,7 +11,7 @@
           <div class="flex flex-col flex-grow">
             <nav class="flex-1 px-2 pt-12">
               <router-link
-                to="/voluntarios"
+                to="/voluntario"
                 exact-active-class="text-blue-500 "
                 class="flex items-center px-2 pt-1 mb-6 text-sm font-medium leading-5 transition duration-150 ease-in-out rounded-md group text-dark-blue-700 hover:text-dark-blue-700 focus:outline-none"
               >
@@ -129,7 +129,7 @@
                       Estado
                     </router-link>
                     <router-link
-                      to="/modality"
+                      to="/modalidad"
                       exact-active-class="font-bold text-blue-600"
                       active-class="font-bold text-blue-600"
                       class="flex items-center w-full pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
@@ -200,7 +200,7 @@
                     class="my-2 text-gray-700"
                   >
                     <router-link
-                      to="/"
+                      to="/paciente"
                       exact-active-class="font-bold text-blue-600"
                       active-class="font-bold text-blue-600"
                       class="flex items-center w-full pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
@@ -208,7 +208,7 @@
                       Pacientes
                     </router-link>
                     <router-link
-                      to="/"
+                      to="/hospital"
                       exact-active-class="font-bold text-blue-600"
                       active-class="font-bold text-blue-600"
                       class="flex items-center w-full pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
@@ -216,7 +216,7 @@
                       Hospitales
                     </router-link>
                     <router-link
-                      to="/"
+                      to="/vehiculo"
                       exact-active-class="font-bold text-blue-600"
                       active-class="font-bold text-blue-600"
                       class="flex items-center w-full pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
@@ -279,7 +279,7 @@
                       Sede
                     </router-link>
                     <router-link
-                      to="/"
+                      to="/seccional"
                       exact-active-class="font-bold text-blue-600"
                       active-class="font-bold text-blue-600"
                       class="flex items-center w-full pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
@@ -287,7 +287,7 @@
                       Seccional
                     </router-link>
                     <router-link
-                      to="/"
+                      to="/usuario"
                       exact-active-class="font-bold text-blue-600"
                       active-class="font-bold text-blue-600"
                       class="flex items-center w-full pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"

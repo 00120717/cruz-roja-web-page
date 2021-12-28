@@ -53,10 +53,10 @@ export const actions: ActionTree<TipoSedeState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  store: async ({ commit }: TipoSedeActionContext, { modality, vm }: { modality: any; vm: any }) => {
+  store: async ({ commit }: TipoSedeActionContext, { tipoSede, vm }: { tipoSede: any; vm: any }) => {
     try {
       commit('toggleLoading', true);
-      await TipoSedeService.store(modality);
+      await TipoSedeService.store(tipoSede);
       vm.$snotify.success('Tipo Sede creada correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
@@ -64,10 +64,10 @@ export const actions: ActionTree<TipoSedeState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  update: async ({ commit }: TipoSedeActionContext, { modality, vm }: { modality: any; vm: any }) => {
+  update: async ({ commit }: TipoSedeActionContext, { tipoSede, vm }: { tipoSede: any; vm: any }) => {
     try {
       commit('toggleLoading', true);
-      await TipoSedeService.update(modality);
+      await TipoSedeService.update(tipoSede);
       vm.$snotify.success('Tipo Sede actualizada correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);

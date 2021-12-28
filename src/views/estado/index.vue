@@ -6,7 +6,7 @@
       :breadcrumbs="breadcrumbs"
     >
       <template slot="actions">
-        <custom-button title="Nuevo Estado" color="secondary" to="/modality/new">
+        <custom-button title="Nuevo Estado" color="secondary" to="/estado/new">
           <template #icon>
             <svg
               class="w-4 h-4 mr-2"
@@ -30,7 +30,7 @@
         :current-page="filters.page"
         :last-page="lastPage"
         :per-page="filters.per_page"
-        :is-loading="isModalityLoading"
+        :is-loading="isEstadoLoading"
         :filters="filters"
         :total-items="meta.total"
         @filter-change="onFiltersChange"
@@ -39,9 +39,9 @@
       >
         <template slot="items">
           <table-item
-            v-for="(modality, index) in estados"
+            v-for="(estado, index) in estados"
             :key="index"
-            :item="modality.id"
+            :item="estado.id"
             :selected="selectedItems"
             :remove="false"
             page="estado"
@@ -53,7 +53,7 @@
               <div class="flex items-center">
                 <div class="">
                   <div class="text-sm font-medium leading-5 text-gray-900">
-                    {{ modality.id }}
+                    {{ estado.id }}
                   </div>
                 </div>
               </div>
@@ -61,7 +61,7 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ modality.estadoVoluntario }}
+              {{ estado.estadoVoluntario }}
             </td>
           </table-item>
         </template>
@@ -86,7 +86,7 @@ interface Breadcrumb {
   route?: string;
 }
 
-const ModalityModel = namespace('estado');
+const EstadoModel = namespace('estado');
 
 @Component({
   components: {
@@ -98,7 +98,7 @@ const ModalityModel = namespace('estado');
     ActiveIndicator,
   },
 })
-export default class ModalityPage extends Vue {
+export default class EstadoPage extends Vue {
   selectedItems: Array<string | number> = []
   showDeleteModal = false
   showDeleteCompleted = false
@@ -110,27 +110,27 @@ export default class ModalityPage extends Vue {
       key: 'id',
     },
     {
-      name: 'Tipo',
-      key: 'type',
+      name: 'Estado',
+      key: 'estadoVoluntario',
     },
   ]
 
   // eslint-disable-next-line @typescript-eslint/camelcase
   filters: Filters = { search: '', per_page: '10', page: 1 }
   selectedItem = 0
-  @ModalityModel.State('estados') estados!: Estado[];
-  @ModalityModel.State('meta') meta!: Meta;
-  @ModalityModel.State('isLoading') isModalityLoading!: boolean;
-  @ModalityModel.Action('fetch') fetchModalities!: ({ filters, vm }: { filters: Filters; vm: any }) => AxiosResponse;
+  @EstadoModel.State('estados') estados!: Estado[];
+  @EstadoModel.State('meta') meta!: Meta;
+  @EstadoModel.State('isLoading') isEstadoLoading!: boolean;
+  @EstadoModel.Action('fetch') fetchEstados!: ({ filters, vm }: { filters: Filters; vm: any }) => AxiosResponse;
 
   async mounted() {
-    await this.fetchModalities({ filters: this.filters, vm: this });
+    await this.fetchEstados({ filters: this.filters, vm: this });
   }
 
   @Watch('filters', { deep: true })
   async handleFilterChange(value: Filters) {
     if (value) {
-      await this.fetchModalities({ filters: this.filters, vm: this });
+      await this.fetchEstados({ filters: this.filters, vm: this });
     }
   }
 
