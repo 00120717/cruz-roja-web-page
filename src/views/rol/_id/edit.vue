@@ -62,10 +62,10 @@
             <div class="grid grid-cols-6 row-gap-2 col-gap-6">
               <div v-if="newRolPermiso && newRolPermiso.length > 0" class="col-span-6 mt-4 sm:col-span-4">
                 <span
-                  v-for="(permission, index) in newRolPermiso"
+                  v-for="(permiso, index) in newRolPermiso"
                   :key="index"
                   class="inline-flex px-3 py-2 mb-2 mr-2 text-xs font-semibold leading-5 text-green-700 bg-green-100 rounded-full"
-                >{{ permission.name }}</span>
+                >{{ permiso.nombre }}</span>
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@
                   type="button"
                   color="secondary"
                   title="Asignar permisos"
-                  @click="showPermissionsModal = true"
+                  @click="showPermisosModal = true"
                 >
                   <template #icon>
                     <svg
@@ -105,12 +105,12 @@
         <custom-button type="submit" class="ml-2" title="Guardar" :loading="isRolLoading" @click.prevent="onSubmit" />
       </div>
     </div>
-    <permissions-modal
-      :show="showPermissionsModal"
-      :new-permissions="newPermiso"
+    <permisos-modal
+      :show="showPermisosModal"
+      :new-permisos="newPermisos"
       :list="permisoList"
-      @update:show="showPermissionsModal = false"
-      @update-permissions="updatenewPermiso"
+      @update:show="showPermisosModal = false"
+      @update-permisos="updateNewPermisos"
     />
   </main>
 </template>
@@ -126,7 +126,7 @@ import ToggleSelector from '@/components/ui/ToggleSelector.vue';
 import InputSelect from '@/components/ui/InputSelect.vue';
 import InputGroup from '@/components/ui/InputGroup.vue';
 import InputMask from '@/components/ui/InputMask.vue';
-import PermissionsModal from '@/components/general/PermissionsModal.vue';
+import PermisosModal from '@/components/general/PermisosModal.vue';
 import Loading from '@/components/ui/Loading.vue';
 
 interface Breadcrumb {
@@ -135,7 +135,7 @@ interface Breadcrumb {
 }
 
 const RolModel = namespace('rol');
-const PermissionModel = namespace('permissions');
+const PermisoModel = namespace('permiso');
 
 @Component({
   components: {
@@ -146,18 +146,18 @@ const PermissionModel = namespace('permissions');
     InputSelect,
     InputGroup,
     InputMask,
-    PermissionsModal,
+    PermisosModal,
     Loading,
   },
 })
 export default class EditRolPage extends Vue {
-  showPermissionsModal = false;
-  newPermiso: Array<number> = [];
+  showPermisosModal = false;
+  newPermisos: Array<number> = [];
   newRolPermiso: Permiso[] = [];
   form = {
     nombre: '',
     tipo: '',
-    permissionId: [],
+    permisoId: [],
   }
 
   typesList = [
@@ -176,9 +176,9 @@ export default class EditRolPage extends Vue {
   @RolModel.State('rol') currentRol!: Rol;
   @RolModel.Action('update') updateRol!: ({ rol, vm }: { rol: any; vm: any }) => ActionMethod;
   @RolModel.Action('show') fetchRol!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
-  @PermissionModel.Action('list') fetchPermisoList!: (vm: any) => ActionMethod;
-  @PermissionModel.State('isLoading') isPermisoLoading!: boolean;
-  @PermissionModel.State('permisoList') permisoList!: Permission[];
+  @PermisoModel.Action('list') fetchPermisoList!: (vm: any) => ActionMethod;
+  @PermisoModel.State('isLoading') isPermisoLoading!: boolean;
+  @PermisoModel.State('permisoList') permisoList!: Permiso[];
 
   async mounted() {
     try {
@@ -190,30 +190,30 @@ export default class EditRolPage extends Vue {
     }
   }
 
-  @Watch('newPermiso', { immediate: true, deep: true })
-  handleNewPermissionChange(value: Array<number>) {
+  @Watch('newPermisos', { immediate: true, deep: true })
+  handleNewPermisoChange(value: Array<number>) {
     if (value && this.permisoList) {
-      this.newRolPermiso = this.permisoList.filter((permission: Permiso) => value.includes(permission.id));
+      this.newRolPermiso = this.permisoList.filter((permiso: Permiso) => value.includes(permiso.id));
     }
   }
 
   setCurrentRol() {
-    const { permissions } = this.currentRol;
+    const { permisos } = this.currentRol;
     this.$set(this.form, 'id', this.currentRol.id);
     this.$set(this.form, 'nombre', this.currentRol.nombre);
     this.$set(this.form, 'tipo', this.currentRol.tipo);
-    this.newPermiso = permissions.map((permission: Permiso) => permission.id);
+    this.newPermisos = permisos.map((permiso: Permiso) => permiso.id);
   }
 
-  updatenewPermiso(value: Array<number>) {
-    this.newPermiso = value;
+  updateNewPermisos(value: Array<number>) {
+    this.newPermisos = value;
   }
 
   async onSubmit() {
     const isValid = await (this.$refs.form as any).validate();
     if (isValid) {
       try {
-        this.$set(this.form, 'permissionId', this.newPermiso);
+        this.$set(this.form, 'permisoId', this.newPermisos);
         await this.updateRol({ rol: this.form, vm: this });
         this.$router.push('/rol');
         // eslint-disable-next-line no-empty

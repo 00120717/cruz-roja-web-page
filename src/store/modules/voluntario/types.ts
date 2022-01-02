@@ -1,7 +1,7 @@
 export interface VoluntarioState {
   voluntarios: Voluntario[];
   voluntario: Voluntario;
-  notes: any;
+  voluntarioList: Voluntario[];
   meta: Meta;
   isLoading: boolean;
 }

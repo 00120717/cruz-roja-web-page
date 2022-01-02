@@ -68,7 +68,7 @@
                 Nombre
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ rol.name }}
+                {{ rol.nombre }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-white sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -76,7 +76,7 @@
                 Tipo
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ typesList.find((type) => type.id === rol.type).name || 'N/A' }}
+                {{ typesList.find((type) => type.id === rol.type).nombre || 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -86,12 +86,12 @@
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
                 <div class="mt-5 mb-4 md:mt-0 md:col-span-2">
                   <div class="grid grid-cols-6 row-gap-2 col-gap-6">
-                    <div v-if="rol.permissions && rol.permissions.length > 0" class="col-span-6 mt-4 sm:col-span-4">
+                    <div v-if="rol.permisos && rol.permisos.length > 0" class="col-span-6 mt-4 sm:col-span-4">
                 <span
-                  v-for="(permission, index) in rol.permissions"
+                  v-for="(permiso, index) in rol.permisos"
                   :key="index"
                   class="inline-flex px-3 py-2 mb-2 mr-2 text-xs font-semibold leading-5 text-green-700 bg-green-100 rounded-full"
-                >{{ permission.name }}</span>
+                >{{ permiso.nombre }}</span>
                     </div>
                   </div>
                 </div>

@@ -52,7 +52,7 @@ export const state: VoluntarioState = {
     total: 1,
   },
   voluntarios: [],
-  notes: {},
+  voluntarioList: [],
 };
 
 export const voluntario: Module<VoluntarioState, RootState> = {

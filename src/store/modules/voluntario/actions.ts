@@ -6,33 +6,11 @@ import VoluntarioService from '@/services/VoluntarioService';
 type VoluntarioActionContext = ActionContext<VoluntarioState, RootState>
 
 export const actions: ActionTree<VoluntarioState, RootState> = {
-  addSubject: async ({ commit }: VoluntarioActionContext, { payload, vm }: { payload: any; vm: any }) => {
+  list: async ({ commit }: VoluntarioActionContext, vm: any) => {
     try {
       commit('toggleLoading', true);
-      await VoluntarioService.addSubject(payload.id, payload);
-    } catch ({ response }) {
-      vm.$snotify.error(response.data.message);
-    } finally {
-      commit('toggleLoading', false);
-    }
-  },
-  updateNote: async ({ commit }: VoluntarioActionContext, { payload, vm }: { payload: any; vm: any }) => {
-    try {
-      commit('toggleLoading', true);
-      await VoluntarioService.updateNote(payload.id, payload);
-      vm.$snotify.success('Nota actualizada correctamente');
-    } catch ({ response }) {
-      vm.$snotify.error(response.data.message);
-      return Promise.reject(response);
-    } finally {
-      commit('toggleLoading', false);
-    }
-  },
-  fetchNotes: async ({ commit }: VoluntarioActionContext, { id, vm }: { id: any; vm: any }) => {
-    try {
-      commit('toggleLoading', true);
-      const { data } = await VoluntarioService.fetchNotes(id);
-      commit('setNotes', data);
+      const { data } = await VoluntarioService.list();
+      commit('setVoluntarioList', data);
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
     } finally {

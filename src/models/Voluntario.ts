@@ -1,5 +1,5 @@
 interface Voluntario {
-  id?: string;
+  id: string;
   fechaInicio: string;
   voluntarioCodigoCarnet?: string;
   firstName: string;
@@ -7,6 +7,7 @@ interface Voluntario {
   genero: string;
   fechaNacimiento: string;
   email: string | null;
+  nombreCompuesto?: string;
   estadoPersona: boolean;
   documentoIdentificacion: string;
   tipoDocumentoPersona: string;

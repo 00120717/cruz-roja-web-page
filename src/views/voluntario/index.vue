@@ -43,7 +43,7 @@
             :key="index"
             :item="voluntario.id"
             :selected="selectedItems"
-            page="voluntarios"
+            page="voluntario"
             @update:selected="setItems"
             @delete="deleteItem"
           >
@@ -223,12 +223,12 @@ export default class VoluntarioPage extends Vue {
 
   // eslint-disable-next-line @typescript-eslint/camelcase
   filters: Filters = { search: '', per_page: '30', page: 1 }
-  selectedItem = 0
+  selectedItem = '0'
   @VoluntarioModel.State('voluntarios') voluntarios!: Voluntario[]
   @VoluntarioModel.State('meta') meta!: Meta
   @VoluntarioModel.State('isLoading') isVoluntarioLoading!: boolean
   @VoluntarioModel.Action('fetch') fetchVoluntarios!: ({ filters, vm }: { filters: Filters; vm: any }) => ActionMethod
-  @VoluntarioModel.Action('destroy') deleteVoluntario!: ({ id, vm }: { id: number; vm: any }) => ActionMethod
+  @VoluntarioModel.Action('destroy') deleteVoluntario!: ({ id, vm }: { id: string; vm: any }) => ActionMethod
 
   async mounted() {
     await this.fetchVoluntarios({ filters: this.filters, vm: this });
@@ -263,13 +263,13 @@ export default class VoluntarioPage extends Vue {
     }
   }
 
-  deleteItem(id: number) {
+  deleteItem(id: string) {
     this.showDeleteModal = true;
     this.selectedItem = id;
   }
 
   async deleteComplete() {
-    if (this.selectedItem !== 0) {
+    if (this.selectedItem !== '0') {
       await this.deleteVoluntario({ id: this.selectedItem, vm: this });
       await this.fetchVoluntarios({ filters: this.filters, vm: this });
 

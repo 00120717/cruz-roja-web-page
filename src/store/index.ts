@@ -18,6 +18,9 @@ import { vehiculo } from '@/store/modules/vehiculo';
 import { hospital } from '@/store/modules/hospital';
 import { emergencia } from './modules/emergencia';
 import { seccional } from './modules/seccional';
+import { emergenciaRealizada } from './modules/emergenciaRealizada';
+import { paciente } from './modules/paciente';
+import { emergenciaAsignada } from './modules/emergenciaAsignada';
 
 Vue.use(Vuex);
 
@@ -39,6 +42,9 @@ export default new Vuex.Store({
     vehiculo,
     hospital,
     emergencia,
+    emergenciaRealizada,
+    emergenciaAsignada,
+    paciente,
     seccional,
   },
 });

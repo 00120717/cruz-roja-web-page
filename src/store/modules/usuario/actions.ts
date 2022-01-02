@@ -20,10 +20,10 @@ export const actions: ActionTree<UsuarioState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  show: async ({ commit }: UsuarioActionContext, { id, vm }: { id: number, vm: any }) => {
+  show: async ({ commit }: UsuarioActionContext, { id, vm }: { id: string, vm: any }) => {
     try {
       commit('toggleLoading', true);
-      const { data } = await UsuarioService.show(id);
+      const { data } = await UsuarioService.showString(id);
       commit('setUsuario', data);
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
@@ -31,10 +31,10 @@ export const actions: ActionTree<UsuarioState, RootState> = {
       commit('toggleLoading', false);
     }
   },
-  destroy: async ({ commit }: UsuarioActionContext, { id, vm }: { id: number, vm: any }) => {
+  destroy: async ({ commit }: UsuarioActionContext, { id, vm }: { id: string, vm: any }) => {
     try {
       commit('toggleLoading', true);
-      await UsuarioService.destroy(id);
+      await UsuarioService.destroyString(id);
       vm.$snotify.success('Usuario eliminado correctamente');
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);

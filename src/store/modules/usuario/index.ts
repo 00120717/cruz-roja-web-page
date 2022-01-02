@@ -10,7 +10,7 @@ export const state: UsuarioState = {
   usuario: {
     email: '',
     firstName: '',
-    id: 0,
+    id: '',
     lastName: '',
     rol: {
       id: 0,

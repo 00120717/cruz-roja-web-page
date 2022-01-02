@@ -1,5 +1,5 @@
 interface Usuario {
-  id?: number;
+  id?: string;
   rol?: Rol;
   sede?: Sede | null;
   username: string;
@@ -8,6 +8,6 @@ interface Usuario {
   email: string | null;
   estadoPersona: boolean;
   sedeId?: number;
-  password?: string;
+  contrasenia?: string;
   rolId?: number;
 }

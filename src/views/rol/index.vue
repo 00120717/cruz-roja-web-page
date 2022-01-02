@@ -63,17 +63,17 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ rol.name }}
+              {{ rol.nombre }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ rol.type }}
+              {{ rol.tipo }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
             >
-              {{ rol.permissions && rol.permissions ? rol.permissions.length : '0' }}
+              {{ rol.permisos && rol.permisos ? rol.permisos.length : '0' }}
             </td>
           </table-item>
         </template>
@@ -147,7 +147,7 @@ export default class RolPage extends Vue {
     },
     {
       name: 'Cantidad de permisoss',
-      key: 'permissions',
+      key: 'permisos',
     },
   ]
 

@@ -53,17 +53,17 @@
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  vid="password"
+                  vid="contrasenia"
                   name="contraseña"
                   tag="div"
                   rules="required|min:8"
                 >
                   <input-group
-                    id="password"
-                    v-model="form.password"
+                    id="contrasenia"
+                    v-model="form.contrasenia"
                     label="Contraseña"
-                    type="password"
-                    name="password"
+                    type="contrasenia"
+                    name="contrasenia"
                     :error="errors[0]"
                   />
                 </ValidationProvider>
@@ -82,44 +82,6 @@
                     v-model="form.email"
                     label="Correo electrónico"
                     name="email"
-                    :error="errors[0]"
-                  />
-                </ValidationProvider>
-              </div>
-
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="phonenumber"
-                  name="teléfono"
-                  tag="div"
-                  rules="min:8"
-                >
-                  <input-mask
-                    id="phonenumber"
-                    v-model="form.phoneNumber"
-                    mask="####-####"
-                    label="Número de teléfono"
-                    name="phonenumber"
-                    :error="errors[0]"
-                  />
-                </ValidationProvider>
-              </div>
-
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="altPhoneNumber"
-                  name="correo electrónico"
-                  tag="div"
-                  rules="min:8"
-                >
-                  <input-mask
-                    id="altphonenumber"
-                    v-model="form.altPhoneNumber"
-                    mask="####-####"
-                    label="Número de teléfono alterno"
-                    name="altPhoneNumber"
                     :error="errors[0]"
                   />
                 </ValidationProvider>
@@ -165,7 +127,7 @@
                 </ValidationProvider>
               </div>
               <div class="col-span-6 sm:col-span-4">
-                <toggle-selector v-model="form.status" label="Activo" />
+                <toggle-selector v-model="form.estadoPersona" label="Activo" />
               </div>
             </div>
           </div>
@@ -216,14 +178,12 @@ export default class NewUsuarioPage extends Vue {
   form = {
     username: '',
     email: '',
-    phoneNumber: '',
-    altPhoneNumber: '',
     firstName: '',
     lastName: '',
     sedeId: 0,
-    password: '',
+    contrasenia: '',
+    estadoPersona: true,
     rolId: 0,
-    status: true,
   }
 
   breadcrumbs: Breadcrumb[] =[

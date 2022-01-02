@@ -3,7 +3,7 @@
     <div class="bg-white shadow sm:rounded-lg">
       <div class="px-4 py-5 sm:p-6">
         <h3 id="renew-headline" class="text-xl font-medium leading-6 text-gray-900">
-          Asignar permisos
+          Asignar seccionales
         </h3>
         <div class="mt-2 sm:flex sm:items-start sm:justify-between">
           <div class="max-w-xl text-sm leading-5 text-gray-500">
@@ -38,21 +38,21 @@
               id="search_field"
               v-model="searchField"
               class="block w-full h-full py-3 pl-8 pr-3 text-gray-900 placeholder-gray-500 bg-transparent rounded-t-md focus:outline-none focus:placeholder-gray-400 sm:text-sm"
-              placeholder="Buscar permisos"
+              placeholder="Buscar seccionales"
               type="search"
             >
           </div>
         </form>
         <div class="p-3 pb-8 mb-6 overflow-auto rounded h-80 bg-gray-50">
-          <div v-for="(permission, index) in filteredList" :key="index">
+          <div v-for="(seccional, index) in filteredList" :key="index">
             <div class="flex items-center px-2 py-2 mb-2 bg-white rounded">
               <div class="flex-shrink-0 mr-3">
                 <input-checkbox
-                  :id="permission.id"
-                  v-model="isPermissionSelected[permission.id]"
+                  :id="seccional.id"
+                  v-model="isSeccionalSelected[seccional.id]"
                   class="m-0"
                   style="margin:0"
-                  :label="permission.name"
+                  :label="seccional.nombre"
                   @change-value="obtainValues"
                   @remove-value="removeValues"
                 />
@@ -62,7 +62,7 @@
         </div>
         <div class="grid grid-cols-2 gap-4">
           <custom-button type="button" title="Cancelar" color="white" @click="cancel" />
-          <custom-button type="button" title="Guardar" @click="addPermissions" />
+          <custom-button type="button" title="Guardar" @click="addSeccionales" />
         </div>
       </div>
     </div>
@@ -77,9 +77,10 @@ import Modal from '@/components/ui/Modal.vue';
 import CustomButton from '@/components/ui/CustomButton.vue';
 import InputCheckbox from '@/components/ui/InputCheckbox.vue';
 
-interface Permission {
+interface Seccional {
   id: number;
-  name: string;
+  nombre: string;
+  codigo: string;
 }
 
 @Component({
@@ -89,74 +90,74 @@ interface Permission {
     InputCheckbox,
   },
 })
-export default class PermissionsModal extends Vue {
+export default class SeccionalesModal extends Vue {
   @Prop({ type: Boolean, default: false }) readonly show!: boolean;
   @Prop(String) readonly title!: string;
-  @Prop({ type: Array, default: [] }) list!: Permiso[];
-  @Prop({ type: Array, default: [] }) readonly newPermissions!: Array<number>;
+  @Prop({ type: Array, default: [] }) list!: Seccional[];
+  @Prop({ type: Array, default: [] }) readonly newSeccionales!: Array<number>;
   @PropSync('show', Boolean) showModal!: boolean;
   searchField = '';
-  tempPermissions: Array<number> = [];
-  filteredList: Permiso[] = [];
-  isPermissionSelected: {[key: number]: boolean} = {};
+  tempSeccionales: Array<number> = [];
+  filteredList: Seccional[] = [];
+  isSeccionalSelected: {[key: number]: boolean} = {};
 
   mounted() {
-    if (this.newPermissions) { this.tempPermissions = JSON.parse(JSON.stringify(this.newPermissions)); }
+    if (this.newSeccionales) { this.tempSeccionales = JSON.parse(JSON.stringify(this.newSeccionales)); }
     if (this.list) { this.filteredList = JSON.parse(JSON.stringify(this.list)); }
   }
 
   @Watch('list', { immediate: true, deep: true })
-  handleListChange(value: Permiso[]) {
+  handleListChange(value: Seccional[]) {
     if (value) { this.filteredList = JSON.parse(JSON.stringify(value)); }
   }
 
-  @Watch('newPermissions', { immediate: true, deep: true })
-  handleNewPermissions(value: Array<number>) {
+  @Watch('newSeccionales', { immediate: true, deep: true })
+  handleNewSeccionales(value: Array<number>) {
     if (value) {
-      this.$set(this, 'tempPermissions', JSON.parse(JSON.stringify(this.newPermissions)));
-      this.$set(this, 'tempPermissions', [...new Set(this.tempPermissions)]);
-      this.filteredList.forEach((permission: Permiso) => {
-        this.$set(this.isPermissionSelected, `${permission.id}`, this.tempPermissions.includes(permission.id));
+      this.$set(this, 'tempSeccionales', JSON.parse(JSON.stringify(this.newSeccionales)));
+      this.$set(this, 'tempSeccionales', [...new Set(this.tempSeccionales)]);
+      this.filteredList.forEach((seccional: Seccional) => {
+        this.$set(this.isSeccionalSelected, `${seccional.id}`, this.tempSeccionales.includes(seccional.id));
       });
     }
   }
 
-  @Watch('tempPermissions', { immediate: true, deep: true })
-  handleTempPermissions(value: Array<number>) {
+  @Watch('tempSeccionales', { immediate: true, deep: true })
+  handleTempSeccionales(value: Array<number>) {
     if (value) {
-      this.filteredList.forEach((permission: Permiso) => {
-        this.$set(this.isPermissionSelected, `${permission.id}`, value.includes(permission.id));
+      this.filteredList.forEach((seccional: Seccional) => {
+        this.$set(this.isSeccionalSelected, `${seccional.id}`, value.includes(seccional.id));
       });
     }
   }
 
-  @Emit('update-permissions')
-  addPermissions() {
+  @Emit('update-seccionales')
+  addSeccionales() {
     this.showModal = false;
-    return this.tempPermissions;
+    return this.tempSeccionales;
   }
 
   @Watch('searchField')
-  filterPermissions(value: string) {
-    this.filteredList = this.list.filter((permission) => permission.nombre.toLowerCase().includes(value.toLowerCase()));
+  filterSeccionales(value: string) {
+    this.filteredList = this.list.filter((seccional) => seccional.nombre.toLowerCase().includes(value.toLowerCase()));
   }
 
   obtainValues(value: number | string) {
     if (typeof value === 'number') {
-      if (!this.tempPermissions.includes(value)) { this.tempPermissions.push(value); }
+      if (!this.tempSeccionales.includes(value)) { this.tempSeccionales.push(value); }
     }
   }
 
   removeValues(value: number | string) {
     if (typeof value === 'number') {
-      const index = this.tempPermissions.indexOf(value);
-      if (index > -1) { this.tempPermissions.splice(index, 1); }
+      const index = this.tempSeccionales.indexOf(value);
+      if (index > -1) { this.tempSeccionales.splice(index, 1); }
     }
   }
 
   cancel() {
-    this.$set(this, 'tempPermissions', JSON.parse(JSON.stringify(this.newPermissions)));
-    this.$set(this, 'tempPermissions', [...new Set(this.tempPermissions)]);
+    this.$set(this, 'tempSeccionales', JSON.parse(JSON.stringify(this.newSeccionales)));
+    this.$set(this, 'tempSeccionales', [...new Set(this.tempSeccionales)]);
     this.showModal = false;
   }
 }

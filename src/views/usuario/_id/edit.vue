@@ -53,17 +53,17 @@
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  vid="password"
+                  vid="contrasenia"
                   name="contraseña"
                   tag="div"
                   rules="min:8"
                 >
                   <input-group
-                    id="password"
-                    v-model="form.password"
+                    id="contrasenia"
+                    v-model="form.contrasenia"
                     label="Contraseña"
-                    type="password"
-                    name="password"
+                    type="contrasenia"
+                    name="contrasenia"
                     :error="errors[0]"
                   />
                 </ValidationProvider>
@@ -90,51 +90,13 @@
               <div class="col-span-6 sm:col-span-4">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  vid="phonenumber"
-                  name="teléfono"
-                  tag="div"
-                  rules="min:8"
-                >
-                  <input-mask
-                    id="phonenumber"
-                    v-model="form.phoneNumber"
-                    mask="####-####"
-                    label="Número de teléfono"
-                    name="phonenumber"
-                    :error="errors[0]"
-                  />
-                </ValidationProvider>
-              </div>
-
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  vid="altPhoneNumber"
-                  name="correo electrónico"
-                  tag="div"
-                  rules="min:8"
-                >
-                  <input-mask
-                    id="altphonenumber"
-                    v-model="form.altPhoneNumber"
-                    mask="####-####"
-                    label="Número de teléfono alterno"
-                    name="altPhoneNumber"
-                    :error="errors[0]"
-                  />
-                </ValidationProvider>
-              </div>
-
-              <div class="col-span-6 sm:col-span-4">
-                <ValidationProvider
-                  v-slot="{ errors }"
                   vid="rol"
                   name="rol"
                   tag="div"
                   rules="required"
                 >
                   <input-select
-                    v-model="form.roleId"
+                    v-model="form.rolId"
                     label="Rol"
                     placeholder="Seleccionar"
                     :options="rolList"
@@ -165,7 +127,7 @@
                 </ValidationProvider>
               </div>
               <div class="col-span-6 sm:col-span-4">
-                <toggle-selector v-model="form.status" label="Activo" />
+                <toggle-selector v-model="form.estadoPersona" label="Activo" />
               </div>
             </div>
           </div>
@@ -214,17 +176,15 @@ const SedeModel = namespace('sede');
 })
 export default class NewUsuarioPage extends Vue {
   form: Usuario = {
+    id: '',
     username: '',
     email: '',
-    phoneNumber: '',
-    altPhoneNumber: '',
     firstName: '',
     lastName: '',
     sedeId: 0,
-    password: '',
-    roleId: 0,
-    status: true,
-    subjectId: 0,
+    contrasenia: '',
+    rolId: 0,
+    estadoPersona: true,
   }
 
   breadcrumbs: Breadcrumb[] =[
@@ -239,12 +199,12 @@ export default class NewUsuarioPage extends Vue {
   @SedeModel.Action('list') fetchSedeList!: (vm: any) => ActionMethod;
   @UsuarioModel.State('isLoading') isUsuarioLoading!: boolean;
   @UsuarioModel.State('usuario') currentUsuario!: Usuario;
-  @UsuarioModel.Action('show') showUsuario!: ({ id, vm }: { id: number; vm: any }) => ActionMethod;
+  @UsuarioModel.Action('show') showUsuario!: ({ id, vm }: { id: string; vm: any }) => ActionMethod;
   @UsuarioModel.Action('update') updateUser!: ({ usuario, vm }: { usuario: any; vm: any }) => ActionMethod;
 
   async mounted() {
     try {
-      await this.showUsuario({ id: +this.$route.params.id, vm: this });
+      await this.showUsuario({ id: String(this.$route.params.id), vm: this });
       this.setCurrentUser();
       await this.fetchRolList(this);
       await this.fetchSedeList(this);
@@ -257,12 +217,12 @@ export default class NewUsuarioPage extends Vue {
     this.form = {
       ...this.currentUsuario,
     };
-    this.form.roleId = this.currentUsuario?.rol?.id ?? 0;
+    this.form.rolId = this.currentUsuario?.rol?.id ?? 0;
     this.form.sedeId = this.currentUsuario?.sede?.id ?? 0;
   }
 
   currentRole() {
-    return this.rolList.find((rol) => rol.id === this.form.roleId);
+    return this.rolList.find((rol) => rol.id === this.form.rolId);
   }
 
   async onSubmit() {

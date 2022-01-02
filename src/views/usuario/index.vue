@@ -153,12 +153,12 @@ export default class UsuarioPage extends Vue {
 
   // eslint-disable-next-line @typescript-eslint/camelcase
   filters: Filters = { search: '', per_page: '10', page: 1 }
-  selectedItem = 0
+  selectedItem = ''
   @UsuarioModel.State('usuarios') usuarios!: Usuario[]
   @UsuarioModel.State('meta') meta!: Meta
   @UsuarioModel.State('isLoading') isUsuarioLoading!: boolean
   @UsuarioModel.Action('fetch') fetchUsuarios!: ({ filters, vm }: { filters: Filters; vm: any }) => ActionMethod
-  @UsuarioModel.Action('destroy') deleteUsuario!: ({ id, vm }: { id: number; vm: any }) => ActionMethod
+  @UsuarioModel.Action('destroy') deleteUsuario!: ({ id, vm }: { id: string; vm: any }) => ActionMethod
   @RolModel.Action('list') fetchRolesList!: (vm: any) => ActionMethod
 
   async mounted() {
@@ -195,13 +195,13 @@ export default class UsuarioPage extends Vue {
     }
   }
 
-  deleteItem(id: number) {
+  deleteItem(id: string) {
     this.showDeleteModal = true;
     this.selectedItem = id;
   }
 
   async deleteComplete() {
-    if (this.selectedItem !== 0) {
+    if (this.selectedItem !== '') {
       await this.deleteUsuario({ id: this.selectedItem, vm: this });
       await this.fetchUsuarios({ filters: this.filters, vm: this });
 

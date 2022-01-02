@@ -355,6 +355,7 @@ const TipoVoluntarioModel = namespace('tipoVoluntario');
 })
 export default class NewVoluntarioPage extends Vue {
   form: Voluntario = {
+    id: '',
     documentoIdentificacion: '',
     tipoDocumentoPersona: '',
     fechaNacimiento: '',
@@ -427,7 +428,7 @@ export default class NewVoluntarioPage extends Vue {
     if (isValid) {
       try {
         await this.updateVoluntario({ voluntario: this.form, vm: this });
-        this.$router.push('/voluntarios');
+        this.$router.push('/voluntario');
       // eslint-disable-next-line no-empty
       } catch (e) {
       }

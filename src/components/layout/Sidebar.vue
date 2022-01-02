@@ -27,7 +27,7 @@
                 Voluntarios
               </router-link>
               <router-link
-                to="/"
+                to="/emergencia"
                 exact-active-class="text-blue-500 "
                 class="flex items-center px-2 pt-1 mb-6 text-sm font-medium leading-5 transition duration-150 ease-in-out rounded-md group text-dark-blue-700 hover:text-dark-blue-700 focus:outline-none"
               >
@@ -41,7 +41,21 @@
                 Emergencias
               </router-link>
               <router-link
-                to="/"
+                to="/emergenciaAsignada"
+                exact-active-class="text-blue-500 "
+                class="flex items-center px-2 pt-1 mb-6 text-sm font-medium leading-5 transition duration-150 ease-in-out rounded-md group text-dark-blue-700 hover:text-dark-blue-700 focus:outline-none"
+              >
+                <svg
+                  class="w-5 h-8 mr-3 transition duration-150 ease-in-out text-dark-blue-500 group-hover:text-dark-blue-500 group-focus:text-dark-blue-500"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                <path fillRule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clipRule="evenodd" />
+                </svg>
+                E. Asignadas
+              </router-link>
+              <router-link
+                to="/emergenciaRealizada"
                 exact-active-class="text-blue-500 "
                 class="flex items-center px-2 pt-1 mb-6 text-sm font-medium leading-5 transition duration-150 ease-in-out rounded-md group text-dark-blue-700 hover:text-dark-blue-700 focus:outline-none"
               >
@@ -55,7 +69,7 @@
                 E. Realizadas
               </router-link>
               <router-link
-                to="/"
+                to="/test"
                 exact-active-class="text-blue-500 "
                 class="flex items-center px-2 pt-1 mb-6 text-sm font-medium leading-5 transition duration-150 ease-in-out rounded-md group text-dark-blue-700 hover:text-dark-blue-700 focus:outline-none"
               >
@@ -113,20 +127,20 @@
                     class="my-2 text-gray-700"
                   >
                     <router-link
-                      to="/"
-                      exact-active-class="font-bold text-blue-600"
-                      active-class="font-bold text-blue-600"
-                      class="flex items-center w-full pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
-                    >
-                      Cursos
-                    </router-link>
-                    <router-link
                       to="/estado"
                       exact-active-class="font-bold text-blue-600"
                       active-class="font-bold text-blue-600"
                       class="flex items-center w-full pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
                     >
                       Estado
+                    </router-link>
+                    <router-link
+                      to="/rol"
+                      exact-active-class="font-bold text-blue-600"
+                      active-class="font-bold text-blue-600"
+                      class="flex items-center w-full pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
+                    >
+                      Rol
                     </router-link>
                     <router-link
                       to="/modalidad"
@@ -151,6 +165,14 @@
                       class="flex items-center w-full h-8 pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
                     >
                       Tipo Voluntario
+                    </router-link>
+                    <router-link
+                      to="/tipoEmergencia"
+                      exact-active-class="font-bold text-blue-600"
+                      active-class="font-bold text-blue-600"
+                      class="flex items-center w-full h-8 pt-1 mt-1 text-sm font-medium leading-5 transition-all duration-150 ease-in-out rounded-md group hover:text-blue-500 pl-11"
+                    >
+                      Tipo Emergencia
                     </router-link>
                   </div>
                 </transition>
