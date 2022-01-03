@@ -51,7 +51,6 @@ export const state: EmergenciaAsignadaState = {
     total: 1,
   },
   emergenciaAsignadas: [],
-  notes: {},
 };
 
 export const emergenciaAsignada: Module<EmergenciaAsignadaState, RootState> = {

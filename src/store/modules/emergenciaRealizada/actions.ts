@@ -19,6 +19,32 @@ export const actions: ActionTree<EmergenciaRealizadaState, RootState> = {
       commit('toggleLoading', false);
     }
   },
+  showReporteFechaUbicacion: async ({ commit }: EmergenciaRealizadaActionContext, {
+    id, fechaInicio, fechaFin, vm,
+  }: { id: string; fechaInicio: string; fechaFin: string; vm: any }) => {
+    try {
+      commit('toggleLoading', true);
+      const { data } = await EmergenciaRealizadaService.showReporteFechaUbicacion(id, fechaInicio, fechaFin);
+      commit('setReporteList', data);
+    } catch ({ response }) {
+      vm.$snotify.error(response.data.message);
+    } finally {
+      commit('toggleLoading', false);
+    }
+  },
+  showReporteFechaTipo: async ({ commit }: EmergenciaRealizadaActionContext, {
+    id, fechaInicio, fechaFin, vm,
+  }: { id: string; fechaInicio: string; fechaFin: string; vm: any }) => {
+    try {
+      commit('toggleLoading', true);
+      const { data } = await EmergenciaRealizadaService.showReporteFechaTipo(id, fechaInicio, fechaFin);
+      commit('setReporteList', data);
+    } catch ({ response }) {
+      vm.$snotify.error(response.data.message);
+    } finally {
+      commit('toggleLoading', false);
+    }
+  },
   show: async ({ commit }: EmergenciaRealizadaActionContext, { id, vm }: { id: string; vm: any }) => {
     try {
       commit('toggleLoading', true);

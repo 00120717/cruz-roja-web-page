@@ -2,14 +2,14 @@ import { mapRoutes } from '@/router/utils';
 
 export default [
   /*
-                |--------------------------------------------------------------------------
-                | Public Routes
-                |--------------------------------------------------------------------------
-                |
-                | Here are registered routes for public access. These routes does not require
-                | authentication.
-                |
-                */
+                        |--------------------------------------------------------------------------
+                        | Public Routes
+                        |--------------------------------------------------------------------------
+                        |
+                        | Here are registered routes for public access. These routes does not require
+                        | authentication.
+                        |
+                        */
   ...mapRoutes({ onlyWhenLoggedOut: false, layout: 'default' }, [{
     path: '/',
     name: 'HomePage',
@@ -54,11 +54,6 @@ export default [
     path: '/voluntario/:id/edit',
     name: 'voluntario-id-edit',
     component: () => import(/* webpackChunkName: "voluntario-id-edit" */ '@/views/voluntario/_id/edit.vue'),
-  },
-  {
-    path: '/voluntario/:id/notes',
-    name: 'voluntario-id-notes',
-    component: () => import(/* webpackChunkName: "voluntario-id-edit" */ '@/views/voluntario/_id/notes.vue'),
   },
   {
     path: '/rol',
@@ -329,12 +324,44 @@ export default [
     component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
   },
   {
-    path: '/test/:id/:fechaInicio',
-    name: 'test',
+    path: '/reporte/',
+    name: 'reporte',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "test" */ '@/views/test.vue'),
+    component: () => import(/* webpackChunkName: "reporte" */ '@/views/reportes/index.vue'),
+  },
+  {
+    path: '/reporte-emergencia-ubicacion-fecha/:id/:fechaInicio/:fechaFin',
+    name: 'reporte-emergencia-ubicacion-fecha-params',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "reporte-emergencia-ubicacion-fecha-params" */ '@/views/reportes/_id/reporteEmergenciaUbicacionFecha.vue'),
+  },
+  {
+    path: '/reporte-emergencia-tipo-fecha/:id/:fechaInicio/:fechaFin',
+    name: 'reporte-emergencia-tipo-fecha-params',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "reporte-emergencia-tipo-fecha-params" */ '@/views/reportes/_id/reporteEmergenciaTipoFecha.vue'),
+  },
+  {
+    path: '/reporte-voluntario-cuerpo-filial',
+    name: 'reporte-voluntario-cuerpo-filial',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "reporte-voluntario-cuerpo-filial" */ '@/views/reportes/_id/reporteVoluntarioCuerpoFilial.vue'),
+  },
+  {
+    path: '/reporte-voluntario-sede/',
+    name: 'reporte-voluntario-sede',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "reporte-voluntario-sede" */ '@/views/reportes/_id/reporteVoluntarioSede.vue'),
   },
   ]),
   ...mapRoutes({ onlyWhenLoggedOut: true, layout: 'auth' }, [{

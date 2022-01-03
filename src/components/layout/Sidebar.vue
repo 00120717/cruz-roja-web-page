@@ -69,7 +69,7 @@
                 E. Realizadas
               </router-link>
               <router-link
-                to="/test"
+                to="/reporte"
                 exact-active-class="text-blue-500 "
                 class="flex items-center px-2 pt-1 mb-6 text-sm font-medium leading-5 transition duration-150 ease-in-out rounded-md group text-dark-blue-700 hover:text-dark-blue-700 focus:outline-none"
               >

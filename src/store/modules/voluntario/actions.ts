@@ -23,7 +23,29 @@ export const actions: ActionTree<VoluntarioState, RootState> = {
       const params = { ...filters };
       const { data } = await VoluntarioService.fetch({ params });
       const { data: voluntarios, ...rest } = data;
-      commit('setVoluntarios', { voluntarios, meta: rest });
+      commit('setReporteList', { voluntarios, meta: rest });
+    } catch ({ response }) {
+      vm.$snotify.error(response.data.message);
+    } finally {
+      commit('toggleLoading', false);
+    }
+  },
+  showReporteSede: async ({ commit }: VoluntarioActionContext, vm: any) => {
+    try {
+      commit('toggleLoading', true);
+      const { data } = await VoluntarioService.showReporteSede();
+      commit('setReporteList', data);
+    } catch ({ response }) {
+      vm.$snotify.error(response.data.message);
+    } finally {
+      commit('toggleLoading', false);
+    }
+  },
+  showReporteCuerpoFilial: async ({ commit }: VoluntarioActionContext, vm: any) => {
+    try {
+      commit('toggleLoading', true);
+      const { data } = await VoluntarioService.showReporteCuerpoFilial();
+      commit('setVoluntarios', data);
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
     } finally {

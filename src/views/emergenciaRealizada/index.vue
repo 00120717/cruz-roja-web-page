@@ -66,12 +66,12 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ emergenciaRealizada.fechaRealizada }}
+              {{ formattedDate(emergenciaRealizada.fechaRealizada) }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ emergenciaRealizada.fechaHoraLlamada }}
+              {{ formattedHour(emergenciaRealizada.fechaHoraLlamada) }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
@@ -91,7 +91,7 @@
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
             >
-              {{ emergenciaRealizada.emergenciaPaciente && emergenciaRealizada.emergenciaPaciente ? emergenciaRealizada.emergenciaPaciente.length : '0' }}
+              {{ emergenciaRealizada.voluntarios && emergenciaRealizada.voluntarios ? emergenciaRealizada.voluntarios.length : '0' }}
             </td>
             <td
               class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
@@ -234,6 +234,20 @@ export default class EmergenciaPage extends Vue {
 
   setItems(value: Array<string | number>) {
     this.selectedItems = value;
+  }
+
+  formattedDate(date: string) {
+    if (date) {
+      const newDate = new Date(date);
+      return `${newDate.toISOString().substring(8, 10)}/${newDate.toISOString().substring(5, 7)}/${newDate.toISOString().substring(0, 4)}`;
+    }
+  }
+
+  formattedHour(date: string) {
+    if (date) {
+      const newDate = new Date(date);
+      return `${newDate.toISOString().substring(11, 16)}`;
+    }
   }
 
   selectAllCurrent(value: boolean) {

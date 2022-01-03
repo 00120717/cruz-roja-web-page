@@ -71,7 +71,6 @@ export const state: EmergenciaRealizadaState = {
     total: 1,
   },
   emergenciaRealizadas: [],
-  notes: {},
 };
 
 export const emergenciaRealizada: Module<EmergenciaRealizadaState, RootState> = {

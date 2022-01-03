@@ -146,7 +146,7 @@ export default class RolPage extends Vue {
       key: 'type',
     },
     {
-      name: 'Cantidad de permisoss',
+      name: 'Cantidad de permisos',
       key: 'permisos',
     },
   ]

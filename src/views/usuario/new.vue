@@ -101,7 +101,7 @@
                     placeholder="Seleccionar"
                     :options="rolList"
                     name="rol"
-                    display-name="name"
+                    display-name="nombre"
                     :error="errors[0]"
                   />
                 </ValidationProvider>
@@ -121,7 +121,7 @@
                     placeholder="Seleccionar"
                     :options="sedeList"
                     name="sede"
-                    display-name="name"
+                    display-name="nombre"
                     :error="errors[0]"
                   />
                 </ValidationProvider>

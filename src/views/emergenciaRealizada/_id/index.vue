@@ -2,8 +2,31 @@
   <main class="pb-40">
     <page-heading title="Detalle Emergencia" back-route="/emergenciaRealizada" :breadcrumbs="breadcrumbs">
       <template slot="actions">
+        <custom-button
+          title="Descargar"
+          color="secondary"
+          size="small"
+          @click="downloadWithCSS2"
+          >
+          <template #icon>
+            <svg
+                class="w-4 h-4 mr-2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                >
+                <path
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
+            </svg>
+          </template>
+        </custom-button>
       </template>
     </page-heading>
+    <div ref="contentPdf" id="contentPdf">
     <section v-if="emergenciaRealizada">
       <div class="overflow-hidden bg-white border border-gray-100 shadow sm:rounded-lg">
         <div class="px-4 py-5 border-b border-gray-100 sm:px-6">
@@ -110,7 +133,19 @@
             </div>
           </dl>
         </div>
-         <simple-table-list
+      </div>
+    </section>
+    <section>
+    <div class="overflow-hidden bg-white border border-gray-100 shadow sm:rounded-lg mt-4">
+    <div class="px-4 py-5 border-b border-gray-100 sm:px-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900">
+        Pacientes Atendidos
+      </h3>
+      <p class="max-w-2xl mt-1 text-sm leading-5 text-gray-500">
+        Información general de los pacientes atendidos
+      </p>
+    </div>
+    <simple-table-list
             :headers="headers"
             >
             <template slot="items">
@@ -147,12 +182,20 @@
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
-                    {{ emergenciaPacienteObject.horaSalida }}
+                    <div
+                      v-for="(vehiculoAux, index) in emergenciaPacienteObject.vehiculoXEmergenciaPaciente"
+                      :key="index"
+                      class="inline-flex px-3 py-2 mb-2 mr-2 text-xs font-semibold leading-5 text-green-700 bg-green-100 rounded-full"
+                    >{{ formattedHour(vehiculoAux.horaSalida) }}</div>
                   </td>
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
-                    {{ emergenciaPacienteObject.horaRegreso }}
+                    <div
+                      v-for="(vehiculoAux, index) in emergenciaPacienteObject.vehiculoXEmergenciaPaciente"
+                      :key="index"
+                      class="inline-flex px-3 py-2 mb-2 mr-2 text-xs font-semibold leading-5 text-green-700 bg-green-100 rounded-full"
+                    >{{ formattedHour(vehiculoAux.horaRegreso) }}</div>
                   </td>
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
@@ -160,47 +203,47 @@
                     {{ emergenciaPacienteObject.paciente.persona.genero == 'M'? 'Masculino' : 'Femenino' }}
                   </td>
                   <td
-                    class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
+                    class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
                     <active-indicator :status="Boolean(emergenciaPacienteObject.paciente.identificado)" />
                   </td>
                   <td
-                    class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
+                    class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
-                    <active-indicator :status="Boolean(emergenciaPacienteObject.paciente.estadoPersona)" />
+                    <active-indicator :status="Boolean(emergenciaPacienteObject.paciente.persona.estadoPersona)" />
                   </td>
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
-                    <span
+                    <div
                       v-for="(vehiculoAux, index) in emergenciaPacienteObject.vehiculoXEmergenciaPaciente"
                       :key="index"
                       class="inline-flex px-3 py-2 mb-2 mr-2 text-xs font-semibold leading-5 text-green-700 bg-green-100 rounded-full"
-                    >{{ vehiculoAux.vehiculo.nombreVehiculo }}</span>
+                    >{{ vehiculoAux.vehiculo.nombreVehiculo }}</div>
                   </td>
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
-                    <span
+                    <div
                       v-for="(voluntarioAux, index) in emergenciaPacienteObject.vehiculoXEmergenciaPaciente"
                       :key="index"
                       class="inline-flex px-3 py-2 mb-2 mr-2 text-xs font-semibold leading-5 text-green-700 bg-green-100 rounded-full"
-                    >{{ voluntarioAux.voluntario.nombreCompuesto }}</span>
+                    >{{ voluntarioAux.voluntario.persona.firstName }}</div>
                   </td>
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
-                    <span
+                    <div
                       v-for="(hospitalAux, index) in emergenciaPacienteObject.vehiculoXEmergenciaPaciente"
                       :key="index"
                       class="inline-flex px-3 py-2 mb-2 mr-2 text-xs font-semibold leading-5 text-green-700 bg-green-100 rounded-full"
-                    >{{ hospitalAux.hospital.nombreHospital }}</span>
+                    >{{ hospitalAux.hospital.nombreHospital }}</div>
                   </td>
                </table-item>
             </template>
-         </simple-table-list>
-      </div>
+         </simple-table-list></div>
     </section>
+    </div>
     <loading :active="isEmergenciaLoading" :is-full-page="false" />
   </main>
 </template>
@@ -209,9 +252,10 @@
 import { Vue, Component } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { ActionMethod } from 'vuex';
+import jspdf from 'jspdf';
 import PageHeading from '@/components/layout/PageHeading.vue';
 import CustomButton from '@/components/ui/CustomButton.vue';
-import TableList from '@/components/ui/TableList.vue';
+import SimpleTableList from '@/components/ui/SimpleTableList.vue';
 import TableItem from '@/components/ui/Table/TableItem.vue';
 import ActiveIndicator from '@/components/ui/ActiveIndicator.vue';
 import Loading from '@/components/ui/Loading.vue';
@@ -228,7 +272,7 @@ const EmergenciaRealizadaModel = namespace('emergenciaRealizada');
     PageHeading,
     CustomButton,
     ActiveIndicator,
-    TableList,
+    SimpleTableList,
     TableItem,
     Loading,
   },
@@ -299,8 +343,51 @@ export default class ShowEmergenciaRealizadaPage extends Vue {
     }
   }
 
+  formattedHour(date: string) {
+    if (date) {
+      const newDate = new Date(date);
+      return `${newDate.toISOString().substring(11, 16)}`;
+    }
+  }
+
   redirectBack() {
     this.$router.push('/emergenciaRealizada');
+  }
+
+  downloadWithCSS2() {
+    // eslint-disable-next-line new-cap
+    const pdf = new jspdf('l', 'px', 'a2');
+    const source = document.getElementById('contentPdf');
+
+    const margins = {
+      top: 80,
+      bottom: 60,
+      left: 40,
+      width: 522,
+    };
+
+    const specialElementHandlers = {
+      // eslint-disable-next-line func-names
+      '#bypassme': function (element, renderer) {
+        return true;
+      },
+    };
+
+    const nombre = `${this.emergenciaRealizada.id}.pdf`;
+    pdf.fromHTML(
+      source,
+      margins.left,
+      margins.top,
+      {
+        width: margins.width,
+        elementHandlers: specialElementHandlers,
+      },
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      (dispose) => {
+        pdf.save(nombre);
+      },
+      margins,
+    );
   }
 }
 </script>

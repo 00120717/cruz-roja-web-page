@@ -33,7 +33,6 @@ export const state: PacienteState = {
     total: 1,
   },
   pacientes: [],
-  notes: {},
 };
 
 export const paciente: Module<PacienteState, RootState> = {

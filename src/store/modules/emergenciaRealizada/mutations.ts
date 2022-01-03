@@ -7,6 +7,9 @@ export const mutations: MutationTree<EmergenciaRealizadaState> = {
     state.emergenciaRealizadas = emergenciaRealizadas;
     state.meta = meta;
   },
+  setReporteList(state, emergenciaRealizadas: EmergenciaRealizada[]) {
+    state.emergenciaRealizadas = emergenciaRealizadas;
+  },
   setEmergenciaRealizada(state, emergenciaRealizada: EmergenciaRealizada) {
     state.emergenciaRealizada = emergenciaRealizada;
   },

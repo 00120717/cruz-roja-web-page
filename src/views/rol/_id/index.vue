@@ -3,7 +3,7 @@
     <page-heading title="Detalle rol" back-route="/rol" :breadcrumbs="breadcrumbs">
       <template slot="actions">
         <custom-button
-          v-if="role.tipo !== 'superadmin' && role.tipo !== 'admin'"
+          v-if="rol.tipo !== 'superadmin' && rol.tipo !== 'admin'"
           title="Editar"
           color="white"
           size="small"
@@ -76,7 +76,7 @@
                 Tipo
               </dt>
               <dd class="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ typesList.find((type) => type.id === rol.type).nombre || 'N/A' }}
+                {{ typesList.find((type) => type.id === rol.tipo).name || 'N/A' }}
               </dd>
             </div>
             <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

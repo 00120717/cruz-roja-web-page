@@ -196,5 +196,4 @@ export default class ShowPacientePage extends Vue {
   }
 }
 
-// :to="`/PacienteModel/${paciente.id}/notes`"
 </script>
