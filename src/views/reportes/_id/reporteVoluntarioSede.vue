@@ -33,7 +33,7 @@
             >
             <template slot="items">
                <table-item
-                  v-for="(voluntario, index) in voluntarios"
+                  v-for="(voluntario, index) in voluntarioList"
                   :key="index"
                   :item="voluntario.id"
                   :show="false"
@@ -200,13 +200,13 @@ headers: Array<object> = [
   },
 ]
 
-  @VoluntarioModel.State('voluntarios') voluntarios!: Voluntario[];
+  @VoluntarioModel.State('voluntarioList') voluntarioList!: Voluntario[];
   @VoluntarioModel.State('isLoading') isVoluntarioLoading!: boolean;
   @VoluntarioModel.Action('showReporteSede') showReporteSede!: (vm: any) => ActionMethod;
 
   async mounted() {
     await this.showReporteSede(this);
-    console.log(this.voluntarios);
+    console.log(this.voluntarioList);
   }
 
   formattedDate(date: string) {
@@ -242,7 +242,7 @@ headers: Array<object> = [
       },
     };
 
-    const nombre = `${this.voluntarios.length}.pdf`;
+    const nombre = `${this.voluntarioList.length}.pdf`;
     pdf.fromHTML(
       source,
       margins.left,

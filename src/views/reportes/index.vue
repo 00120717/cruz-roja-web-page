@@ -18,6 +18,44 @@
                 Emergencias por Ubicacion o por Tipo de Emergencia
             </p>
           </div>
+          <div class="col-span-6 sm:col-span-4">
+          <div class="flex w-full justify-between">
+              <label
+                for="masculino"
+                class="block text-sm font-medium leading-5 text-gray-700"
+                >Seleccion Tipo Reporte</label>
+          </div>
+          <div class="relative mt-1 rounded-md shadow-sm">
+              <div class="flex items-center mb-2">
+                <input
+                    id="masculino"
+                    v-model="form.lista"
+                    label="Ubicacion"
+                    name="lista"
+                    value="ubicacion"
+                    class="w-4 h-4 text-blue-600 transition duration-150 ease-in-out form-radio"
+                    type="radio"
+                    />
+                <label for="masculino" class="w-full ml-3">
+                <span class="block text-sm font-medium leading-5 text-gray-700 truncate ...">{{ "Ubicacion" | truncate(75)}}</span>
+                </label>
+              </div>
+              <div class="flex items-center mb-2">
+                <input
+                    id="femenino"
+                    v-model="form.lista"
+                    label="Femenino"
+                    name="lista"
+                    value="tipoEmergencia"
+                    class="w-4 h-4 text-blue-600 transition duration-150 ease-in-out form-radio"
+                    type="radio"
+                    />
+                <label for="femenino" class="w-full ml-3">
+                <span class="block text-sm font-medium leading-5 text-gray-700 truncate ...">{{ "Tipo Emergencia" | truncate(75)}}</span>
+                </label>
+              </div>
+              </div>
+          </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
               <div class="col-span-6 sm:col-span-4">
                     <input-select
@@ -165,7 +203,7 @@ export default class ReportePage extends Vue {
     tipoEmergenciaId: 0,
     fechaInicio: '',
     fechaFin: '',
-    lista: '',
+    lista: 'ubicacion',
   };
 
   selectedItems: Array<string | number> = []

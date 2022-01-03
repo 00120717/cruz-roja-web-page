@@ -10,8 +10,8 @@ export const mutations: MutationTree<VoluntarioState> = {
   setVoluntario(state, voluntario: Voluntario) {
     state.voluntario = voluntario;
   },
-  setReporteList(state, voluntarios: Voluntario[]) {
-    state.voluntarios = voluntarios;
+  setReporteList(state, voluntarioList: Voluntario[]) {
+    state.voluntarioList = voluntarioList;
   },
   setVoluntarioList(state, voluntarioList: Voluntario[]) {
     state.voluntarioList = voluntarioList;

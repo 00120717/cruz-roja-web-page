@@ -23,7 +23,7 @@ export const actions: ActionTree<VoluntarioState, RootState> = {
       const params = { ...filters };
       const { data } = await VoluntarioService.fetch({ params });
       const { data: voluntarios, ...rest } = data;
-      commit('setReporteList', { voluntarios, meta: rest });
+      commit('setVoluntarios', { voluntarios, meta: rest });
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
     } finally {
@@ -45,7 +45,7 @@ export const actions: ActionTree<VoluntarioState, RootState> = {
     try {
       commit('toggleLoading', true);
       const { data } = await VoluntarioService.showReporteCuerpoFilial();
-      commit('setVoluntarios', data);
+      commit('setReporteList', data);
     } catch ({ response }) {
       vm.$snotify.error(response.data.message);
     } finally {
