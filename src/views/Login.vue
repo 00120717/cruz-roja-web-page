@@ -167,7 +167,7 @@ export default class SignInPage extends Vue {
   }
 
   redirectBack() {
-    this.$router.push('/login');
+    this.showConfirmationModal = false;
   }
 }
 </script>
