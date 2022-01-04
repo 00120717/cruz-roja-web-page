@@ -172,12 +172,12 @@
                   <td
                      class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                      >
-                     {{ emergenciaPacienteObject.paciente.persona.firstName }}
+                     {{ emergenciaPacienteObject.paciente ? emergenciaPacienteObject.paciente.persona.firstName : '' }}
                   </td>
                   <td
                      class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                      >
-                     {{ emergenciaPacienteObject.paciente.persona.lastName }}
+                     {{ emergenciaPacienteObject.paciente ? emergenciaPacienteObject.paciente.persona.lastName : '' }}
                   </td>
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
@@ -200,17 +200,17 @@
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
-                    {{ emergenciaPacienteObject.paciente.persona.genero == 'M'? 'Masculino' : 'Femenino' }}
+                    {{ emergenciaPacienteObject.paciente ? emergenciaPacienteObject.paciente.persona.genero == 'M'? 'Masculino' : 'Femenino' : '' }}
                   </td>
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
-                    <active-indicator :status="Boolean(emergenciaPacienteObject.paciente.identificado)" />
+                    <active-indicator :status="Boolean( emergenciaPacienteObject.paciente ? emergenciaPacienteObject.paciente.identificado : false)" />
                   </td>
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
-                    <active-indicator :status="Boolean(emergenciaPacienteObject.paciente.persona.estadoPersona)" />
+                    <active-indicator :status="Boolean( emergenciaPacienteObject.paciente ? false: true)" />
                   </td>
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
@@ -314,7 +314,7 @@ export default class ShowEmergenciaRealizadaPage extends Vue {
       key: 'identificado',
     },
     {
-      name: 'Estado Paciente',
+      name: 'Vehiculo Vacio',
       key: 'estadoPersona',
     },
     {

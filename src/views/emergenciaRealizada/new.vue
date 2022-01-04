@@ -63,7 +63,7 @@
                            tag="div"
                            rules="required"
                            >
-                           <input-group v-model="form.fechaHoraLlamada" label="Hora llamada" name="fechaHoraLlamada" :error="errors[0]" />
+                           <input-group v-model="form.fechaHoraLlamada" label="Realizada Hora llamada" name="fechaHoraLlamada" :error="errors[0]" />
                         </ValidationProvider>
                      </div>
                      <div class="col-span-6 sm:col-span-4">
@@ -224,17 +224,12 @@
       </form-section>
       <form-section>
       <div class="md:grid md:grid-cols-3 md:gap-8 ">
+        <div v-if="!vacioVehiculo">
         <div class="col-span-6 sm:col-span-4">
           <input-group v-model="firstName" label="Nombres" name="firstName" />
         </div>
         <div class="col-span-6 sm:col-span-4">
           <input-group v-model="lastName" label="Apellidos" name="lastname"/>
-        </div>
-        <div class="col-span-6 sm:col-span-4">
-          <input-group v-model="horaSalida" label="Hora Salida Vehiculo" name="horaSalida"/>
-        </div>
-        <div class="col-span-6 sm:col-span-4">
-          <input-group v-model="horaRegreso" label="Hora Regreso Vehiculo" name="horaRegreso"/>
         </div>
         <div class="col-span-6 sm:col-span-4">
           <div class="flex w-full justify-between">
@@ -277,8 +272,21 @@
         <div class="col-span-6 sm:col-span-4">
           <toggle-selector v-model="identificado" label="Paciente Identificado" />
         </div>
+        </div>
         <div class="col-span-6 sm:col-span-4">
-          <toggle-selector v-model="estadoPersona" label="Estado Paciente" />
+          <input-group v-model="fechaSalida" label="Fecha Salida Vehiculo" name="horaSalida"/>
+        </div>
+        <div class="col-span-6 sm:col-span-4">
+          <input-group v-model="horaSalida" label="Hora Salida Vehiculo" name="horaRegreso"/>
+        </div>
+        <div class="col-span-6 sm:col-span-4">
+          <input-group v-model="fechaRegreso" label="Fecha Regreso Vehiculo" name="horaSalida"/>
+        </div>
+        <div class="col-span-6 sm:col-span-4">
+          <input-group v-model="horaRegreso" label="Hora Regreso Vehiculo" name="horaRegreso"/>
+        </div>
+        <div class="col-span-6 sm:col-span-4">
+          <toggle-selector v-model="vacioVehiculo" label="Vehiculo Vacio Regreso" />
         </div>
         <div class="col-span-6 sm:col-span-4">
           <input-select
@@ -333,7 +341,7 @@
                   :item="vehiculoXEmergenciaPaciente.id"
                   :selected="selectedItems"
                   :show="false"
-                  :edit="false"
+                  :edit="true"
                   @delete="deleteComplete"
                   >
                   <td
@@ -373,14 +381,14 @@
                     {{ vehiculoXEmergenciaPaciente.genero == 'M'? 'Masculino' : 'Femenino' }}
                   </td>
                   <td
-                    class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
+                    class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
-                    <active-indicator :status="Boolean(vehiculoXEmergenciaPaciente.identificado)" />
+                    {{ vehiculoXEmergenciaPaciente.identificado == true ? 'Si' : 'No' }}
                   </td>
                   <td
-                    class="px-6 py-4 text-sm leading-5 text-center text-gray-500 whitespace-no-wrap inline-flex justify-center items-center"
+                    class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
-                    <active-indicator :status="Boolean(vehiculoXEmergenciaPaciente.estadoPersona)" />
+                    {{ vehiculoXEmergenciaPaciente.vacio == true? 'Si' : 'No' }}
                   </td>
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
@@ -433,6 +441,7 @@ import TableItem from '@/components/ui/Table/TableItem.vue';
 import InputGroup from '@/components/ui/InputGroup.vue';
 import SeccionalesModal from '@/components/general/SeccionalesModal.vue';
 import VoluntariosModal from '@/components/general/VoluntariosModal.vue';
+import ActiveIndicator from '@/components/ui/ActiveIndicator.vue';
 
 const EmergenciaRealizadaModel = namespace('emergenciaRealizada');
 const EmergenciaModel = namespace('emergencia');
@@ -455,6 +464,7 @@ const VehiculoModel = namespace('vehiculo');
     DeleteItem,
     ConfirmationModal,
     TableItem,
+    ActiveIndicator,
   },
 })
 export default class NewEmergenciaRealizadaPage extends Vue {
@@ -483,6 +493,9 @@ export default class NewEmergenciaRealizadaPage extends Vue {
   horaSalida = ''
   horaRegreso = ''
   nextTodoId = 1
+  vacioVehiculo = false
+  fechaSalida: '';
+  fechaRegreso: '';
 
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
@@ -520,7 +533,7 @@ export default class NewEmergenciaRealizadaPage extends Vue {
       key: 'identificado',
     },
     {
-      name: 'Estado Paciente',
+      name: 'Vehiculo Vacio',
       key: 'estadoPersona',
     },
     {
@@ -609,7 +622,8 @@ export default class NewEmergenciaRealizadaPage extends Vue {
     const voluntario = (this.voluntarioList.find((voluntarioA) => voluntarioA.id === this.voluntarioId));
     const vehiculo = (this.vehiculoList.find((vehiculoA) => vehiculoA.id === this.vehiculoId));
     const hospital = (this.hospitalList.find((hospitalA) => hospitalA.id === this.hospitalId));
-    if (voluntario && vehiculo && hospital) {
+    const { vacioVehiculo } = this;
+    if (voluntario && vehiculo && hospital && !vacioVehiculo) {
       this.newVehiculoPacienteVoluntario.push({
         id: this.nextTodoId,
         firstName: this.firstName,
@@ -620,6 +634,8 @@ export default class NewEmergenciaRealizadaPage extends Vue {
         tipoDocumentoPersona: this.tipoDocumentoPersona,
         menorEdad: this.menorEdad,
         identificado: this.identificado,
+        fechaSalida: this.fechaSalida,
+        fechaRegreso: this.fechaRegreso,
         horaSalida: this.horaSalida,
         horaRegreso: this.horaRegreso,
         voluntarioId: this.voluntarioId,
@@ -628,8 +644,32 @@ export default class NewEmergenciaRealizadaPage extends Vue {
         vehiculo,
         hospitalId: this.hospitalId,
         hospital,
+        vacio: false,
       });
       this.nextTodoId += 1;
+    } else {
+      this.newVehiculoPacienteVoluntario.push({
+        id: this.nextTodoId,
+        firstName: '',
+        lastName: '',
+        genero: '',
+        estadoPersona: false,
+        documentoIdentificacion: '',
+        tipoDocumentoPersona: '',
+        menorEdad: false,
+        identificado: false,
+        fechaSalida: this.fechaSalida,
+        fechaRegreso: this.fechaRegreso,
+        horaSalida: this.horaSalida,
+        horaRegreso: this.horaRegreso,
+        voluntarioId: this.voluntarioId,
+        voluntario,
+        vehiculoId: this.vehiculoId,
+        vehiculo,
+        hospitalId: this.hospitalId,
+        hospital,
+        vacio: true,
+      });
     }
   }
 

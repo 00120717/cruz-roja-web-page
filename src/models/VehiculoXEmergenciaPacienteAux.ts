@@ -16,4 +16,7 @@ interface VehiculoXEmergenciaPacienteAux {
   vehiculo?: Vehiculo;
   hospitalId?: number;
   hospital?: Hospital;
+  fechaSalida: string;
+  fechaRegreso: string;
+  vacio?: true;
 }
