@@ -91,12 +91,13 @@
                 </div>
 
                 <div class="text-sm leading-5">
-                  <router-link
-                    to="/reset"
-                    class="font-medium text-blue-600 transition duration-150 ease-in-out hover:text-blue-500 focus:outline-none focus:underline"
-                  >
-                    ¿Olvidaste tu contraseña?
-                  </router-link>
+                <custom-button
+                  title="¿Olvidaste tu contraseña?"
+                  color="secondary"
+                  size="small"
+                  @click="showConfirmationModal = true"
+                >
+                </custom-button>
                 </div>
               </div>
 
@@ -120,6 +121,12 @@
       </div>
     </div>
     <vue-snotify></vue-snotify>
+    <confirmation-modal
+      :show="showConfirmationModal"
+      title="Funcionalidad no implementada version actual"
+      @update:show="showConfirmationModal = false"
+      @action="redirectBack"
+    />
   </div>
 </template>
 
@@ -129,14 +136,17 @@ import { Action, State } from 'vuex-class';
 import InputGroup from '@/components/ui/InputGroup.vue';
 import CustomButton from '@/components/ui/CustomButton.vue';
 import axios from '@/services/core/http';
+import ConfirmationModal from '@/components/general/ConfirmationModal.vue';
 
 @Component({
   components: {
     InputGroup,
     CustomButton,
+    ConfirmationModal,
   },
 })
 export default class SignInPage extends Vue {
+  showConfirmationModal = false
   form = {
     username: '',
     password: '',
@@ -154,6 +164,10 @@ export default class SignInPage extends Vue {
     if (isValid) {
       await this.login({ credentials: this.form, vm: this });
     }
+  }
+
+  redirectBack() {
+    this.$router.push('/login');
   }
 }
 </script>
