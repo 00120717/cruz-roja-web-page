@@ -1,11 +1,13 @@
 <template>
-  <nav class="flex-shrink-0 bg-blue-600">
+  <nav class="flex-shrink-0 bg-blue-900">
     <div class="px-2 mx-auto sm:px-4 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="flex items-center px-2 lg:px-0 xl:w-64">
-          <div class="flex-shrink-0">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Emblema_Cruz_Roja.jpg"
+      class="object-fill object-center w-10 h-10">
+          <div class="flex-shrink-0 text-blue-900">
             <router-link to="/">
-              INICIO
+                 .
             </router-link>
           </div>
         </div>

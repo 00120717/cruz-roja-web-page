@@ -101,12 +101,12 @@
                 </div>
               </div>
 
-              <div class="mt-6">
+              <div class="mt-6 ">
                 <span class="block w-full rounded-md shadow-sm">
                   <custom-button
                     type="submit"
                     title="Ingresar"
-                    class="w-full py-3 text-lg"
+                    class="w-full py-3 text-lg bg-blue-900"
                     :loading="isLoading"
                   />
                 </span>
@@ -117,13 +117,15 @@
       </div>
     </div>
     <div class="relative flex-1 hidden w-0 bg-gray-100 lg:block">
-      <div class="w-full h-screen bg-blue-600">
+      <div class="w-full h-screen bg-blue-900">
+      <img src="https://cruzrojasal.org.sv/wp-content/uploads/2016/10/logo-cruz-roja-interno.jpg"
+      class="object-fill object-center w-full h-screen">
       </div>
     </div>
     <vue-snotify></vue-snotify>
     <confirmation-modal
       :show="showConfirmationModal"
-      title="Funcionalidad no implementada version actual"
+      title="Pendiente de implementar según politicas de la institución"
       @update:show="showConfirmationModal = false"
       @action="redirectBack"
     />

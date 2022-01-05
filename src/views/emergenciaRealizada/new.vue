@@ -98,7 +98,7 @@
                       <input-group
                           id="emergenciaFinal"
                           v-model="form.comentario"
-                          label="Comentario"
+                          label="Comentario Emisor"
                           name="comentario"
                           />
                      </div>

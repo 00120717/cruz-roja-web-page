@@ -85,7 +85,7 @@
                            vid="voluntarioCodigoCarnet"
                            name="voluntarioCodigoCarnet"
                            tag="div"
-                           rules="min:8"
+                           rules="min:5"
                            >
                            <input-group
                               id="voluntarioCodigoCarnet"

@@ -2,8 +2,7 @@
   <div class>
     <MobileSidebar :show="show" @emit-close-sidebar="closeSidebar" />
     <div
-      class="hidden h-full border-r border-gray-200 md:flex md:flex-shrink-0"
-    >
+      class="hidden h-full border-r border-gray-200 md:flex md:flex-shrink-0">
       <div class="flex flex-col w-64">
         <div
           class="flex flex-col flex-grow px-4 pt-3 pb-4 overflow-y-auto bg-white border-gray-200"
@@ -38,7 +37,7 @@
                 >
                 <path fillRule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clipRule="evenodd" />
                 </svg>
-                Emergencias
+                Emergencias (Categorias)
               </router-link>
               <router-link
                 to="/emergenciaAsignada"
@@ -52,7 +51,7 @@
                 >
                 <path fillRule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clipRule="evenodd" />
                 </svg>
-                E. Asignadas
+                Emergencias Asignadas
               </router-link>
               <router-link
                 to="/emergenciaRealizada"
@@ -66,7 +65,7 @@
                 >
                 <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
-                E. Realizadas
+                Emergencias Realizadas
               </router-link>
               <router-link
                 to="/reporte"
@@ -80,7 +79,7 @@
                 >
                   <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clip-rule="evenodd" />
                 </svg>
-                Reportes
+                Reportes Varios
               </router-link>
               <div>
                 <button
