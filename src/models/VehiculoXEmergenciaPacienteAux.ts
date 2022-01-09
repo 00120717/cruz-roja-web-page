@@ -18,5 +18,5 @@ interface VehiculoXEmergenciaPacienteAux {
   hospital?: Hospital;
   fechaSalida: string;
   fechaRegreso: string;
-  vacio?: true;
+  vacio?: boolean;
 }

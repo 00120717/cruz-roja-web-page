@@ -209,7 +209,6 @@ export default class ReportePage extends Vue {
   selectedItems: Array<string | number> = []
   showDeleteModal = false
   showDeleteCompleted = false
-  breadcrumbs: Breadcrumb[] = [{ name: 'Administración' }, { name: 'Reportes' }]
 
   // eslint-disable-next-line @typescript-eslint/camelcase
   filters: Filters = { search: '', per_page: '30', page: 1 }
@@ -247,9 +246,9 @@ export default class ReportePage extends Vue {
 
   async onSubmitEmergenciaTipos() {
     try {
-      const splittedInicio = this.form.fechaInicio2.split('/');
+      const splittedInicio = this.form.fechaInicio.split('/');
       const stringNewInicio = `${splittedInicio[0]}%2F${splittedInicio[1]}%2F${splittedInicio[2]}`;
-      const splittedFin = this.form.fechaFin2.split('/');
+      const splittedFin = this.form.fechaFin.split('/');
       const stringNewFin = `${splittedFin[0]}%2F${splittedFin[1]}%2F${splittedFin[2]}`;
       this.$router.push(`/reporte-emergencia-tipo-fecha/${this.form.tipoEmergenciaId}/${stringNewInicio}/${stringNewFin}`);
     // eslint-disable-next-line no-empty

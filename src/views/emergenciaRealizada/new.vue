@@ -378,7 +378,7 @@
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                   >
-                    {{ vehiculoXEmergenciaPaciente.genero == 'M'? 'Masculino' : 'Femenino' }}
+                    {{ vehiculoXEmergenciaPaciente.genero == 'M'? 'Masculino' : vehiculoXEmergenciaPaciente.genero == 'F' ?'Femenino' : '' }}
                   </td>
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
