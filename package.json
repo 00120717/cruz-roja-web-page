@@ -10,6 +10,7 @@
   "dependencies": {
     "@tailwindcss/ui": "^0.7.2",
     "@types/dom-to-image": "^2.6.4",
+    "@types/jspdf": "^2.0.0",
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "dom-to-image": "^2.6.0",

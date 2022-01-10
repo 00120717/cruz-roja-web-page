@@ -494,8 +494,8 @@ export default class NewEmergenciaRealizadaPage extends Vue {
   horaRegreso = ''
   nextTodoId = 1
   vacioVehiculo = false
-  fechaSalida: '';
-  fechaRegreso: '';
+  fechaSalida= ''
+  fechaRegreso= ''
 
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
