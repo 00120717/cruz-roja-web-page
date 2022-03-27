@@ -22,7 +22,8 @@ import Paginate from 'vuejs-paginate'
 import VueTheMask from 'vue-the-mask'
 
 import './assets/scss/tailwind.scss';
-
+import "leaflet/dist/leaflet.css";
+import "leaflet-geosearch/dist/geosearch.css";
 Vue.use(VTooltip)
 Vue.use(vClickOutside);
 Vue.component('paginate', Paginate)
