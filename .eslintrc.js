@@ -22,5 +22,6 @@ module.exports = {
     'consistent-return': 'off',
     'lines-between-class-members': 'off',
     'import/no-named-as-default': 'off',
+    'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix'],
   },
 };
