@@ -223,6 +223,10 @@
          </ValidationObserver>
       </form-section>
       <form-section>
+        <LocationSelectorMap>
+        </LocationSelectorMap>
+      </form-section>
+      <form-section>
       <div class="md:grid md:grid-cols-3 md:gap-8 ">
         <div v-if="!vacioVehiculo">
         <div class="col-span-6 sm:col-span-4">
@@ -442,6 +446,7 @@ import InputGroup from '@/components/ui/InputGroup.vue';
 import SeccionalesModal from '@/components/general/SeccionalesModal.vue';
 import VoluntariosModal from '@/components/general/VoluntariosModal.vue';
 import ActiveIndicator from '@/components/ui/ActiveIndicator.vue';
+import LocationSelectorMap from '@/components/Map/LocationSelectorMap.vue';
 
 const EmergenciaRealizadaModel = namespace('emergenciaRealizada');
 const EmergenciaModel = namespace('emergencia');
@@ -465,6 +470,7 @@ const VehiculoModel = namespace('vehiculo');
     ConfirmationModal,
     TableItem,
     ActiveIndicator,
+    LocationSelectorMap,
   },
 })
 export default class NewEmergenciaRealizadaPage extends Vue {
