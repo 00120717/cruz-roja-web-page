@@ -32,7 +32,6 @@ import { OpenStreetMapProvider } from "leaflet-geosearch";
 import LGeosearch from "vue2-leaflet-geosearch";
 import { icon } from "leaflet";
 export default {
-  name: "LocationInput",
   components: {
     LMap,
     LTileLayer,
