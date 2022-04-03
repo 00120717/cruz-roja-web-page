@@ -2,6 +2,8 @@
    <main class="pb-40">
       <page-heading title="Nueva Emergencia Realizada" back-route="/emergenciaRealizada" :breadcrumbs="breadcrumbs" />
       <form-section>
+          <LocationSelectorMap v-model="location" :key="key">
+          </LocationSelectorMap>
          <ValidationObserver ref="form" tag="form" autocomplete="off" @submit.prevent="onSubmit">
             <div class="md:grid md:grid-cols-3 md:gap-8 ">
                <div class="md:col-span-1">
@@ -222,8 +224,6 @@
             </div>
          </ValidationObserver>
       </form-section>
-      <LocationSelectorMap>
-      </LocationSelectorMap>
       <form-section>
       <div class="md:grid md:grid-cols-3 md:gap-8 ">
         <div v-if="!vacioVehiculo">

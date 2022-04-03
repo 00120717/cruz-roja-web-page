@@ -5,7 +5,7 @@
     :zoom="zoom"
     :center="[
       position.lat || userLocation.lat || defaultLocation.lat,
-      position.lng || userLocation.lng || defaultLocation.lng,
+      position.lng || userLocation.lng || defaultLocation.lng
     ]"
   >
     <l-tile-layer
@@ -32,25 +32,26 @@ import { OpenStreetMapProvider } from "leaflet-geosearch";
 import LGeosearch from "vue2-leaflet-geosearch";
 import { icon } from "leaflet";
 export default {
+  name: "LocationInput",
   components: {
     LMap,
     LTileLayer,
     LMarker,
     LTooltip,
-    LGeosearch,
+    LGeosearch
   },
   props: {
     value: {
       type: Object,
-      required: true,
+      required: true
     },
     defaultLocation: {
       type: Object,
       default: () => ({
         lat: 8.9806,
-        lng: 38.7578,
-      }),
-    },
+        lng: 38.7578
+      })
+    }
   },
   data() {
     return {
@@ -58,23 +59,23 @@ export default {
       geoSearchOptions: {
         provider: new OpenStreetMapProvider(),
         showMarker: false,
-        autoClose: true,
+        autoClose: true
       },
       userLocation: {},
       icon: icon({
         iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
         iconUrl: require("leaflet/dist/images/marker-icon.png"),
-        shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+        shadowUrl: require("leaflet/dist/images/marker-shadow.png")
       }),
       position: {},
       address: "",
       tileProvider: {
         attribution:
           '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       },
       zoom: 18,
-      dragging: false,
+      dragging: false
     };
   },
   mounted() {
@@ -87,8 +88,8 @@ export default {
       async handler(value) {
         this.address = await this.getAddress();
         this.$emit("input", { position: value, address: this.address });
-      },
-    },
+      }
+    }
   },
   computed: {
     tooltipContent() {
@@ -100,7 +101,7 @@ export default {
       )}</strong> <hr/><strong>lat:</strong> ${
         this.position.lat
       }<br/> <strong>lng:</strong> ${this.position.lng}`;
-    },
+    }
   },
   methods: {
     async getAddress() {
@@ -132,15 +133,15 @@ export default {
     async getUserPosition() {
       if (navigator.geolocation) {
         // get GPS position
-        navigator.geolocation.getCurrentPosition((pos) => {
+        navigator.geolocation.getCurrentPosition(pos => {
           // set the user location
           this.userLocation = {
             lat: pos.coords.latitude,
-            lng: pos.coords.longitude,
+            lng: pos.coords.longitude
           };
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
