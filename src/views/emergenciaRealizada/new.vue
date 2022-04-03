@@ -222,10 +222,8 @@
             </div>
          </ValidationObserver>
       </form-section>
-      <form-section>
-        <LocationSelectorMap>
-        </LocationSelectorMap>
-      </form-section>
+      <LocationSelectorMap>
+      </LocationSelectorMap>
       <form-section>
       <div class="md:grid md:grid-cols-3 md:gap-8 ">
         <div v-if="!vacioVehiculo">
