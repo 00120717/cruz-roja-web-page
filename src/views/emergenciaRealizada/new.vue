@@ -1,7 +1,7 @@
 <template>
    <main class="pb-40">
       <page-heading title="Nueva Emergencia Realizada" back-route="/emergenciaRealizada" :breadcrumbs="breadcrumbs" />
-      <LocationSelectorMap v-model="location">
+      <LocationSelectorMap v-model="location" :key="1">
       </LocationSelectorMap>
       <form-section>
          <ValidationObserver ref="form" tag="form" autocomplete="off" @submit.prevent="onSubmit">
