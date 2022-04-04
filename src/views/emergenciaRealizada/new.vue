@@ -1,8 +1,9 @@
 <template>
    <main class="pb-40">
       <page-heading title="Nueva Emergencia Realizada" back-route="/emergenciaRealizada" :breadcrumbs="breadcrumbs" />
-      <LocationSelectorMap v-model="location" :key="1">
-      </LocationSelectorMap>
+      <div style="width:100%;height: 500px">
+        <LocationSelectorMap v-model="data.location" :key="data.key" />
+      </div>
       <form-section>
          <ValidationObserver ref="form" tag="form" autocomplete="off" @submit.prevent="onSubmit">
             <div class="md:grid md:grid-cols-3 md:gap-8 ">
@@ -428,6 +429,7 @@
    </main>
 </template>
 <script lang="ts">
+import { LMap, LTileLayer } from 'vue2-leaflet';
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { ActionMethod } from 'vuex';
@@ -468,6 +470,8 @@ const VehiculoModel = namespace('vehiculo');
     ConfirmationModal,
     TableItem,
     ActiveIndicator,
+    LMap,
+    LTileLayer,
     LocationSelectorMap,
   },
 })
@@ -554,6 +558,11 @@ export default class NewEmergenciaRealizadaPage extends Vue {
     },
   ]
 
+  tileProvider = {
+    attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  };
+
   form = {
     identificadorFormulario: '',
     fechaRealizada: '',
@@ -565,6 +574,11 @@ export default class NewEmergenciaRealizadaPage extends Vue {
     seccionalId: [],
     voluntarioId: [],
     emergenciaId: 0,
+  };
+
+  data = {
+    location: {},
+    key: 1,
   };
 
   selectedItem = 0
