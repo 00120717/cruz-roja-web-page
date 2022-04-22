@@ -47,8 +47,8 @@ export default {
     defaultLocation: {
       type: Object,
       default: () => ({
-        lat: 8.9806,
-        lng: 38.7578
+        lat: 13.91807207081174,  
+        lng: -89.01672363281251
       })
     }
   },
