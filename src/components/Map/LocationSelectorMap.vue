@@ -47,8 +47,8 @@ export default {
     defaultLocation: {
       type: Object,
       default: () => ({
-        lat: 13.91807207081174,  
-        lng: -89.01672363281251
+        lat: 13.675427950275159,  
+        lng: -89.28949356079102
       })
     }
   },
@@ -73,7 +73,7 @@ export default {
           '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       },
-      zoom: 18,
+      zoom: 10,
       dragging: false
     };
   },
