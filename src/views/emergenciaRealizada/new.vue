@@ -1,13 +1,6 @@
 <template>
    <main class="pb-40">
       <page-heading title="Nueva Emergencia Realizada" back-route="/emergenciaRealizada" :breadcrumbs="breadcrumbs" />
-      <div style="width:100%;height: 500px">
-        <LocationSelectorMap v-model="data.location" :key="data.key" @latitud="latitud=$event" @longitud="longitud=$event"/>
-        <div class="grid grid-cols-3 row-gap-3 col-gap-2">
-          <h3>Lat: {{latitud}}</h3>
-          <h3>Lng: {{longitud}}</h3>
-        </div>
-      </div>
       <form-section>
          <ValidationObserver ref="form" tag="form" autocomplete="off" @submit.prevent="onSubmit">
             <div class="md:grid md:grid-cols-3 md:gap-8 ">
@@ -118,7 +111,11 @@
                         </ValidationProvider>
                      </div>
                     <div class="col-span-1 sm:col-span-5" style="width:100%;height: 300px">
-                      <LocationSelectorMap v-model="data.location" :key="data.key" />
+                      <LocationSelectorMap v-model="data.location" :key="data.key" @latitud="latitud=$event" @longitud="longitud=$event"/>
+                    </div>
+                    <div class="col-span-2 sm:col-span-4">
+                      <h3><strong>Latitud:</strong> {{latitud}}</h3>
+                      <h3><strong>Longitud:</strong> {{longitud}}</h3>
                     </div>
                     <div class="col-span-6 sm:col-span-4">
                         <ValidationProvider
