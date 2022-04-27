@@ -37,17 +37,6 @@
                      <div class="col-span-6 sm:col-span-4">
                         <ValidationProvider
                            v-slot="{ errors }"
-                           vid="ubicacionExacta"
-                           name="Ubicacion exacta"
-                           tag="div"
-                           rules="required"
-                           >
-                           <input-group v-model="form.ubicacionExacta" label="Ubicacion de referencia" name="ubicacionExacta" :error="errors[0]" />
-                        </ValidationProvider>
-                     </div>
-                     <div class="col-span-6 sm:col-span-4">
-                        <ValidationProvider
-                           v-slot="{ errors }"
                            vid="fechaRealizada"
                            name="fechaRealizada"
                            tag="div"
@@ -126,6 +115,20 @@
                               display-name="emergenciaNombre"
                               :error="errors[0]"
                               />
+                        </ValidationProvider>
+                     </div>
+                    <div class="col-span-1 sm:col-span-5" style="width:100%;height: 300px">
+                      <LocationSelectorMap v-model="data.location" :key="data.key" />
+                    </div>
+                    <div class="col-span-6 sm:col-span-4">
+                        <ValidationProvider
+                           v-slot="{ errors }"
+                           vid="ubicacionExacta"
+                           name="Ubicacion exacta"
+                           tag="div"
+                           rules="required"
+                           >
+                           <input-group v-model="form.ubicacionExacta" label="Ubicacion de referencia" name="ubicacionExacta" :error="errors[0]"/>
                         </ValidationProvider>
                      </div>
                   </div>
