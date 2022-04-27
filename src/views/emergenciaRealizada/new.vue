@@ -38,7 +38,7 @@
                            tag="div"
                            rules="required"
                            >
-                           <input-group v-model="form.ubicacionExacta" label="Ubicacion exacta" name="ubicacionExacta" :error="errors[0]" />
+                           <input-group v-model="form.ubicacionExacta" label="Ubicacion de referencia" name="ubicacionExacta" :error="errors[0]" />
                         </ValidationProvider>
                      </div>
                      <div class="col-span-6 sm:col-span-4">
