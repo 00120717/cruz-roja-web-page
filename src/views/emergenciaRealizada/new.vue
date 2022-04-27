@@ -2,7 +2,11 @@
    <main class="pb-40">
       <page-heading title="Nueva Emergencia Realizada" back-route="/emergenciaRealizada" :breadcrumbs="breadcrumbs" />
       <div style="width:100%;height: 500px">
-        <LocationSelectorMap v-model="data.location" :key="data.key" />
+        <LocationSelectorMap v-model="data.location" :key="data.key" @latitud="latitud=$event" @longitud="longitud=$event"/>
+        <div class="grid grid-cols-3 row-gap-3 col-gap-2">
+          <h3>Lat: {{latitud}}</h3>
+          <h3>Lng: {{longitud}}</h3>
+        </div>
       </div>
       <form-section>
          <ValidationObserver ref="form" tag="form" autocomplete="off" @submit.prevent="onSubmit">
@@ -579,6 +583,8 @@ export default class NewEmergenciaRealizadaPage extends Vue {
   data = {
     location: {},
     key: 1,
+    latitud: 0.0,
+    longitud: 0.0,
   };
 
   selectedItem = 0

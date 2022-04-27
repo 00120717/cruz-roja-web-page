@@ -22,7 +22,6 @@
       @dragstart="dragging = true"
       @dragend="dragging = false"
     >
-      <l-tooltip :content="tooltipContent" :options="{ permanent: true }" />
     </l-marker>
   </l-map>
 </template>
@@ -58,7 +57,7 @@ export default {
       geoSearchOptions: {
         provider: new OpenStreetMapProvider(),
         showMarker: false,
-        autoClose: true
+        autoClose: false
       },
       userLocation: {},
       icon: icon({
@@ -83,10 +82,12 @@ export default {
   },
   watch: {
     position: {
-      deep: true,
+      deep: false,
       async handler(value) {
         this.address = await this.getAddress();
         this.$emit("input", { position: value, address: this.address });
+        this.$emit('latitud',this.position.lat);
+        this.$emit('longitud',this.position.lng);
       }
     }
   },
