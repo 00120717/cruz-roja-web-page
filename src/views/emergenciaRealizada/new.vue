@@ -1,9 +1,6 @@
 <template>
    <main class="pb-40">
       <page-heading title="Nueva Emergencia Realizada" back-route="/emergenciaRealizada" :breadcrumbs="breadcrumbs" />
-      <div style="width:100%;height: 500px">
-        <LocationSelectorMap v-model="data.location" :key="data.key" />
-      </div>
       <form-section>
          <ValidationObserver ref="form" tag="form" autocomplete="off" @submit.prevent="onSubmit">
             <div class="md:grid md:grid-cols-3 md:gap-8 ">
@@ -28,17 +25,6 @@
                            rules="required"
                            >
                            <input-group v-model="form.identificadorFormulario" label="Identificador Formulario" name="identificadorFormulario" :error="errors[0]" />
-                        </ValidationProvider>
-                     </div>
-                     <div class="col-span-6 sm:col-span-4">
-                        <ValidationProvider
-                           v-slot="{ errors }"
-                           vid="ubicacionExacta"
-                           name="Ubicacion exacta"
-                           tag="div"
-                           rules="required"
-                           >
-                           <input-group v-model="form.ubicacionExacta" label="Ubicacion de referencia" name="ubicacionExacta" :error="errors[0]" />
                         </ValidationProvider>
                      </div>
                      <div class="col-span-6 sm:col-span-4">
@@ -122,6 +108,20 @@
                               display-name="emergenciaNombre"
                               :error="errors[0]"
                               />
+                        </ValidationProvider>
+                     </div>
+                    <div class="col-span-1 sm:col-span-5" style="width:100%;height: 300px">
+                      <LocationSelectorMap v-model="data.location" :key="data.key" />
+                    </div>
+                    <div class="col-span-6 sm:col-span-4">
+                        <ValidationProvider
+                           v-slot="{ errors }"
+                           vid="ubicacionExacta"
+                           name="Ubicacion exacta"
+                           tag="div"
+                           rules="required"
+                           >
+                           <input-group v-model="form.ubicacionExacta" label="Ubicacion de referencia" name="ubicacionExacta" :error="errors[0]"/>
                         </ValidationProvider>
                      </div>
                   </div>
