@@ -35,7 +35,6 @@ export default {
     LMap,
     LTileLayer,
     LMarker,
-    LTooltip,
     LGeosearch
   },
   props: {
@@ -83,11 +82,11 @@ export default {
   watch: {
     position: {
       deep: false,
-      async handler(value) {
+      async handler() {
         this.address = await this.getAddress();
-        this.$emit("input", { position: value, address: this.address });
-        this.$emit('latitud',this.position.lat);
-        this.$emit('longitud',this.position.lng);
+        this.$emit("input",this.address);
+        this.$emit("latitud",this.position.lat);
+        this.$emit("longitud",this.position.lng);
       }
     }
   },

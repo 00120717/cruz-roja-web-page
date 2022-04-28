@@ -1,13 +1,13 @@
 <template>
-  <l-map ref="map">
+  <l-map ref='map'>
      <l-tile-layer
-      :url="tileProvider.url"
-      :attribution="tileProvider.attribution"
+      :url='tileProvider.url'
+      :attribution='tileProvider.attribution'
     />
   </l-map>
 </template>
 <script>
-import { LMap, LTileLayer} from "vue2-leaflet";
+import { LMap, LTileLayer} from 'vue2-leaflet';
 export default {
   components: {
     LMap,
