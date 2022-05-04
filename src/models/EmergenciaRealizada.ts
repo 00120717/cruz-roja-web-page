@@ -7,6 +7,9 @@ interface EmergenciaRealizada {
   telefono: string;
   emisorEmergencia: string;
   comentario: string;
+  ubicacionReferencia: string;
+  latitud: number;
+  longitud: number;
   voluntarios?: Voluntario[];
   emergenciaSeccional?: EmergenciaSeccional[];
   emergenciaPaciente?: EmergenciaPaciente[];
