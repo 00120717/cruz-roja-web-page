@@ -117,13 +117,14 @@
                       <h3><strong>Latitud:</strong> {{latitud}}</h3>
                       <h3><strong>Longitud:</strong> {{longitud}}</h3>
                     </div>
-                    <div class="col-span-6 sm:col-span-4 h-48">
+                    <div class="col-span-6 sm:col-span-4">
                       <input-group
                           id="emergenciaFinal"
                           label="Ubicacion Exacta"
                           name="exactUbi"
                           :value="input"
-                          size="lg"
+                          :disabled="true"
+                          class="h-48"
                           />
                      </div>
                     <div class="col-span-6 sm:col-span-4">
@@ -446,6 +447,7 @@ import { LMap, LTileLayer } from 'vue2-leaflet';
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { ActionMethod } from 'vuex';
+import TextareaAutosize from 'vue-textarea-autosize';
 import PageHeading from '@/components/layout/PageHeading.vue';
 import FormSection from '@/components/ui/FormSection.vue';
 import CustomButton from '@/components/ui/CustomButton.vue';
@@ -470,6 +472,7 @@ const VehiculoModel = namespace('vehiculo');
 
 @Component({
   components: {
+    TextareaAutosize,
     PageHeading,
     FormSection,
     CustomButton,
