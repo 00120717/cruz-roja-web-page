@@ -18,7 +18,7 @@
         class="block w-full form-input focus:shadow-outline sm:text-md sm:leading-5"
         :class="{
           'border-red-300  placeholder-red-300 focus:border-red-300 focus:shadow-outline-red' : error,
-          'cursor-not-allowed': disabled,
+          'bg-gray-100 text-gray-400 cursor-not-allowed': disabled,
           'pr-10': error}"
         :placeholder="placeholder"
         :disabled="disabled"
