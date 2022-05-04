@@ -118,24 +118,24 @@
                       <h3><strong>Longitud:</strong> {{longitud}}</h3>
                     </div>
                     <div class="col-span-6 sm:col-span-4">
-                      <input-group
-                          id="emergenciaFinal"
-                          label="Ubicacion Exacta"
-                          name="exactUbi"
-                          :value="input"
-                          :disabled="true"
-                          class="h-48"
-                          />
+                      Ubicacion Exacta
+                      <textarea-autosize
+                        style="width:100%;background-color: #ffffff;border-color: #d2d6dc;border-width: 1px;border-radius: 0.375rem;padding-top: 0.5rem;padding-right: 0.75rem;padding-bottom: 0.5rem;padding-left: 0.75rem;font-size: 1rem;"
+                        :value="input"
+                        disabled
+                      />
                      </div>
                     <div class="col-span-6 sm:col-span-4">
                         <ValidationProvider
-                           v-slot="{ errors }"
                            vid="ubicacionExacta"
                            name="Ubicacion exacta"
                            tag="div"
                            rules="required"
                            >
-                           <input-group v-model="form.ubicacionExacta" label="Ubicacion de referencia" name="ubicacionExacta" :error="errors[0]"/>
+                           Ubicacion de Referencia
+                      <textarea-autosize
+                        style="width:100%;background-color: #ffffff;border-color: #d2d6dc;border-width: 1px;border-radius: 0.375rem;padding-top: 0.5rem;padding-right: 0.75rem;padding-bottom: 0.5rem;padding-left: 0.75rem;font-size: 1rem;"
+                      />
                         </ValidationProvider>
                      </div>
                   </div>
@@ -468,6 +468,7 @@ const SeccionalModel = namespace('seccional');
 const VoluntarioModel = namespace('voluntario');
 const HospitalModel = namespace('hospital');
 const VehiculoModel = namespace('vehiculo');
+const TextAreaAuto = Vue.use(TextareaAutosize);
 
 @Component({
   components: {
