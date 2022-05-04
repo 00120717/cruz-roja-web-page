@@ -110,19 +110,20 @@
                               />
                         </ValidationProvider>
                      </div>
-                    <div class="col-span-1 sm:col-span-5" style="width:100%;height: 300px">
+                    <div class="col-span-1 sm:col-span-5" style="width:100%;height: 300px; z-index: 2">
                       <LocationSelectorMap v-model="data.location" :key="data.key" @input="input=$event" @latitud="latitud=$event" @longitud="longitud=$event"/>
                     </div>
                     <div class="col-span-2 sm:col-span-4">
                       <h3><strong>Latitud:</strong> {{latitud}}</h3>
                       <h3><strong>Longitud:</strong> {{longitud}}</h3>
                     </div>
-                    <div class="col-span-6 sm:col-span-4">
+                    <div class="col-span-6 sm:col-span-4 h-48">
                       <input-group
                           id="emergenciaFinal"
                           label="Ubicacion Exacta"
                           name="exactUbi"
                           :value="input"
+                          size="lg"
                           />
                      </div>
                     <div class="col-span-6 sm:col-span-4">
