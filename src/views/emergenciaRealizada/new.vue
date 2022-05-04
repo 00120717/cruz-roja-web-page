@@ -461,6 +461,7 @@ import SeccionalesModal from '@/components/general/SeccionalesModal.vue';
 import VoluntariosModal from '@/components/general/VoluntariosModal.vue';
 import ActiveIndicator from '@/components/ui/ActiveIndicator.vue';
 import LocationSelectorMap from '@/components/Map/LocationSelectorMap.vue';
+import TextareaAutosize from 'vue-textarea-autosize';
 
 const EmergenciaRealizadaModel = namespace('emergenciaRealizada');
 const EmergenciaModel = namespace('emergencia');
