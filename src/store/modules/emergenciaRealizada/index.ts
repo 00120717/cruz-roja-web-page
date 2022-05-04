@@ -16,6 +16,9 @@ export const state: EmergenciaRealizadaState = {
     telefono: '',
     emisorEmergencia: '',
     comentario: '',
+    ubicacionReferencia: '',
+    latitud: 0.0,
+    longitud: 0.0,
     voluntarios: [{
       id: '',
       voluntarioCodigoCarnet: '0',
