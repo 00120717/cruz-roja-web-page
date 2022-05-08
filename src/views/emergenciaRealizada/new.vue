@@ -111,7 +111,7 @@
                         </ValidationProvider>
                      </div>
                     <div class="col-span-1 sm:col-span-5" style="width:100%;height: 300px; z-index: 2">
-                      <LocationSelectorMap v-model="data.location" :key="data.key" @input="address=$event" @latitud="latitud=$event" @longitud="longitud=$event"/>
+                      <LocationSelectorMap v-model="data2" :key="data.key" @input="address=$event" @latitud="latitud=$event" @longitud="longitud=$event"/>
                     </div>
                     <div class="col-span-2 sm:col-span-4">
                       <h3><strong>Latitud:</strong> {{latitud}}</h3>
@@ -121,14 +121,13 @@
                       Ubicacion Exacta
                       <textarea-autosize
                         style="width:100%;background-color: #ffffff;border-color: #d2d6dc;border-width: 1px;border-radius: 0.375rem;padding-top: 0.5rem;padding-right: 0.75rem;padding-bottom: 0.5rem;padding-left: 0.75rem;font-size: 1rem;"
-                        :value="address"
-                        v-model="form.address"
+                        :value="data2.address"
                       />
                      </div>
                     <div class="col-span-6 sm:col-span-4">
                         <ValidationProvider
-                           vid="ubicacionExacta"
-                           name="Ubicacion exacta"
+                           vid="ubicacionReferencia"
+                           name="Ubicacion referencia"
                            tag="div"
                            rules="required"
                            >
@@ -586,14 +585,11 @@ export default class NewEmergenciaRealizadaPage extends Vue {
   form = {
     identificadorFormulario: '',
     fechaRealizada: '',
-    ubicacionExacta: 'this.address',
     fechaHoraLlamada: '',
     telefono: '',
     emisorEmergencia: '',
     comentario: '',
     ubicacionReferencia: '',
-    latitud: this.latitud,
-    longitud: this.longitud,
     seccionalId: [],
     voluntarioId: [],
     emergenciaId: 0,
@@ -601,6 +597,11 @@ export default class NewEmergenciaRealizadaPage extends Vue {
   data = {
     location: {},
     key: 1,
+  };
+  data2 = {
+    address: '',
+    lat: 0.0,
+    lng: 0.0,
   };
 
   selectedItem = 0
@@ -718,8 +719,12 @@ export default class NewEmergenciaRealizadaPage extends Vue {
     if (isValid) {
       try {
         this.$set(this.form, 'seccionalId', this.newSeccionales);
+        this.$set(this.form, 'ubicacionExacta', this.data2.address);
+        this.$set(this.form, 'latitud', this.data2.lat);
+        this.$set(this.form, 'longitud', this.data2.lng);
         this.$set(this.form, 'voluntarioId', this.newVoluntarios);
         this.$set(this.form, 'pacienteVehiculoHospital', this.newVehiculoPacienteVoluntario);
+        console.log(this.form);
         await this.createEmergenciaRealizada({ emergenciaRealizada: this.form, vm: this });
         this.$router.push('/emergenciaRealizada');
       } catch (e) {

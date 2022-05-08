@@ -114,6 +114,8 @@ export default {
         if (result.status === 200) {
           const body = await result.json();
           address = body.display_name;
+          this.position.address = address;
+          return this.position;
         }
       } catch (e) {
         console.error("Reverse Geocode Error->", e);
