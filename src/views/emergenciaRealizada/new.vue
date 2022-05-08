@@ -111,7 +111,7 @@
                         </ValidationProvider>
                      </div>
                     <div class="col-span-1 sm:col-span-5" style="width:100%;height: 300px; z-index: 2">
-                      <LocationSelectorMap v-model="data.location" :key="data.key" @input="input=$event" @latitud="latitud=$event" @longitud="longitud=$event"/>
+                      <LocationSelectorMap v-model="data.location" :key="data.key" @input="address=$event" @latitud="latitud=$event" @longitud="longitud=$event"/>
                     </div>
                     <div class="col-span-2 sm:col-span-4">
                       <h3><strong>Latitud:</strong> {{latitud}}</h3>
@@ -121,8 +121,8 @@
                       Ubicacion Exacta
                       <textarea-autosize
                         style="width:100%;background-color: #ffffff;border-color: #d2d6dc;border-width: 1px;border-radius: 0.375rem;padding-top: 0.5rem;padding-right: 0.75rem;padding-bottom: 0.5rem;padding-left: 0.75rem;font-size: 1rem;"
-                        :value="input"
-                        disabled
+                        :value="address"
+                        v-model="form.address"
                       />
                      </div>
                     <div class="col-span-6 sm:col-span-4">
@@ -133,9 +133,10 @@
                            rules="required"
                            >
                            Ubicacion de Referencia
-                      <textarea-autosize
-                        style="width:100%;background-color: #ffffff;border-color: #d2d6dc;border-width: 1px;border-radius: 0.375rem;padding-top: 0.5rem;padding-right: 0.75rem;padding-bottom: 0.5rem;padding-left: 0.75rem;font-size: 1rem;"
-                      />
+                          <textarea-autosize
+                            style="width:100%;background-color: #ffffff;border-color: #d2d6dc;border-width: 1px;border-radius: 0.375rem;padding-top: 0.5rem;padding-right: 0.75rem;padding-bottom: 0.5rem;padding-left: 0.75rem;font-size: 1rem;"
+                            v-model="form.ubicacionReferencia"
+                          />
                         </ValidationProvider>
                      </div>
                   </div>
@@ -447,6 +448,7 @@ import { LMap, LTileLayer } from 'vue2-leaflet';
 import { Vue, Component, Watch } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { ActionMethod } from 'vuex';
+import TextareaAutosize from 'vue-textarea-autosize';
 import PageHeading from '@/components/layout/PageHeading.vue';
 import FormSection from '@/components/ui/FormSection.vue';
 import CustomButton from '@/components/ui/CustomButton.vue';
@@ -461,7 +463,6 @@ import SeccionalesModal from '@/components/general/SeccionalesModal.vue';
 import VoluntariosModal from '@/components/general/VoluntariosModal.vue';
 import ActiveIndicator from '@/components/ui/ActiveIndicator.vue';
 import LocationSelectorMap from '@/components/Map/LocationSelectorMap.vue';
-import TextareaAutosize from 'vue-textarea-autosize';
 
 const EmergenciaRealizadaModel = namespace('emergenciaRealizada');
 const EmergenciaModel = namespace('emergencia');
@@ -520,6 +521,9 @@ export default class NewEmergenciaRealizadaPage extends Vue {
   vacioVehiculo = false
   fechaSalida= ''
   fechaRegreso= ''
+  address= ''
+  latitud= 0.0
+  longitud= 0.0
 
   breadcrumbs: Breadcrumb[] = [
     { name: 'Administración' },
@@ -582,24 +586,21 @@ export default class NewEmergenciaRealizadaPage extends Vue {
   form = {
     identificadorFormulario: '',
     fechaRealizada: '',
-    ubicacionExacta: '',
+    ubicacionExacta: 'this.address',
     fechaHoraLlamada: '',
     telefono: '',
     emisorEmergencia: '',
     comentario: '',
     ubicacionReferencia: '',
-    latitud: 0.0,
-    longitud: 0.0,
+    latitud: this.latitud,
+    longitud: this.longitud,
     seccionalId: [],
     voluntarioId: [],
     emergenciaId: 0,
   };
-
   data = {
     location: {},
     key: 1,
-    latitud: 0.0,
-    longitud: 0.0,
   };
 
   selectedItem = 0
