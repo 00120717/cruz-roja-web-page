@@ -67,6 +67,23 @@
                         </ValidationProvider>
                      </div>
                      <div class="col-span-6 sm:col-span-4">
+                        <ValidationProvider
+                           v-slot="{ errors }"
+                           vid="telefono"
+                           name="telefono"
+                           tag="div"
+                           rules="min:8"
+                           >
+                           <input-group
+                              id="telefono"
+                              v-model="form.telefono"
+                              label="Telefono"
+                              name="telefono"
+                              :error="errors[0]"
+                              />
+                        </ValidationProvider>
+                     </div>
+                     <div class="col-span-6 sm:col-span-4">
                       <input-group
                           id="emergenciaFinal"
                           v-model="form.comentario"
@@ -384,7 +401,7 @@ export default class NewEmergenciaRealizadaPage extends Vue {
   };
 
   form: EmergenciaRealizada = {
-    id:'',
+    id: '',
     identificadorFormulario: '',
     fechaRealizada: '',
     fechaHoraLlamada: '',
@@ -430,8 +447,8 @@ export default class NewEmergenciaRealizadaPage extends Vue {
       await this.fetchEmergenciaList(this);
       await this.fetchVoluntarioList(this);
       await this.fetchSeccionalList(this);
-      await this.fetchHospitalList(this);
-      await this.fetchVehiculoList(this);
+      await this.fetchEmergenciaRealizada({ id: +this.$route.params.id, vm: this });
+      this.setCurrentEmergenciaRealizada();
     } catch (e) {
       (this as any).$snotify.error('Ha ocurrido un error');
     }
@@ -537,7 +554,6 @@ export default class NewEmergenciaRealizadaPage extends Vue {
         this.$set(this.form, 'latitud', this.data2.lat);
         this.$set(this.form, 'longitud', this.data2.lng);
         this.$set(this.form, 'voluntarioId', this.newVoluntarios);
-        this.$set(this.form, 'pacienteVehiculoHospital', this.newVehiculoPacienteVoluntario);
         console.log(this.form);
         await this.updateEmergenciaRealizada({ emergenciaRealizada: this.form, vm: this });
         this.$router.push('/emergenciaRealizada');
