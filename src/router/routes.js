@@ -161,6 +161,11 @@ export default [
     component: () => import(/* webpackChunkName: "emergenciaRealizada-id" */ '@/views/emergenciaRealizada/_id/index.vue'),
   },
   {
+    path: '/emergenciaRealizada/:id/edit',
+    name: 'emergenciaRealizada-id-edit',
+    component: () => import(/* webpackChunkName: "emergencia-id-edit" */ '@/views/emergenciaRealizada/_id/edit.vue'),
+  },
+  {
     path: '/paciente',
     name: 'paciente',
     component: () => import(/* webpackChunkName: "paciente" */ '@/views/paciente/index.vue'),
