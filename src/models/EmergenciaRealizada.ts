@@ -14,4 +14,5 @@ interface EmergenciaRealizada {
   emergenciaSeccional?: EmergenciaSeccional[];
   emergenciaPaciente?: EmergenciaPaciente[];
   idEmergencia: number;
+  emergencia?: Emergencia;
 }

@@ -100,7 +100,7 @@
                            rules="required"
                            >
                            <input-select
-                              v-model="form.emergenciaId"
+                              v-model="form.idEmergencia"
                               label="Emergencia"
                               placeholder="Seleccionar"
                               :options="emergenciaList"
@@ -464,6 +464,7 @@ export default class NewEmergenciaRealizadaPage extends Vue {
     this.data2.address = this.emergenciaRealizada?.ubicacionExacta;
     this.latitud = this.emergenciaRealizada?.latitud ?? 0.0;
     this.longitud = this.emergenciaRealizada?.longitud ?? 0.0;
+    this.form.idEmergencia = this.emergenciaRealizada.emergencia?.id ?? 0.0;
   }
 
   @Watch('newSeccionales', { immediate: true, deep: true })
