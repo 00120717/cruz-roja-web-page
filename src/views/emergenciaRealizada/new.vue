@@ -122,6 +122,7 @@
                       <textarea-autosize
                         style="width:100%;background-color: #ffffff;border-color: #d2d6dc;border-width: 1px;border-radius: 0.375rem;padding-top: 0.5rem;padding-right: 0.75rem;padding-bottom: 0.5rem;padding-left: 0.75rem;font-size: 1rem;"
                         :value="data2.address"
+                        disabled
                       />
                      </div>
                     <div class="col-span-6 sm:col-span-4">
