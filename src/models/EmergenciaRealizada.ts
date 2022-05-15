@@ -13,4 +13,5 @@ interface EmergenciaRealizada {
   voluntarios?: Voluntario[];
   emergenciaSeccional?: EmergenciaSeccional[];
   emergenciaPaciente?: EmergenciaPaciente[];
+  idEmergencia: number;
 }

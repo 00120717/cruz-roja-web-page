@@ -415,6 +415,7 @@ export default class NewEmergenciaRealizadaPage extends Vue {
     ubicacionExacta: '',
     latitud: 0.0,
     longitud: 0.0,
+    idEmergencia: 0,
   };
   data = {
     location: {},
@@ -555,7 +556,7 @@ export default class NewEmergenciaRealizadaPage extends Vue {
       try {
         this.$set(this.form, 'seccionalId', this.newSeccionales);
         this.$set(this.form, 'ubicacionExacta', this.data2.address);
-        this.$set(this.form, 'latitud', this.data2.lat);
+        this.$set(this.form, 'latitud', this.data2.lat || this.latitud);
         this.$set(this.form, 'longitud', this.data2.lng);
         this.$set(this.form, 'voluntarioId', this.newVoluntarios);
         console.log(this.form);

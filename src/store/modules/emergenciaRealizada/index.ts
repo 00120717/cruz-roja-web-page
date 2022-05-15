@@ -19,6 +19,7 @@ export const state: EmergenciaRealizadaState = {
     ubicacionReferencia: '',
     latitud: 0.0,
     longitud: 0.0,
+    idEmergencia: 0,
     voluntarios: [{
       id: '',
       voluntarioCodigoCarnet: '0',
