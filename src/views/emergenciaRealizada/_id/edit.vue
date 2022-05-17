@@ -142,102 +142,6 @@
                   </div>
                </div>
             </div>
-            <div class="md:grid md:grid-cols-3 md:gap-8 ">
-            <div class="md:col-span-1">
-               <h3 class="text-lg font-medium leading-6 text-gray-900">
-                  Seccionales
-               </h3>
-               <p class="mt-1 text-sm leading-5 text-gray-500">
-                  Seccionales a asignar
-               </p>
-            </div>
-            <div class="mt-5 mb-4 md:mt-0 md:col-span-2">
-               <div class="grid grid-cols-6 row-gap-2 col-gap-6">
-                  <div v-if="newSeccionalVA && newSeccionalVA.length > 0" class="col-span-6 mt-4 sm:col-span-4">
-                     <span
-                        v-for="(seccional, index) in newSeccionalVA"
-                        :key="index"
-                        class="inline-flex px-3 py-2 mb-2 mr-2 text-xs font-semibold leading-5 text-green-700 bg-green-100 rounded-full"
-                        >{{ seccional.nombre }}</span>
-                  </div>
-               </div>
-            </div>
-            <div class="md:col-span-1" />
-               <div class="mt-5 mb-4 md:mt-0 md:col-span-2">
-                  <div class="grid grid-cols-6 row-gap-2 col-gap-6">
-                     <div class="col-span-6 mt-4 sm:col-span-4">
-                        <custom-button
-                           type="button"
-                           color="secondary"
-                           title="Asignar seccionales"
-                           @click="showSeccionalesModal = true"
-                           >
-                           <template #icon>
-                              <svg
-                                 class="w-4 h-4 mr-2"
-                                 fill="none"
-                                 stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 stroke-width="2"
-                                 viewBox="0 0 24 24"
-                                 stroke="currentColor"
-                                 >
-                                 <path d="M12 4v16m8-8H4" />
-                              </svg>
-                           </template>
-                        </custom-button>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="md:grid md:grid-cols-3 md:gap-8 ">
-            <div class="md:col-span-1">
-               <h3 class="text-lg font-medium leading-6 text-gray-900">
-                  Voluntarios
-               </h3>
-               <p class="mt-1 text-sm leading-5 text-gray-500">
-                  Voluntarios a asignar
-               </p>
-            </div>
-            <div class="mt-5 mb-4 md:mt-0 md:col-span-2">
-               <div class="grid grid-cols-6 row-gap-2 col-gap-6">
-                  <div v-if="newVoluntarioEA && newVoluntarioEA.length > 0" class="col-span-6 mt-4 sm:col-span-4">
-                     <span
-                        v-for="(voluntario, index) in newVoluntarioEA"
-                        :key="index"
-                        class="inline-flex px-3 py-2 mb-2 mr-2 text-xs font-semibold leading-5 text-green-700 bg-green-100 rounded-full"
-                        >{{ voluntario.nombreCompuesto }}</span>
-                  </div>
-               </div>
-            </div>
-            <div class="md:col-span-1" />
-               <div class="mt-5 mb-4 md:mt-0 md:col-span-2">
-                  <div class="grid grid-cols-6 row-gap-2 col-gap-6">
-                     <div class="col-span-6 mt-4 sm:col-span-4">
-                        <custom-button
-                           type="button"
-                           color="secondary"
-                           title="Asignar voluntarios"
-                           @click="showVoluntariosModal = true"
-                           >
-                           <template #icon>
-                              <svg
-                                 class="w-4 h-4 mr-2"
-                                 fill="none"
-                                 stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 stroke-width="2"
-                                 viewBox="0 0 24 24"
-                                 stroke="currentColor"
-                                 >
-                                 <path d="M12 4v16m8-8H4" />
-                              </svg>
-                           </template>
-                        </custom-button>
-                     </div>
-                  </div>
-               </div>
-            </div>
          </ValidationObserver>
       </form-section>
       <div class="w-full">
@@ -245,20 +149,6 @@
             <custom-button type="submit" class="ml-2" title="Guardar" :loading="isEmergenciaRealizadaLoading" @click.prevent="onSubmit" />
          </div>
       </div>
-      <seccionales-modal
-         :show="showSeccionalesModal"
-         :new-seccionales="newSeccionales"
-         :list="seccionalList"
-         @update:show="showSeccionalesModal = false"
-         @update-seccionales="updateNewSeccionales"
-         />
-      <voluntarios-modal
-         :show="showVoluntariosModal"
-         :new-voluntarios="newVoluntarios"
-         :list="voluntarioList"
-         @update:show="showVoluntariosModal = false"
-         @update-voluntarios="updateNewVoluntarios"
-         />
    </main>
 </template>
 <script lang="ts">
@@ -558,7 +448,7 @@ export default class NewEmergenciaRealizadaPage extends Vue {
         this.$set(this.form, 'seccionalId', this.newSeccionales);
         this.$set(this.form, 'ubicacionExacta', this.data2.address);
         this.$set(this.form, 'latitud', this.data2.lat || this.latitud);
-        this.$set(this.form, 'longitud', this.data2.lng);
+        this.$set(this.form, 'longitud', this.data2.lng || this.longitud);
         this.$set(this.form, 'voluntarioId', this.newVoluntarios);
         console.log(this.form);
         await this.updateEmergenciaRealizada({ emergenciaRealizada: this.form, vm: this });
