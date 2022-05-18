@@ -111,7 +111,7 @@
                         </ValidationProvider>
                      </div>
                     <div class="col-span-1 sm:col-span-5" style="width:100%;height: 300px; z-index: 2">
-                      <LocationSelectorMap v-model="data2" :key="data.key" @input="address=$event" @latitud="latitud=$event" @longitud="longitud=$event"/>
+                      <LocationSelectorMap :acPosition="{lat: data2.lat, lng: data2.lng}" v-model="data2" :key="data.key" @input="address=$event" @latitud="latitud=$event" @longitud="longitud=$event"/>
                     </div>
                     <div class="col-span-2 sm:col-span-4">
                       <h3><strong>Latitud:</strong> {{latitud}}</h3>
@@ -340,7 +340,7 @@ export default class NewEmergenciaRealizadaPage extends Vue {
       await this.fetchVoluntarioList(this);
       await this.fetchSeccionalList(this);
       await this.fetchEmergenciaRealizada({ id: +this.$route.params.id, vm: this });
-      this.setCurrentEmergenciaRealizada();
+      await this.setCurrentEmergenciaRealizada();
     } catch (e) {
       (this as any).$snotify.error('Ha ocurrido un error');
     }

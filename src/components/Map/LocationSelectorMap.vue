@@ -48,7 +48,10 @@ export default {
         lat: 13.675427950275159,  
         lng: -89.28949356079102
       })
-    }
+    },
+    acPosition: {
+      type: Object,
+    },
   },
   data() {
     return {
@@ -76,8 +79,13 @@ export default {
     };
   },
   mounted() {
+    console.log('Mounted');
+    console.log(this.acPosition);
     this.getUserPosition();
     this.$refs.map.mapObject.on("geosearch/showlocation", this.onSearch);
+  },
+  rendertracked() {
+    this.getEditPosition(this.acPosition);
   },
   watch: {
     position: {
@@ -138,11 +146,19 @@ export default {
           // set the user location
           this.userLocation = {
             lat: pos.coords.latitude,
-            lng: pos.coords.longitude
+            lng: pos.coords.longitude,
           };
         });
       }
-    }
+    },
+    getEditPosition(acPosition) {
+      console.log('El de abajo es el acPosition');
+      console.log(acPosition);
+      this.position = {
+        lat: acPosition.lat,
+        lng: acPosition.lng,
+      };
+    },
   }
 };
 </script>
