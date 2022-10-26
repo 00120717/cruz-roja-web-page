@@ -19,6 +19,7 @@
     "jspdf": "^1.4.1",
     "leaflet": "^1.7.1",
     "leaflet-geosearch": "^3.6.0",
+    "moment": "^2.29.4",
     "postcss-loader": "^4.0.4",
     "store": "^2.0.12",
     "tailwindcss": "^1.9.6",

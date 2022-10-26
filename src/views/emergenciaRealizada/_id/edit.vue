@@ -28,6 +28,7 @@
                         </ValidationProvider>
                      </div>
                      <div class="col-span-6 sm:col-span-4">
+                        <span class="block text-sm font-medium leading-5 text-gray-700">Fecha Realizada</span>
                         <ValidationProvider
                            v-slot="{ errors }"
                            vid="fechaRealizada"
@@ -35,13 +36,7 @@
                            tag="div"
                            rules="min:10"
                            >
-                           <input-group
-                              id="fechaRealizada"
-                              v-model="form.fechaRealizada"
-                              label="Fecha Realizada"
-                              name="fechaRealizada"
-                              :error="errors[0]"
-                              />
+                           <input class="block w-full form-input focus:shadow-outline sm:text-md sm:leading-5 mb-4" type="date" id="fechaRealizada" name="fechaRealizada" label="Fecha Realizada" v-model="form.fechaRealizada" :error="errors[0]">
                         </ValidationProvider>
                      </div>
                      <div class="col-span-6 sm:col-span-4">
@@ -52,7 +47,7 @@
                            tag="div"
                            rules="required"
                            >
-                           <input-group v-model="form.fechaHoraLlamada" label="Realizada Hora llamada" name="fechaHoraLlamada" :error="errors[0]" />
+                           <input-group v-model="form.fechaHoraLlamada" label="Hora llamada" name="fechaHoraLlamada" :error="errors[0]" />
                         </ValidationProvider>
                      </div>
                      <div class="col-span-6 sm:col-span-4">
@@ -157,6 +152,7 @@ import { Vue, Component, Watch } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { ActionMethod } from 'vuex';
 import TextareaAutosize from 'vue-textarea-autosize';
+import moment from 'moment';
 import PageHeading from '@/components/layout/PageHeading.vue';
 import FormSection from '@/components/ui/FormSection.vue';
 import CustomButton from '@/components/ui/CustomButton.vue';
@@ -355,6 +351,8 @@ export default class NewEmergenciaRealizadaPage extends Vue {
     this.latitud = this.emergenciaRealizada?.latitud ?? 0.0;
     this.longitud = this.emergenciaRealizada?.longitud ?? 0.0;
     this.form.idEmergencia = this.emergenciaRealizada.emergencia?.id ?? 0.0;
+    this.form.fechaRealizada = moment(this.emergenciaRealizada?.fechaRealizada, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(this.emergenciaRealizada?.fechaRealizada);
   }
 
   @Watch('newSeccionales', { immediate: true, deep: true })
@@ -450,6 +448,7 @@ export default class NewEmergenciaRealizadaPage extends Vue {
         this.$set(this.form, 'latitud', this.data2.lat || this.latitud);
         this.$set(this.form, 'longitud', this.data2.lng || this.longitud);
         this.$set(this.form, 'voluntarioId', this.newVoluntarios);
+        this.$set(this.form, 'fechaRealizada', this.form.fechaRealizada);
         console.log(this.form);
         await this.updateEmergenciaRealizada({ emergenciaRealizada: this.form, vm: this });
         this.$router.push('/emergenciaRealizada');

@@ -24,10 +24,11 @@
                            tag="div"
                            rules="required"
                            >
-                           <input-group v-model="form.identificadorFormulario" label="Identificador Formulario" name="identificadorFormulario" :error="errors[0]" />
+                          <input-group v-model="form.identificadorFormulario" label="Identificador Formulario" name="identificadorFormulario" :error="errors[0]" />
                         </ValidationProvider>
                      </div>
                      <div class="col-span-6 sm:col-span-4">
+                        <span class="block text-sm font-medium leading-5 text-gray-700">Fecha Realizada</span>
                         <ValidationProvider
                            v-slot="{ errors }"
                            vid="fechaRealizada"
@@ -35,13 +36,7 @@
                            tag="div"
                            rules="min:10"
                            >
-                           <input-group
-                              id="fechaRealizada"
-                              v-model="form.fechaRealizada"
-                              label="Fecha Realizada"
-                              name="fechaRealizada"
-                              :error="errors[0]"
-                              />
+                           <input class="block w-full form-input focus:shadow-outline sm:text-md sm:leading-5 mb-4" type="date" id="fechaRealizada" name="fechaRealizada" label="Fecha Realizada" v-model="form.fechaRealizada" :error="errors[0]">
                         </ValidationProvider>
                      </div>
                      <div class="col-span-6 sm:col-span-4">
@@ -52,7 +47,7 @@
                            tag="div"
                            rules="required"
                            >
-                           <input-group v-model="form.fechaHoraLlamada" label="Realizada Hora llamada" name="fechaHoraLlamada" :error="errors[0]" />
+                           <input-group v-model="form.fechaHoraLlamada" label="Hora llamada" name="fechaHoraLlamada" :error="errors[0]" />
                         </ValidationProvider>
                      </div>
                      <div class="col-span-6 sm:col-span-4">
@@ -292,13 +287,15 @@
         </div>
         </div>
         <div class="col-span-6 sm:col-span-4">
-          <input-group v-model="fechaSalida" label="Fecha Salida Vehiculo" name="horaSalida"/>
+          <span class="block text-sm font-medium leading-5 text-gray-700">Fecha Salida Vehiculo</span>
+          <input class="block w-full form-input focus:shadow-outline sm:text-md sm:leading-5 mb-4" type="date" v-model="fechaSalida" label="Fecha Salida Vehiculo" name="fechaSalida"/>
         </div>
         <div class="col-span-6 sm:col-span-4">
           <input-group v-model="horaSalida" label="Hora Salida Vehiculo" name="horaRegreso"/>
         </div>
         <div class="col-span-6 sm:col-span-4">
-          <input-group v-model="fechaRegreso" label="Fecha Regreso Vehiculo" name="horaSalida"/>
+          <span class="block text-sm font-medium leading-5 text-gray-700">Fecha Regreso Vehiculo</span>
+          <input class="block w-full form-input focus:shadow-outline sm:text-md sm:leading-5 mb-4" type="date" v-model="fechaRegreso" label="Fecha Regreso Vehiculo" name="fechaRegreso"/>
         </div>
         <div class="col-span-6 sm:col-span-4">
           <input-group v-model="horaRegreso" label="Hora Regreso Vehiculo" name="horaRegreso"/>
@@ -725,6 +722,9 @@ export default class NewEmergenciaRealizadaPage extends Vue {
         this.$set(this.form, 'longitud', this.data2.lng);
         this.$set(this.form, 'voluntarioId', this.newVoluntarios);
         this.$set(this.form, 'pacienteVehiculoHospital', this.newVehiculoPacienteVoluntario);
+        this.$set(this.form, 'fechaRealizada', this.form.fechaRealizada);
+        this.$set(this.form, 'fechaSalida', this.fechaSalida);
+        this.$set(this.form, 'fechaRegreso', this.fechaRegreso);
         console.log(this.form);
         await this.createEmergenciaRealizada({ emergenciaRealizada: this.form, vm: this });
         this.$router.push('/emergenciaRealizada');
